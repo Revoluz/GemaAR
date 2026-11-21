@@ -30,6 +30,13 @@ Hasil export dari `docs/design/UI/ui.pen` (frame 1912×862, scale 1x).
 | `assets/alat-slenthem.png` | ilustrasi alat |
 | `assets/alat-kendang.png` | ilustrasi alat |
 
+## Verifikasi
+
+| File | Isi |
+|---|---|
+| `verification/T001-S1-implemented.png` | S1 Beranda hasil implementasi di Tab S9 |
+| `verification/T001-mulai-AR.png` | hasil tap Mulai → AR placeholder |
+
 ## Catatan implementasi
 
 - **S3 Petunjuk:** kartu marker di Pen masih kosong. Di aplikasi, tampilkan

@@ -41,6 +41,13 @@
 
 ## Log
 
+## 2026-11-22 10:35 — F-01 — T001 S1 Beranda
+- Done: S1 mengikuti `S1-beranda.png`; font Alfa Slab One/Nunito; background export Pen; Mulai → AR placeholder; Alat Musik/Pengaturan nonaktif
+- Contract: no
+- Docs: docs/specs/F-01-ar-placement/tasks.md, docs/design/UI/exports/verification/
+- Next: T002 S3 Petunjuk
+- Blocked: none
+
 ## 2026-11-22 10:25 — design — export Pen ke repo
 - Done: S1–S7 + state board + aset bersih diexport ke `docs/design/UI/exports/`
 - Contract: no

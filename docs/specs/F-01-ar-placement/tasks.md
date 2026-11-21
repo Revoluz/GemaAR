@@ -4,11 +4,12 @@
 
 ## Phase 1: Setup
 
-- [ ] **T001** S1 Beranda versi F-01: 3 tombol tampil, hanya Mulai aktif
+- [x] **T001** S1 Beranda versi F-01: 3 tombol tampil, hanya Mulai aktif
       blocked by: none
       design: `docs/design/UI/exports/S1-beranda.png`
       files: `MainActivity.kt`, `ui/HomeScreen.kt`
-      verify: app membuka Beranda; Mulai membuka alur AR; Alat Musik/Pengaturan nonaktif
+      verify: `docs/design/UI/exports/verification/T001-S1-implemented.png`;
+              Mulai membuka AR placeholder `T001-mulai-AR.png`
 
 - [ ] **T002** S3 Petunjuk overlay: 3 langkah, close, Mulai AR, “?”
       blocked by: T001
