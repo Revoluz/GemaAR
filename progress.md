@@ -41,6 +41,76 @@
 
 ## Log
 
+## 2026-11-22 10:25 — design — export Pen ke repo
+- Done: S1–S7 + state board + aset bersih diexport ke `docs/design/UI/exports/`
+- Contract: no
+- Docs: docs/design/UI/exports/README.md, SCREENS.md, F-01 plan/tasks
+- Next: implement T001 mengikuti S1-beranda.png
+- Blocked: marker artwork final (placeholder)
+
+## 2026-11-22 10:05 — F-01 — grill selesai, spec/plan/tasks
+- Done: Saron default, marker A4 21 cm, model hide saat marker hilang, note bar/scale ditunda, Unduh Marker share PNG
+- Contract: `ArUiState`, `ArController`, `PetunjukStore`
+- Docs: docs/specs/F-01-ar-placement/spec.md, plan.md, tasks.md
+- Next: review spec → implement T001
+- Blocked: marker artwork final (placeholder dipakai)
+
+## 2026-11-22 09:35 — docs — rename F-01
+- Done: F-01 jadi "Tempatkan satu alat musik di marker"; referensi SCREENS/ROADMAP disesuaikan
+- Contract: no (spec F-01 belum dibuat)
+- Docs: feature_list.json, docs/design/SCREENS.md, ROADMAP.md
+- Next: F-01 grill + spec
+- Blocked: ARCore package di tablet belum dicek
+
+## 2026-11-22 09:25 — design — Alat Musik tanpa navigasi ke AR
+- Done: S6 Alat Musik hanya daftar + status; tidak ada tombol ke AR; F-03 hanya S2
+- Contract: no (belum ada kode AR)
+- Docs: docs/design/SCREENS.md
+- Next: F-01 grill + spec
+- Blocked: ARCore package di tablet belum dicek
+
+## 2026-11-22 09:20 — design — Koleksi Alat Musik + status
+- Done: S6 jadi "Koleksi Alat Musik", daftar 6 alat + badge sudah/belum dimainkan
+- Contract: no (belum ada kode AR)
+- Docs: docs/design/SCREENS.md
+- Next: F-01 grill + spec
+- Blocked: ARCore package di tablet belum dicek
+
+## 2026-11-22 09:10 — design — revisi alur: overlay + Alat Musik
+- Done: S2/S3 jadi overlay S4; S6 jadi Alat Musik (daftar + status sudah/belum dimainkan)
+- Contract: no (belum ada kode AR)
+- Docs: docs/design/SCREENS.md, docs/design/COMPONENTS.md
+- Next: F-01 grill + spec
+- Blocked: ARCore package di tablet belum dicek
+
+## 2026-11-21 16:30 — F-00 — setup + scaffold selesai
+- Done: Gradle 9.9.2/AGP 9.5.2, 3D viewer, build/test/init hijau, install di Galaxy Tab S9
+- Contract: `ModelScale.factorFor`; asset `models/*.glb`
+- Docs: spec/plan/tasks/converge F-00, ADR 0002, README, AGENTS, ROADMAP
+- Next: F-01 grill + spec (marker + penempatan)
+- Blocked: ARCore package di tablet belum dicek
+
+## 2026-11-21 16:02 — docs — fase setup environment + scaffold
+- Done: ROADMAP: Fase 0 setup environment, Fase 1 scaffold project; fase lain digeser
+- Contract: no (belum ada kode)
+- Docs: ROADMAP.md, README.md
+- Next: isi checklist Fase 0
+- Blocked: none
+
+## 2026-11-21 15:55 — assets — keputusan skala MVP
+- Done: model tetap skala sekarang; tampilan pakai `scaleToUnits = 0.5f` (marker A4)
+- Contract: no (belum ada kode)
+- Docs: docs/design/assets/README.md
+- Next: scaffold app + salin model ke `app/src/main/assets/models/`
+- Blocked: none
+
+## 2026-11-21 15:48 — assets — masukkan model 3D + preview
+- Done: 6 GLB final + 7 preview masuk `docs/design/assets/`; tambah `CREDITS.md`
+- Contract: no (belum ada kode)
+- Docs: README, AGENTS, ARCHITECTURE, docs/design/assets/README.md, CREDITS.md
+- Next: scaffold app, lalu salin model ke `app/src/main/assets/models/`
+- Blocked: none
+
 ## 2026-11-21 14:32 — docs — tambah F-07 Pengaturan volume musik
 - Done: F-07 masuk feature_list; S7 aktif di SCREENS; SettingsPanel + SliderRow masuk COMPONENTS
 - Contract: no (belum ada kode)

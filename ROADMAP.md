@@ -13,21 +13,43 @@ Satu halaman. Cetak, tempel, centang.
 - [x] `scripts/verify-docs.sh` → `SRC_GLOB=app/src`
 - [x] `docs/decisions/0001-native-ar-android.md`
 - [x] `docs/design/` disalin dari kit (masih template)
-- [ ] `bash init.sh --check` lulus (butuh project Gradle)
 
 ---
 
-## Fase 0 — Scaffold
+## Fase 0 — Setup environment
 
-- [ ] Project Gradle + `app/` + `gradlew` ada
-- [ ] `./gradlew assembleDebug` hijau (HP/emulator belum perlu)
-- [ ] `./gradlew testDebugUnitTest` hijau (minimal 1 test)
-- [ ] `init.sh --check` hijau
-- [ ] Satu HP ARCore-supported terpasang untuk uji manual
+- [x] JDK 21+ aktif (JDK 25 dipakai; target JVM 21)
+- [x] Gradle 9.9.2 + AGP 9.5.2 (Android Studio opsional)
+- [x] Android SDK 37.2 + Build Tools 37.0.0 + Platform Tools
+- [x] `sdk.dir` di `local.properties` (jangan commit)
+- [x] `adb` berfungsi (emulator API 35)
+- [x] Device fisik terhubung (Galaxy Tab S9 / SM-X710)
+- [ ] Google Play Services for AR (`com.google.ar.core`) terpasang:
+      `adb shell pm list packages | grep -i arcore`
+- [ ] Device ada di daftar ARCore-supported: https://developers.google.com/ar/devices
+- [x] Koneksi internet untuk unduh dependency Gradle
+- [x] Blender + Node (`npx`) untuk pipeline aset 3D
 
 ---
 
-## Fase 1 — Produk (sekali)
+## Fase 1 — Scaffold project
+
+- [x] `settings.gradle.kts`, `build.gradle.kts`, `app/build.gradle.kts`
+- [x] `gradle/libs.versions.toml` + wrapper (`gradlew`)
+- [x] Dependency: Compose, Material3, Navigation, SceneView `arsceneview:4.70.0`, DataStore, JUnit
+- [x] Manifest: izin kamera, ARCore optional, landscape, theme
+- [x] Salin `docs/design/assets/models/*.glb` → `app/src/main/assets/models/`
+- [x] Salin marker placeholder → `app/src/main/assets/markers/marker_placeholder.png`
+- [x] `./gradlew assembleDebug` hijau
+- [x] `./gradlew testDebugUnitTest` hijau (3 test)
+- [x] `./gradlew installDebug` di emulator API 35
+- [x] `./gradlew installDebug` di device fisik (Galaxy Tab S9)
+- [x] Viewer 3D menampilkan model di device
+- [x] `bash init.sh --check` hijau
+
+---
+
+## Fase 2 — Produk (sekali)
 
 - [x] `docs/PRODUCT.md` — masalah, user, non-goals, metrik
 - [x] `docs/constitution.md` — 9 artikel (tetap, stack-agnostic)
@@ -37,7 +59,7 @@ Satu halaman. Cetak, tempel, centang.
 
 ---
 
-## Fase 2 — Desain & daftar fitur (sekali)
+## Fase 3 — Desain & daftar fitur (sekali)
 
 **Hanya kalau project punya UI.**
 
@@ -54,22 +76,22 @@ Lalu audit: `/design-system audit` sebelum rilis besar.
 
 ---
 
-## Fase 3 — Per fitur (ulangi)
+## Fase 4 — Per fitur (ulangi)
 
-Mulai dari **F-01 — Scaffold + penempatan model**.
+Mulai dari **F-01 — penempatan model di marker**.
 
-- [ ] **3.1 Grill** — wawancara sampai bisa menulis spec tanpa menebak
-- [ ] **3.2 Research** — hanya kalau butuh fakta eksternal (ARCore device support, SceneView API)
-- [ ] **3.3 Spec** — apa & kenapa, tanpa teknologi
-- [ ] **3.4 Plan** — bagaimana, tanpa kode
-- [ ] **3.5 Tasks** — vertical slice, `blocked by`, ≤30 menit
-- [ ] **3.6 Implement** — **satu task per pesan**, verify, commit
-- [ ] **3.7 Converge** — spec + standards, dengan bukti
-- [ ] **3.8 Tutup** — `passes: true`, `evidence`, `progress.md`
+- [ ] **4.1 Grill** — wawancara sampai bisa menulis spec tanpa menebak
+- [ ] **4.2 Research** — hanya kalau butuh fakta eksternal (ARCore device support, SceneView API)
+- [ ] **4.3 Spec** — apa & kenapa, tanpa teknologi
+- [ ] **4.4 Plan** — bagaimana, tanpa kode
+- [ ] **4.5 Tasks** — vertical slice, `blocked by`, ≤30 menit
+- [ ] **4.6 Implement** — **satu task per pesan**, verify, commit
+- [ ] **4.7 Converge** — spec + standards, dengan bukti
+- [ ] **4.8 Tutup** — `passes: true`, `evidence`, `progress.md`
 
 ---
 
-## Fase 4 — Loop harian
+## Fase 5 — Loop harian
 
 **Pagi**
 - [ ] baca `progress.md` (40 baris terakhir)

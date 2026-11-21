@@ -16,8 +16,8 @@ di atasnya, lalu ketuk bagian alat untuk membunyikan nada.
 | Build | Gradle KTS + version catalog | Standar Android Studio |
 | Test | JUnit untuk logika, manual di HP untuk AR | AR tidak realistis di unit test |
 
-Toolchain SceneView 4.70: `compileSdk 37`, `minSdk 24+` (kita pakai 26), AGP 9.4+,
-Kotlin 2.3+, JVM target 21 (JDK 21 dari Android Studio).
+Toolchain SceneView 4.70: `compileSdk 37.2`, `minSdk 26`, AGP 9.5.2, Kotlin 2.4.21,
+Gradle 9.9.2, JVM target 21 (JDK 21+; di mesin ini JDK 25).
 
 Tidak ada DI framework, database, backend, login, atau Unity. Tambah hanya kalau
 sebuah fitur benar-benar menuntutnya (`docs/constitution.md`, Article VII).
@@ -44,16 +44,18 @@ PRODUCT → feature_list → grill → spec → plan → tasks → implement →
 ## Quickstart
 
 ```bash
-# prasyarat: JDK 21 (wajib, pakai yang dibundel Android Studio), Android SDK, HP ARCore-supported
+# prasyarat: JDK 21+, Gradle 9.9.2/AGP 9.5.2, Android SDK 37.2, device ARCore-supported
 bash init.sh --check
 
-# setelah project Gradle di-scaffold:
 ./gradlew assembleDebug
+./gradlew testDebugUnitTest
 ./gradlew installDebug
 ```
 
-Saat ini repo berisi **dokumen + struktur**, belum ada project Gradle. Langkah
-berikutnya adalah F-01 (scaffold + penempatan model AR pertama).
+Project Gradle sudah ada (F-00); perintah di atas untuk build, test, dan install.
+
+Saat ini repo sudah punya project Gradle (F-00). Langkah berikutnya adalah
+**verifikasi device ARCore** lalu **F-01 (penempatan model)**.
 
 ## Struktur
 
@@ -62,9 +64,27 @@ GemaAR/
 ├── AGENTS.md
 ├── README.md
 ├── ROADMAP.md
+├── CREDITS.md
 ├── feature_list.json
 ├── progress.md
 ├── init.sh
+├── gradlew / gradlew.bat
+├── settings.gradle.kts
+├── build.gradle.kts
+├── gradle.properties
+├── local.properties        # tidak di-commit
+├── app/
+│   ├── build.gradle.kts
+│   └── src/
+│       ├── main/
+│       │   ├── java/com/gemaar/
+│       │   ├── assets/models/
+│       │   ├── assets/markers/
+│       │   └── res/
+│       └── test/java/com/gemaar/
+├── gradle/
+│   ├── libs.versions.toml
+│   └── wrapper/
 ├── scripts/verify-docs.sh
 ├── .gitignore
 └── docs/
@@ -77,12 +97,17 @@ GemaAR/
     │   ├── SCREENS.md
     │   ├── COMPONENTS.md
     │   ├── design-tokens.json
-    │   └── UI/                 # screenshot referensi
+    │   ├── UI/                 # screenshot referensi
+    │   └── assets/             # model GLB + preview
+    │       ├── models/
+    │       └── preview/
     ├── decisions/
     │   ├── NNNN-template.md
     │   └── 0001-native-ar-android.md
-    └── specs/_templates/
+    └── specs/
+        ├── _templates/
+        └── F-00-setup/
 ```
 
-Project Android (`app/`, `gradle/`) ditambahkan di Fase 0 dan mengikuti
-`docs/ARCHITECTURE.md`.
+Project Android mengikuti `docs/ARCHITECTURE.md`; model runtime ada di
+`app/src/main/assets/models/`.

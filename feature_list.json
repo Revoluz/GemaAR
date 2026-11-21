@@ -9,8 +9,17 @@
   },
   "features": [
     {
+      "id": "F-00",
+      "title": "Setup environment & scaffold project",
+      "priority": 0,
+      "spec": "docs/specs/F-00-setup/spec.md",
+      "passes": true,
+      "evidence": "assembleDebug OK; testDebugUnitTest OK (3 tests); init.sh --check OK; APK installed on Galaxy Tab S9 (SM-X710); 3D model visible (user-confirmed).",
+      "updated": "2026-11-21"
+    },
+    {
       "id": "F-01",
-      "title": "Scaffold app + tempatkan satu alat musik di permukaan",
+      "title": "Tempatkan satu alat musik di marker",
       "priority": 1,
       "spec": "docs/specs/F-01-ar-placement/spec.md",
       "passes": false,

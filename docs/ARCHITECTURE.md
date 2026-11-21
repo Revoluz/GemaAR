@@ -9,7 +9,7 @@
 MainActivity (Compose)
    ├── CatalogScreen ──► CatalogRepository ──► assets/catalog.json
    └── ArScreen ──────► ArController (SceneView + ARCore)
-                            ├── MarkerDatabase ─► assets/markers/marker.png (1 gambar)
+                            ├── MarkerDatabase ─► assets/markers/marker_placeholder.png (sementara)
                             ├── ModelLoader ──► assets/models/*.glb
                             └── NotePlayer ───► SoundPool ──► res/raw/*.ogg
                                    ▲
@@ -35,7 +35,7 @@ Aturan:
 
 | Komponen | Cara jalan | Entry |
 |---|---|---|
-| App debug | `./gradlew installDebug` (compileSdk 37, minSdk 26) | `MainActivity` |
+| App debug | `./gradlew installDebug` (compileSdk 37.2, minSdk 26) | `MainActivity` |
 | Unit test | `./gradlew testDebugUnitTest` | `app/src/test/` |
 | AR | HP fisik ARCore-supported | `ArScreen` |
 
@@ -58,13 +58,14 @@ Aturan:
 | Intent & non-goals | `docs/PRODUCT.md` | manual |
 | Prinsip | `docs/constitution.md` | manual |
 | Token, layar, komponen UI | `docs/design/` | manual |
+| Aset 3D (sumber desain) | `docs/design/assets/` | manual |
 | Kriteria fitur | `docs/specs/<feature>/spec.md` | manual |
 | Status fitur | `feature_list.json` | manual (agent: `passes` saja) |
 | Keputusan | `docs/decisions/` | manual |
 | Memori sesi | `progress.md` | manual |
 | Peta repo | `AGENTS.md` | manual |
 | Daftar alat & nada | `app/src/main/assets/catalog.json` | manual |
-| Marker AR | `app/src/main/assets/markers/marker.png` — satu untuk semua alat | manual |
+| Marker AR | `app/src/main/assets/markers/` — satu marker (placeholder di F-00) | manual |
 | Versi dependency | `gradle/libs.versions.toml` | manual (bukan generated) |
 
 ## Environment

@@ -8,7 +8,8 @@ membunyikan nada. "Done" berarti satu alat musik muncul stabil di atas marker,
 dimainkan minimal satu oktaf, dan tidak crash di HP yang mendukung ARCore.
 
 Kotlin + Jetpack Compose + ARCore + SceneView 4.70 (Filament). Build: Gradle KTS.
-Toolchain: compileSdk 37, minSdk 26, AGP 9.4+, Kotlin 2.3+, JVM target 21.
+Toolchain: compileSdk 37.2, minSdk 26, AGP 9.5.2, Kotlin 2.4.21, Gradle 9.9.2,
+JVM target 21 (JDK 21+).
 
 ## Read this when
 | You are doing | Read | Do not read |
@@ -51,6 +52,7 @@ constitution > AGENTS.md > feature_list.json > spec.md > plan.md > tasks.md
 | Audio | `app/src/main/java/com/gemaar/audio/` |
 | Domain + data | `app/src/main/java/com/gemaar/data/` |
 | Model 3D (GLB) | `app/src/main/assets/models/` |
+| 3D source (desain) | `docs/design/assets/models/` — salin ke app saat scaffold |
 | Sampel suara | `app/src/main/res/raw/` |
 | Katalog | `app/src/main/assets/catalog.json` |
 | Unit test | `app/src/test/` |

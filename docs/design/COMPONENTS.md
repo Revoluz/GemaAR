@@ -12,12 +12,12 @@
 | Komponen | Jenis | Dipakai di | Varian | Fitur | Status |
 |---|---|---|---|---|---|
 | `AppBackground` | composite | S1–S7 | siang (ilustrasi), AR (gelap) | semua | draft |
-| `OrnatePanel` | composite | S1, S2, S3, S5, S6 | default, compact | F-03, F-05, F-06 | draft |
+| `OrnatePanel` | composite | S1, S2, S3, S5, S6 | default, compact | F-01, F-03, F-05, F-06 | draft |
 | `PlaqueTitle` | composite | S1–S7 | statis, dinamis (nama alat) | semua | draft |
 | `IconButton` | primitive | S1–S4 | home, katalog, petunjuk, info, close | F-01…F-05 | draft |
 | `ActionButton` | primitive | S1, S2, S3 | gold (utama), green (unduh), wood (sekunder) | F-01, F-03 | draft |
-| `InstrumentCard` | composite | S2, S6 | default, selected, played | F-03, F-06 | draft |
-| `ProgressBadge` | primitive | S1, S6 | `x/6` | F-06 | draft |
+| `InstrumentCard` | composite | S2, S6 | default, selected, played (S6) | F-03, F-06 | draft |
+| `ProgressBadge` | primitive | S6 | sudah / belum dimainkan | F-06 | draft |
 | `NoteBar` | composite | S4 | 7 bilah, 14 bilah | F-02 | draft |
 | `NoteKey` | primitive | S4 | idle, pressed, active | F-02 | draft |
 | `ScaleSelector` | composite | S4 | slendro, pelog + oktaf | F-04 | draft |
@@ -25,7 +25,7 @@
 | `HintOverlay` | composite | S3, S4 | reticle, marker, permission | F-01 | draft |
 | `EmptyState` | composite | S2, S6 | — | F-03, F-06 | draft |
 | `ErrorState` | composite | semua | inline, full-page | semua | draft |
-| `LoadingState` | composite | S1, S2, S4 | skeleton, spinner | F-01…F-03 | draft |
+| `LoadingState` | composite | S1, S2, S4, S6 | skeleton, spinner | F-01, F-02, F-03, F-06 | draft |
 | `SettingsPanel` | composite | S7 | music-only | F-07 | draft |
 | `SliderRow` | composite | S7 | default, disabled | F-07 | draft |
 
