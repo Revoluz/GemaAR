@@ -1,0 +1,75 @@
+{
+  "$comment": "STATUS INDEX ONLY. Acceptance criteria hidup di docs/specs/<feature>/spec.md. Agent hanya boleh mengubah 'passes', 'evidence', 'updated'.",
+  "project": "GemaAR",
+  "updated": "2026-11-21",
+  "rules": {
+    "agentMayEdit": ["passes", "evidence", "updated"],
+    "criteriaLocation": "docs/specs/<feature>/spec.md",
+    "passesTrueRequires": "evidence"
+  },
+  "features": [
+    {
+      "id": "F-01",
+      "title": "Scaffold app + tempatkan satu alat musik di permukaan",
+      "priority": 1,
+      "spec": "docs/specs/F-01-ar-placement/spec.md",
+      "passes": false,
+      "evidence": null,
+      "updated": null
+    },
+    {
+      "id": "F-02",
+      "title": "Ketuk alat musik untuk membunyikan nada",
+      "priority": 2,
+      "spec": "docs/specs/F-02-play-note/spec.md",
+      "passes": false,
+      "evidence": null,
+      "updated": null
+    },
+    {
+      "id": "F-03",
+      "title": "Katalog alat musik + pilih dari daftar",
+      "priority": 3,
+      "spec": "docs/specs/F-03-catalog/spec.md",
+      "passes": false,
+      "evidence": null,
+      "updated": null
+    },
+    {
+      "id": "F-04",
+      "title": "Pilihan tangga nada dan oktaf",
+      "priority": 4,
+      "spec": "docs/specs/F-04-scale/spec.md",
+      "passes": false,
+      "evidence": null,
+      "updated": null
+    },
+    {
+      "id": "F-05",
+      "title": "Kartu info budaya tiap alat",
+      "priority": 5,
+      "spec": "docs/specs/F-05-culture-card/spec.md",
+      "passes": false,
+      "evidence": null,
+      "updated": null
+    },
+    {
+      "id": "F-06",
+      "title": "Progres koleksi alat yang sudah dimainkan",
+      "priority": 6,
+      "spec": "docs/specs/F-06-collection/spec.md",
+      "passes": false,
+      "evidence": null,
+      "updated": null
+    },
+    {
+      "id": "F-07",
+      "title": "Pengaturan volume musik",
+      "priority": 7,
+      "spec": "docs/specs/F-07-audio-settings/spec.md",
+      "passes": false,
+      "evidence": null,
+      "updated": null
+    }
+  ]
+}

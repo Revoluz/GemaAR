@@ -1,0 +1,28 @@
+# Gradle / Android
+.gradle/
+build/
+app/build/
+captures/
+.externalNativeBuild/
+.cxx/
+local.properties
+*.iml
+.idea/
+*.hprof
+
+# Output
+*.apk
+*.aab
+*.ap_
+app/release/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+
+# Secrets (project ini seharusnya tidak punya)
+.env
+.env.*
+!.env.example

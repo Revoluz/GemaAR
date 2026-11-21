@@ -1,0 +1,95 @@
+{
+  "$comment": "Sumber kebenaran token GemaAR. Diturunkan dari referensi docs/design/UI/*.png. DESIGN.md menjelaskan alasan tiap nilai. Jangan menaruh hex mentah di komponen. Di Android, 1px dipetakan ke 1dp (spasi/ukuran) atau 1sp (font).",
+  "color": {
+    "bg": "#F8F4E8",
+    "surface": "#3D382C",
+    "surface-2": "#4E3D35",
+    "wood": "#6C543C",
+    "wood-light": "#806247",
+    "fg": "#FFF6E3",
+    "fg-dark": "#3B2C1C",
+    "muted": "#C9B99F",
+    "border": "#2E2418",
+    "primary": "#F8C32A",
+    "primary-fg": "#3B2C1C",
+    "accent": "#641F4F",
+    "success": "#8BAC26",
+    "danger": "#70302F",
+    "metal": "#EAB76A",
+    "line": "#A9C3D1"
+  },
+  "font": {
+    "family": "Nunito, system-ui, sans-serif",
+    "display": "Alfa Slab One, serif",
+    "script": "Caveat, cursive",
+    "size": {
+      "display": "32px",
+      "h1": "24px",
+      "h2": "20px",
+      "body": "16px",
+      "info": "18px",
+      "numeric": "20px",
+      "caption": "12px",
+      "script": "20px"
+    },
+    "lineHeight": {
+      "display": "40px",
+      "h1": "32px",
+      "h2": "28px",
+      "body": "24px",
+      "info": "28px",
+      "numeric": "28px",
+      "caption": "16px",
+      "script": "26px"
+    },
+    "weight": {
+      "regular": 400,
+      "semibold": 600,
+      "bold": 700
+    }
+  },
+  "space": {
+    "1": "4px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px",
+    "6": "24px",
+    "8": "32px",
+    "12": "48px"
+  },
+  "radius": {
+    "sm": "8px",
+    "md": "12px",
+    "lg": "20px",
+    "full": "9999px"
+  },
+  "shadow": {
+    "hard": "0 4px 0 #2E2418",
+    "panel": "0 8px 24px rgba(0,0,0,.35)",
+    "soft": "0 2px 8px rgba(0,0,0,.20)"
+  },
+  "layout": {
+    "orientation": "landscape",
+    "touchTarget": "48px",
+    "hudRail": "56px",
+    "panelMaxWidth": "720px",
+    "panelCompactWidth": "92%",
+    "infoPanelWidth": "34%",
+    "infoPanelMaxWidth": "420px",
+    "pagePaddingX": "24px",
+    "pagePaddingY": "16px"
+  },
+  "breakpoint": {
+    "compact": "0px",
+    "medium": "600px",
+    "expanded": "840px"
+  },
+  "motion": {
+    "fast": "100ms",
+    "normal": "180ms",
+    "slow": "260ms",
+    "pulse": "1200ms",
+    "easing": "ease-out",
+    "pulseEasing": "ease-in-out"
+  }
+}
