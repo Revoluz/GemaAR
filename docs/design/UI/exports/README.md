@@ -43,6 +43,7 @@ Hasil export dari `docs/design/UI/ui.pen` (frame 1912×862, scale 1x).
 |---|---|
 | `verification/T001-S1-implemented.png` | S1 Beranda hasil implementasi di Tab S9 |
 | `verification/T001-mulai-AR.png` | hasil tap Mulai → AR |
+| `verification/T001a-saron-tanpa-tabuh.png` | model Saron F-02 tanpa tabuh |
 | `verification/T002-petunjuk-overlay.png` | S3 Petunjuk tampil otomatis pertama kali |
 | `verification/T002-petunjuk-dibuka-lagi.png` | “?” membuka Petunjuk dari AR |
 | `verification/T003-unduh-marker-share.png` | share sheet PNG marker |

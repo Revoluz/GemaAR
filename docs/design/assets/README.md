@@ -13,7 +13,7 @@ Model alat musik untuk desain dan implementasi AR.
 |---|---|---|---|---|---|
 | `gong_kempul.glb` | 3,77 MB | 95.418 | 3 | 2,53 × 1,46 × 0,55 | paling berat; kandidat decimate |
 | `bonang.glb` | 1,25 MB | 26.404 | 7 | 1,79 × 0,55 × 0,57 | 12 pencon, 2 baris |
-| `saron.glb` | 1,18 MB | 15.906 | 6 | 0,93 × 0,36 × 0,30 | satu unit |
+| `saron.glb` | 0,46 MB | 5.058 | 4 | 0,93 × 0,32 × 0,30 | satu unit; **tanpa tabuh** untuk F-02 |
 | `gender_barung.glb` | 0,94 MB | 13.664 | 4 | 1,44 × 0,57 × 0,47 | 14 bilah |
 | `slenthem.glb` | 1,61 MB | 22.800 | 65 | 0,84 × 0,57 × 0,47 | 65 material → draw call tinggi |
 | `kendang.glb` | 0,58 MB | 7.580 | 5 | 0,36 × 0,28 × 0,21 | satu drum |
@@ -28,10 +28,10 @@ Semua GLB:
 
 | File | Isi |
 |---|---|
-| `preview/00_contact_sheet.png` | ringkasan 6 model |
+| `preview/00_contact_sheet.png` | ringkasan 6 model (tile Saron masih render lama) |
 | `preview/01_gong_kempul.png` | rak gong |
 | `preview/02_bonang.png` | bonang |
-| `preview/03_saron.png` | saron |
+| `preview/03_saron.png` | saron tanpa tabuh (F-02) |
 | `preview/04_gender_barung.png` | gender barung |
 | `preview/05_slenthem.png` | slenthem |
 | `preview/06_kendang.png` | kendang |

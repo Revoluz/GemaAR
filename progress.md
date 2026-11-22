@@ -41,6 +41,28 @@
 
 ## Log
 
+## 2026-11-22 16:45 — F-02 — T001a selesai
+- Done: tabuh (`Object_109` + `Object_112`) dihapus; `saron.glb` 463 KB, 5.058 tris; preview diperbarui
+- Contract: model F-02 tanpa tabuh; bbox X/Y tetap, tinggi 0,3205 m
+- Docs: `docs/specs/F-02-play-note/tasks.md`, `docs/design/assets/README.md`, `verification/T001a-saron-tanpa-tabuh.png`
+- Verify: Blender render 7 bilah bersih; gltf-transform inspect OK; app load tanpa ModelError
+- Next: T001 sampel audio
+- Blocked: none
+
+## 2026-11-22 16:40 — F-02 — tabuh dihapus
+- Done: setuju hapus tabuh; tambah FR-013/SC-008 dan task T001a
+- Contract: model Saron F-02 tanpa `Object_109` + `Object_112`
+- Docs: `docs/specs/F-02-play-note/spec.md`, `plan.md`, `tasks.md`
+- Next: T001a ekspor ulang model tanpa tabuh
+- Blocked: none
+
+## 2026-11-22 16:25 — F-02 — spec/plan/tasks
+- Done: grill F-02; Saron-only, Pelog 7 (SBPL1–7), tap model→nada terdekat, note bar 1–7, overlap, highlight+label
+- Contract: `NotePlayer`, `NoteMap`, `onModelTap(normalizedX)`
+- Docs: `docs/specs/F-02-play-note/{spec,plan,tasks}.md`, `docs/decisions/0003-gamelan-audio-samples.md`, `docs/PRODUCT.md`
+- Next: T001 sampel audio + lisensi
+- Blocked: none
+
 
 ## 2026-11-22 11:58 — F-01 — selesai
 - Done: S3 Petunjuk, S4 AR, marker A4 21 cm, Saron menempel, hilang/muncul 4×, izin kamera, gate ARCore, share marker, konfirmasi keluar
