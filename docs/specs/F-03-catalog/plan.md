@@ -4,86 +4,35 @@
 **Status:** draft
 **Scope:** S2 Katalog (overlay), S4 model swap, persistence
 
+## Prinsip
+
+F-03 dibuat sederhana untuk tim pemula:
+
+- **tanpa JSON / parser** — daftar alat ditulis langsung di Kotlin;
+- **tanpa repository berlapis** — satu object `Catalog`;
+- **ikon PNG** — pakai ilustrasi alat yang diperkecil, bukan Canvas rumit;
+- **satu file per topik** — mudah dibaca dan di-review.
+
 ## Arsitektur
 
 ```
 data/
-├── Instrument.kt
-├── CatalogRepository.kt   ──► assets/catalog.json
-└── InstrumentStore.kt     ──► SharedPreferences
+├── Instrument.kt       # data class
+├── Catalog.kt          # listOf 6 alat (ditulis manual)
+└── InstrumentStore.kt  # SharedPreferences: alat terakhir + flag first-run
 ui/ar/
-├── CatalogOverlay.kt      # S2
-├── InstrumentIcon.kt      # ikon kartu (Canvas)
-└── ArScreen.kt            # pilih, first-run, note-bar gating
+├── CatalogOverlay.kt   # S2: 6 kartu, pilih, close
+└── ArScreen.kt         # state katalog + wiring
 ar/
-└── ArController.kt        # model mengikuti Instrument
+└── ArController.kt     # model mengikuti Instrument
 ```
 
-Boundary:
-- `ui/` tidak memuat JSON; lewat `CatalogRepository`.
-- `ar/` menerima `Instrument`, tidak membaca katalog.
-- `data/` tidak bergantung UI/AR.
+Tidak ada `CatalogRepository`, `CatalogResult`, `catalog.json`, atau state
+loading/error katalog. Data statis, jadi tidak ada proses memuat.
 
-## Data katalog
+## Data
 
-`app/src/main/assets/catalog.json` — skema versi 1:
-
-```json
-{
-  "schemaVersion": 1,
-  "instruments": [
-    {
-      "id": "saron",
-      "name": "Saron",
-      "origin": "Jawa",
-      "model": "models/saron.glb",
-      "icon": "saron",
-      "audioAvailable": true
-    }
-  ]
-}
-```
-
-Enam entri: `gong_kempul`, `bonang`, `saron`, `gender_barung`, `slenthem`,
-`kendang`. `audioAvailable` hanya `true` untuk Saron sampai F-04.
-
-`docs/ARCHITECTURE.md` diperbarui dengan versi skema ini.
-
-## Teknis
-
-| Bagian | Keputusan |
-|---|---|
-| Parser | `org.json` bawaan Android; `runCatching` → state Error |
-| Repository | `CatalogRepository(context).load(): CatalogResult` (Success/Empty/Error) |
-| Persistence | `InstrumentStore`: `selected_instrument_id`, `catalog_auto_shown` |
-| Default | `saron`; id tak dikenal → fallback Saron |
-| First run | Setelah Petunjuk ditutup, buka katalog sekali; set flag |
-| Judul AR | `selectedInstrument.name` |
-| Model | `ArController(instrument)`, `key(instrument.id, retryToken)` |
-| Note bar | Hanya jika `instrument.audioAvailable`; selain itu pesan “Audio belum tersedia” |
-| Tap model | Hanya memanggil audio jika `audioAvailable` |
-| Ikon | Compose Canvas per `icon` key; tidak memakai ilustrasi besar |
-| Katalog overlay | S2: scrim, plaque “Katalog”, close X, grid 3×2 |
-| Pilih | Kartu ditekan → simpan → tutup overlay |
-| Back | Katalog → Petunjuk → konfirmasi keluar |
-| Home | Tombol **Alat Musik** tetap nonaktif (F-06) |
-
-## File yang disentuh
-
-```
-app/src/main/assets/catalog.json
-app/src/main/java/com/gemaar/data/Instrument.kt
-app/src/main/java/com/gemaar/data/CatalogRepository.kt
-app/src/main/java/com/gemaar/data/InstrumentStore.kt
-app/src/main/java/com/gemaar/ui/ar/CatalogOverlay.kt
-app/src/main/java/com/gemaar/ui/ar/InstrumentIcon.kt
-app/src/main/java/com/gemaar/ui/ar/ArScreen.kt
-app/src/main/java/com/gemaar/ar/ArController.kt
-app/src/test/java/com/gemaar/data/InstrumentSelectionTest.kt
-docs/ARCHITECTURE.md
-```
-
-## Kontrak
+`data/Instrument.kt`:
 
 ```kotlin
 data class Instrument(
@@ -91,23 +40,73 @@ data class Instrument(
     val name: String,
     val origin: String,
     val modelAsset: String,
-    val icon: String,
+    @DrawableRes val iconRes: Int,
     val audioAvailable: Boolean,
 )
+```
 
-sealed interface CatalogResult {
-    data class Success(val instruments: List<Instrument>) : CatalogResult
-    data object Empty : CatalogResult
-    data class Error(val message: String) : CatalogResult
+`data/Catalog.kt`:
+
+```kotlin
+object Catalog {
+    val instruments = listOf(
+        Instrument("saron", "Saron", "Jawa", "models/saron.glb", R.drawable.ikon_saron, true),
+        // 5 alat lain ditambahkan di sini
+    )
+
+    val saron = instruments.first { it.id == "saron" }
+
+    fun byId(id: String?): Instrument =
+        instruments.firstOrNull { it.id == id } ?: saron
 }
+```
 
-class InstrumentStore(context: Context) {
-    var selectedInstrumentId: String
-    var catalogAutoShown: Boolean
-}
+Enam id: `gong_kempul`, `bonang`, `saron`, `gender_barung`, `slenthem`, `kendang`.
+`audioAvailable = true` hanya Saron sampai F-04.
 
-// fallback murni, mudah diuji
-fun resolveInstrument(instruments: List<Instrument>, storedId: String?): Instrument
+## Ikon
+
+Gunakan `docs/design/UI/exports/assets/alat-*.png`, perkecil ke ±256 px, simpan
+sebagai:
+
+```
+app/src/main/res/drawable-nodpi/ikon_gong_kempul.png
+app/src/main/res/drawable-nodpi/ikon_bonang.png
+app/src/main/res/drawable-nodpi/ikon_saron.png
+app/src/main/res/drawable-nodpi/ikon_gender_barung.png
+app/src/main/res/drawable-nodpi/ikon_slenthem.png
+app/src/main/res/drawable-nodpi/ikon_kendang.png
+```
+
+Kartu katalog memakai `Image(painterResource(iconRes), ContentScale.Fit)`.
+
+## Teknis
+
+| Bagian | Keputusan |
+|---|---|
+| Data | `Catalog` statis; tidak ada loading/error |
+| Persistence | `InstrumentStore` SharedPreferences: `selected_instrument`, `catalog_auto_opened` |
+| Default | `Catalog.saron`; id tak dikenal → Saron |
+| First run | Setelah Petunjuk ditutup, buka katalog sekali; set flag |
+| Judul AR | `selectedInstrument.name` |
+| Model | `ArController(instrument)`, `key(instrument.id, retryToken)` |
+| Note bar | Hanya jika `instrument.audioAvailable` |
+| Tap model | Hanya audio jika `audioAvailable` |
+| Katalog overlay | grid 2 baris × 3 kartu; selected border emas; close X |
+| Pilih | Simpan id → tutup overlay |
+| Back | Katalog → Petunjuk → keluar |
+| Home | **Alat Musik** tetap nonaktif (F-06) |
+
+## File yang disentuh
+
+```
+app/src/main/java/com/gemaar/data/Instrument.kt
+app/src/main/java/com/gemaar/data/Catalog.kt
+app/src/main/java/com/gemaar/data/InstrumentStore.kt
+app/src/main/java/com/gemaar/ui/ar/CatalogOverlay.kt
+app/src/main/java/com/gemaar/ui/ar/ArScreen.kt
+app/src/main/java/com/gemaar/ar/ArController.kt
+app/src/main/res/drawable-nodpi/ikon_*.png
 ```
 
 ## Verifikasi
@@ -125,7 +124,7 @@ bash scripts/verify-docs.sh
 Manual di Tab S9:
 1. First run → Petunjuk → tutup → Katalog terbuka otomatis.
 2. Pilih Bonang → overlay tutup, model Bonang di marker, judul “Bonang”.
-3. Pilih Gender/Slenthem/Gong/Kendang → model berganti tanpa scan ulang.
+3. Pilih alat lain → model berganti tanpa scan ulang.
 4. Pilih Saron kembali → note bar dan audio Saron muncul.
 5. Alat non-Saron → pesan “Audio belum tersedia”, tap tidak memutar Saron.
 6. Tutup aplikasi → buka → Mulai → alat terakhir aktif.
@@ -134,19 +133,18 @@ Manual di Tab S9:
 
 ## Risiko
 
-- Model Gong 3,8 MB dan Slenthem 1,7 MB → loading lebih lama; tampilkan progress.
-- Model lain mungkin punya tabuh/geometri yang menutupi; audio belum aktif,
-  jadi tidak memblokir F-03. Rapikan di F-04 bila perlu.
-- `org.json` tidak diuji di JVM; parser dibundel dan error state menangkap
-  kegagalan. Uji device memakai data nyata.
-- First-run flag bisa terbuka dua kali jika proses mati sebelum flag tersimpan →
-  simpan segera saat katalog dibuka.
-- `ArScreen` sudah besar; jangan menambah logika audio alat lain di F-03.
+- Model Gong 3,8 MB dan Slenthem 1,7 MB → loading lebih lama; progress F-01
+  sudah ada, tidak perlu state baru.
+- Model lain mungkin punya tabuh yang menutupi; audio belum aktif, jadi tidak
+  memblokir F-03.
+- Data statis selalu berisi 6 alat; tidak ada state kosong/error katalog.
+- `ArScreen` sudah besar; katalog overlay dipisah ke file sendiri.
+- Ikon PNG harus diperkecil agar APK tidak membengkak.
 
 ## Constitution check
 
-- [x] Simplicity: tanpa dependency baru; JSON + SharedPreferences.
-- [x] Boundary: UI → repository/controller, AR tidak baca katalog.
-- [x] Satu sumber data katalog: `assets/catalog.json`.
+- [x] Simplicity: tanpa dependency baru, tanpa JSON/parser.
+- [x] Boundary: UI → data/ar; AR tidak baca katalog.
+- [x] Satu sumber data: `Catalog.kt`.
 - [x] Tidak ada backend.
 - [x] Tidak ada fitur F-04–F-07 di F-03.

@@ -41,6 +41,13 @@
 
 ## Log
 
+## 2026-11-22 18:20 — F-03 — disederhanakan + pembagian tim
+- Done: F-03 tanpa JSON/parser; `Catalog.kt` statis + ikon PNG; panduan A/B di `team-guide.md`
+- Pembagian: A = overlay + Saron/Bonang/Slenthem; B = Gender/Gong/Kendang + InstrumentStore + first-run
+- Docs: `docs/specs/F-03-catalog/spec.md`, `plan.md`, `tasks.md`, `team-guide.md`, `SCREENS.md`, `COMPONENTS.md`, `ARCHITECTURE.md`
+- Next: A mulai A1 (ikon) lalu A2–A7; handoff ke B
+- Blocked: none
+
 ## 2026-11-22 18:00 — F-03/F-04 — spec
 - Done: F-03 katalog (model swap, last instrument, first-run, audio Saron saja); F-04 audio semua alat selain Saron (menggantikan scale/oktaf)
 - Contract: `catalog.json` v1, `Instrument`, `InstrumentStore`, `InstrumentAudio`, `InstrumentControls`

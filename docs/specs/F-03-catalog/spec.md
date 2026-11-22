@@ -101,22 +101,6 @@ alat itu belum tersedia.
 4. **Given** pengguna kembali memilih Saron, **When** model siap,
    **Then** baris nada dan audio Saron berfungsi lagi.
 
-### US5 — State katalog (Priority: P2)
-
-Katalog punya keadaan memuat, kosong, dan gagal.
-
-- **Why this priority:** data katalog bisa gagal dibaca; layar tidak boleh kosong
-  tanpa penjelasan.
-- **Independent test:** jalankan dengan data katalog kosong/rusak; layar
-  menampilkan pesan yang sesuai.
-
-**Acceptance scenarios:**
-
-1. **Given** katalog sedang dimuat, **Then** tampil kerangka kartu.
-2. **Given** katalog tidak berisi alat, **Then** muncul **“Belum ada alat”**.
-3. **Given** katalog gagal dibaca, **Then** muncul **“Katalog gagal dimuat”**
-   dengan tombol **Coba lagi**.
-
 ---
 
 ## Edge cases
@@ -126,7 +110,6 @@ Katalog punya keadaan memuat, kosong, dan gagal.
 - Memilih alat saat model lama masih dimuat → pilihan terbaru menang; tidak ada
   dua model di marker.
 - Alat terakhir tidak ada di katalog → fallback ke Saron.
-- Katalog kosong/rusak → state kosong/error, bukan crash.
 - Model alat gagal dimuat → pesan + coba lagi; katalog masih bisa dibuka.
 - Katalog dan Petunjuk tidak boleh tampil bersamaan.
 - Keluar dari AR saat katalog terbuka → sesi berhenti seperti biasa.
@@ -149,7 +132,6 @@ Katalog punya keadaan memuat, kosong, dan gagal.
   dan MUST NOT membunyikan suara Saron.
 - **FR-011**: Berpindah dari Saron MUST menghentikan nada Saron yang sedang
   berbunyi.
-- **FR-012**: Katalog MUST punya state memuat, kosong, dan gagal.
 - **FR-013**: Model yang gagal dimuat MUST menampilkan pesan + coba lagi.
 - **FR-014**: F-03 MUST NOT menambah audio alat lain, badge progres, layar
   Alat Musik, panel Info, pengaturan volume, atau pemilih tangga nada/oktaf.
@@ -170,7 +152,7 @@ Katalog punya keadaan memuat, kosong, dan gagal.
 - **SC-004**: Alat terakhir dipulihkan setelah aplikasi dibuka lagi.
 - **SC-005**: Katalog first run terbuka tepat satu kali.
 - **SC-006**: Alat non-Saron menampilkan pesan audio dan tidak memutar Saron.
-- **SC-007**: Katalog kosong/rusak dan model gagal tidak membuat aplikasi berhenti.
+- **SC-007**: Model alat gagal dimuat tidak membuat aplikasi berhenti.
 - **SC-008**: Setelah kembali ke Saron, audio Saron berfungsi lagi.
 
 ## Non-goals
@@ -186,7 +168,8 @@ Katalog punya keadaan memuat, kosong, dan gagal.
 ## Assumptions
 
 - Enam model tiga dimensi sudah tersedia.
-- Data katalog dibundel di aplikasi; tidak ada server.
+- Data katalog ditulis langsung di aplikasi dan selalu berisi enam alat; tidak ada
+  server, JSON, proses memuat, atau state kosong/error katalog.
 - Orientasi landscape.
 - Audio hanya Saron pada F-03.
 - Pengguna memakai satu marker yang sama untuk semua alat.

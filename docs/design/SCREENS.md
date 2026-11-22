@@ -44,7 +44,7 @@ Setiap layar wajib punya empat state. Isi bagaimana tampilannya:
 | Layar | Loading | Empty | Error | Success |
 |---|---|---|---|---|
 | S1 Beranda | ilustrasi + logo fade-in | n/a | aset gagal dimuat → "Muat ulang" | tombol Mulai, Alat Musik, Pengaturan |
-| S2 Katalog | skeleton 6 kartu | "Belum ada alat" | "Katalog gagal dimuat" + Coba lagi | grid 6 kartu, satu selected |
+| S2 Katalog | n/a (data statis) | n/a (data statis) | n/a (data statis) | grid 6 kartu, satu selected |
 | S3 Petunjuk | n/a | n/a | izin kamera ditolak / AR tidak didukung → pesan + buka pengaturan | 3 langkah marker + tombol Mulai AR |
 | S4 AR | progress memuat model di plakat | marker belum terdeteksi → hint arahkan kamera | izin kamera / ARCore tidak tersedia | model tampil di atas marker + HUD + kontrol nada/pad |
 | S5 Kartu Budaya | teks memuat | n/a | teks gagal dimuat → Coba lagi | panel Info terbuka; AR tetap jalan |
