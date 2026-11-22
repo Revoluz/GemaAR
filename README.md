@@ -12,7 +12,7 @@ di atasnya, lalu ketuk bagian alat untuk membunyikan nada.
 | UI | Jetpack Compose + Material 3 | Satu bahasa untuk layar & state |
 | AR | ARCore + SceneView 4.70 (Filament) | Compose-native, marker/image tracking + GLB loader siap pakai, tanpa game engine |
 | Audio | `SoundPool` bawaan Android | Zero dependency, latensi rendah untuk sampel pendek |
-| Data | JSON di `assets/` | Offline, tanpa backend/database |
+| Data | File di `assets/` + `Catalog.kt` | Offline, tanpa backend/database |
 | Build | Gradle KTS + version catalog | Standar Android Studio |
 | Test | JUnit untuk logika, manual di HP untuk AR | AR tidak realistis di unit test |
 
@@ -21,6 +21,12 @@ Gradle 9.9.2, JVM target 21 (JDK 21+; di mesin ini JDK 25).
 
 Tidak ada DI framework, database, backend, login, atau Unity. Tambah hanya kalau
 sebuah fitur benar-benar menuntutnya (`docs/constitution.md`, Article VII).
+
+## Mulai di sini
+
+Panduan setup, struktur folder, cara run, koneksi HP, dan Windows:
+
+**`docs/onboarding/README.md`**
 
 ## Alur kerja
 
@@ -44,7 +50,7 @@ PRODUCT → feature_list → grill → spec → plan → tasks → implement →
 ## Quickstart
 
 ```bash
-# prasyarat: JDK 21+, Gradle 9.9.2/AGP 9.5.2, Android SDK 37.2, device ARCore-supported
+# prasyarat: JDK 21+, Android SDK 37.2, device ARCore-supported
 bash init.sh --check
 
 ./gradlew assembleDebug
@@ -52,10 +58,15 @@ bash init.sh --check
 ./gradlew installDebug
 ```
 
-Project Gradle sudah ada (F-00); perintah di atas untuk build, test, dan install.
+Windows: gunakan `gradlew.bat` dan Git Bash untuk `init.sh`.
 
-Saat ini repo sudah punya project Gradle (F-00). Langkah berikutnya adalah
-**verifikasi device ARCore** lalu **F-01 (penempatan model)**.
+Status saat ini:
+
+- F-00, F-01, F-02: `passes: true`
+- F-03: spec/plan/tasks siap; implementasi berikutnya
+- F-04: audio semua alat selain Saron
+
+Detail: `feature_list.json`, `progress.md`, `docs/specs/`.
 
 ## Struktur
 
@@ -104,9 +115,14 @@ GemaAR/
     ├── decisions/
     │   ├── NNNN-template.md
     │   └── 0001-native-ar-android.md
+    ├── onboarding/           # panduan tim
     └── specs/
         ├── _templates/
-        └── F-00-setup/
+        ├── F-00-setup/
+        ├── F-01-ar-placement/
+        ├── F-02-play-note/
+        ├── F-03-catalog/
+        └── F-04-instrument-audio/
 ```
 
 Project Android mengikuti `docs/ARCHITECTURE.md`; model runtime ada di

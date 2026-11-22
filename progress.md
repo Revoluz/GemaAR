@@ -41,6 +41,12 @@
 
 ## Log
 
+## 2026-11-22 18:40 — docs — onboarding tim
+- Done: folder `docs/onboarding/`; struktur Kotlin, Android Studio, VS Code/CLI, koneksi HP, setup Windows, troubleshooting, Git workflow
+- Docs: `docs/onboarding/README.md` + 7 panduan; root `README.md` dan `AGENTS.md` diperbarui
+- Next: A mulai F-03 A1 (ikon) sesuai `docs/specs/F-03-catalog/team-guide.md`
+- Blocked: none
+
 ## 2026-11-22 18:20 — F-03 — disederhanakan + pembagian tim
 - Done: F-03 tanpa JSON/parser; `Catalog.kt` statis + ikon PNG; panduan A/B di `team-guide.md`
 - Pembagian: A = overlay + Saron/Bonang/Slenthem; B = Gender/Gong/Kendang + InstrumentStore + first-run
