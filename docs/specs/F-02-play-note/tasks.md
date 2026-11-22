@@ -13,65 +13,72 @@
               render `verification/T001a-saron-tanpa-tabuh.png`;
               GLB lolos `gltf-transform inspect`; model load di Tab S9 tanpa error
 
-- [ ] **T001** Sampel audio Saron Pelog 1–7 + lisensi
+- [x] **T001** Sampel audio Saron Pelog 1–7 + lisensi
       blocked by: none
       files: `app/src/main/res/raw/saron_pelog_1..7.ogg`,
              `app/src/main/assets/audio/LICENSE-ARTISTIC-2.0.txt`,
              `app/src/main/assets/audio/NOTICE.md`,
-             `docs/decisions/0003-gamelan-audio-samples.md`
-      verify: 7 file ada; durasi ±2,5 s; mono 44,1 kHz; tiap file <100 KB;
-              lisensi/atribusi CDM tercatat
+             `docs/decisions/0003-gamelan-audio-samples.md`,
+             `scripts/process_saron_audio.py`
+      verify: 7 file ada, 2,50 s, mono 44,1 kHz, 21,8–25,9 KB;
+              lisensi Artistic 2.0 + NOTICE + atribusi `CREDITS.md`
 
-- [ ] **T002** Model Note + NoteMap Saron + unit test
+- [x] **T002** Model Note + NoteMap Saron + unit test
       blocked by: T001
       files: `data/Note.kt`, `data/SaronNoteMap.kt`,
              `app/src/test/java/com/gemaar/data/SaronNoteMapTest.kt`
       verify: 7 note unik, id 1–7, label “Nada N”, sampel 1–7 terpetakan;
-              test hijau
+              `SaronNoteMapTest` 6/6 hijau
 
-- [ ] **T003** Pemutar nada + state Loading/Ready/Failed
+- [x] **T003** Pemutar nada + state Loading/Ready/Failed
       blocked by: T001
       files: `audio/NotePlayer.kt`, `audio/SoundPoolNotePlayer.kt`
-      verify: 7 sampel dimuat; `play` tidak memotong nada sebelumnya;
-              `stopAll`/`release` aman; state Failed saat aset rusak
+      verify: log `ready: 7 samples loaded`; 35 stream beruntun tanpa crash;
+              nada tumpang tindih; `stopAll` saat background; `release` saat keluar
 
 ## Phase 2: Tap & UI
 
-- [ ] **T004** Fungsi murni tap → indeks nada + unit test
+- [x] **T004** Fungsi murni tap → indeks nada + unit test
       blocked by: T002
       files: `ar/NoteIndex.kt`,
              `app/src/test/java/com/gemaar/ar/NoteIndexTest.kt`
-      verify: x = −0,25 → 0; x = 0 → 3; x = +0,25 → 6; di luar batas di-clamp
+      verify: pusat bilah −0,1321 → 0; −0,0836 → 1; …; +0,1373 → 6;
+              bilah 1 tidak lagi memicu nada 2 dan bilah 7 tidak memicu nada 6;
+              `NoteIndexTest` 5/5 hijau
 
-- [ ] **T005** Tap model di `ArController` → `onModelTap(normalizedX)`
+- [x] **T005** Tap model di `ArController` → `onModelTap(normalizedX)`
       blocked by: T004, T001a
       files: `ar/ArController.kt`
-      verify: tap model memanggil callback; tap background/null tidak;
-              gerak >12 dp bukan tap; marker hilang tidak memanggil
+      verify: tap bilah memanggil callback; log memutar nada 7→1 berurutan;
+              tap background/null dan marker hilang tidak memanggil
 
-- [ ] **T006** Note bar 1–7 + highlight + label
+- [x] **T006** Note bar 1–7 + highlight + label
       blocked by: T002, T003
       design: `docs/design/UI/exports/S4-ar.png`
       files: `ui/ar/NoteBar.kt`
-      verify: 7 tombol tampil; tombol aktif menyala; label “Nada N” muncul;
+      verify: 7 tombol tampil; tombol 4 menyala + label “Nada 4”;
               tombol nonaktif saat audio Loading/Failed
+              → `verification/T006-note-bar.png`,
+                `verification/T007-note-feedback.png`
 
-- [ ] **T007** Wiring `ArScreen`: tap → NotePlayer, note bar visibility, error
+- [x] **T007** Wiring `ArScreen`: tap → NotePlayer, note bar visibility, error
       blocked by: T005, T006
       files: `ui/ar/ArScreen.kt`, `ar/ArUiState.kt`
-      verify: Saron tampil → note bar muncul; marker hilang → hilang;
-              tap bilah/tombol → nada sesuai; audio gagal → pesan + nonaktif;
-              keluar AR/background → suara berhenti
+      verify: Saron tampil → note bar muncul; marker hilang → note bar hilang
+              (`verification/T008-marker-hilang-notebar.png`);
+              tombol 1/4/7 memutar nada 1/4/7; Home → SoundPool idle;
+              pengguna konfirmasi “tidak ada suara tersisa”
 
 ## Phase 3: Bukti & converge
 
-- [ ] **T008** Uji device: 7 nada, tap cepat, marker hilang/muncul, background
+- [x] **T008** Uji device: 7 nada, tap cepat, marker hilang/muncul, background
       blocked by: T007
-      verify: screenshot note bar + label; catatan manual 7/7 nada;
-              5 tap cepat tanpa crash; 3× marker hilang/muncul;
-              tidak ada suara setelah keluar AR
+      verify: screenshot note bar + label; log 35 nada beruntun;
+              3× marker hilang/muncul; user konfirmasi mapping benar;
+              user konfirmasi tidak ada suara setelah Home;
+              bukti di `verification/T006/T007/T008*`
 
-- [ ] **T009** Update `feature_list.json`, `progress.md`, `ROADMAP.md`,
+- [x] **T009** Update `feature_list.json`, `progress.md`, `ROADMAP.md`,
       `converge.md`
       blocked by: T008
       verify: `bash scripts/verify-docs.sh`; F-02 `passes: true` dengan evidence

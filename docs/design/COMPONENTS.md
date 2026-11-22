@@ -18,8 +18,8 @@
 | `ActionButton` | primitive | S1, S2, S3 | gold (utama), green (unduh), wood (sekunder) | F-01, F-03 | draft |
 | `InstrumentCard` | composite | S2, S6 | default, selected, played (S6) | F-03, F-06 | draft |
 | `ProgressBadge` | primitive | S6 | sudah / belum dimainkan | F-06 | draft |
-| `NoteBar` | composite | S4 | 7 bilah, 14 bilah | F-02 | draft |
-| `NoteKey` | primitive | S4 | idle, pressed, active | F-02 | draft |
+| `NoteBar` | composite | S4 | 7 bilah, 14 bilah | F-02 | ada |
+| `NoteKey` | primitive | S4 | idle, pressed, active | F-02 | ada |
 | `ScaleSelector` | composite | S4 | slendro, pelog + oktaf | F-04 | draft |
 | `InfoPanel` | composite | S5 | side-panel, scroll | F-05 | draft |
 | `HintOverlay` | composite | S3, S4 | reticle, marker, permission | F-01 | draft |

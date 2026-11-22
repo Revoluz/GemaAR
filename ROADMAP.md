@@ -80,6 +80,9 @@ Lalu audit: `/design-system audit` sebelum rilis besar.
 **F-01 — penempatan model di marker: selesai 2026-11-22**
 (`docs/specs/F-01-ar-placement/converge.md`)
 
+**F-02 — ketuk alat → nada: selesai 2026-11-22**
+(`docs/specs/F-02-play-note/converge.md`)
+
 - [ ] **4.1 Grill** — wawancara sampai bisa menulis spec tanpa menebak
 - [ ] **4.2 Research** — hanya kalau butuh fakta eksternal (ARCore device support, SceneView API)
 - [ ] **4.3 Spec** — apa & kenapa, tanpa teknologi

@@ -1,11 +1,14 @@
 package com.gemaar.ar
 
 import android.util.Log
+import android.view.MotionEvent
+import android.view.ViewConfiguration
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
@@ -38,12 +41,16 @@ fun ArController(
     modifier: Modifier = Modifier,
     retryToken: Int = 0,
     onUiState: (ArUiState) -> Unit,
+    onModelTap: (markerLocalX: Float) -> Unit = {},
     onCameraPermissionChanged: (Boolean) -> Unit = {},
     onArCoreAvailabilityChanged: (Boolean) -> Unit = {},
     cameraPermissionOverlay: (@Composable BoxScope.(ARCameraPermissionState) -> Unit)? = null,
     arCoreAvailabilityOverlay: (@Composable BoxScope.(ARCoreAvailabilityState) -> Unit)? = null,
 ) {
     val context = LocalContext.current
+    val touchSlop = remember(context) {
+        ViewConfiguration.get(context).scaledTouchSlop.toFloat()
+    }
     val engine = rememberEngine()
     val modelLoader = rememberModelLoader(engine)
     val markerBitmap = remember(context) { MarkerRepository.loadBitmap(context) }
@@ -75,7 +82,13 @@ fun ArController(
     }
 
     val notifyState by rememberUpdatedState(onUiState)
+    val notifyTap by rememberUpdatedState(onModelTap)
+    val currentImage by rememberUpdatedState(trackedImage)
     LaunchedEffect(state) { notifyState(state) }
+
+    var downX by remember { mutableFloatStateOf(0f) }
+    var downY by remember { mutableFloatStateOf(0f) }
+    var isTap by remember { mutableStateOf(false) }
 
     ARSceneView(
         modifier = modifier,
@@ -93,6 +106,44 @@ fun ArController(
                 }
             }
             config.focusMode = Config.FocusMode.AUTO
+        },
+        onTouchEvent = { event, hitResult ->
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN -> {
+                    downX = event.x
+                    downY = event.y
+                    isTap = true
+                    true
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    if (isTap) {
+                        val dx = event.x - downX
+                        val dy = event.y - downY
+                        if (dx * dx + dy * dy > touchSlop * touchSlop) {
+                            isTap = false
+                        }
+                    }
+                    true
+                }
+                MotionEvent.ACTION_UP -> {
+                    if (isTap && hitResult != null) {
+                        currentImage?.centerPose?.let { markerPose ->
+                            val world = hitResult.getWorldPosition()
+                            val local = markerPose.inverse().transformPoint(
+                                floatArrayOf(world.x, world.y, world.z),
+                            )
+                            notifyTap(local[0])
+                        }
+                    }
+                    isTap = false
+                    true
+                }
+                MotionEvent.ACTION_CANCEL -> {
+                    isTap = false
+                    true
+                }
+                else -> false
+            }
         },
         onSessionUpdated = { session, _ ->
             val image = session

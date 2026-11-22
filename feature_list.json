@@ -35,9 +35,9 @@
       "title": "Ketuk alat musik untuk membunyikan nada",
       "priority": 2,
       "spec": "docs/specs/F-02-play-note/spec.md",
-      "passes": false,
-      "evidence": null,
-      "updated": null
+      "passes": true,
+      "evidence": "Galaxy Tab S9: 7 sampel Saron Pelog dimuat (2,50 s, mono 44,1 kHz, 21,8–25,9 KB); note bar 1–7 + highlight + label; tap 3D bilah 1–7 memetakan ke nada yang benar setelah mapping diperbaiki ke pusat bilah; tap cepat 35 stream tanpa crash; note bar hilang saat marker hilang; tidak ada suara tersisa setelah Home (user-confirmed, SoundPool idle); tabuh dihapus dari saron.glb. assembleDebug OK; 18 unit test OK; lintDebug 0 issue; init.sh --check OK; verify-docs.sh OK. Audio: CDM Gamelan Sample Library, Artistic 2.0. Bukti: docs/design/UI/exports/verification/T006/T007/T008*.",
+      "updated": "2026-11-22"
     },
     {
       "id": "F-03",

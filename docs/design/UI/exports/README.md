@@ -55,6 +55,11 @@ Hasil export dari `docs/design/UI/ui.pen` (frame 1912×862, scale 1x).
 | `verification/T006-marker-terdeteksi.png` | Saron tampil di marker |
 | `verification/T007-marker-hilang.png` | Saron hilang + hint + status “Marker hilang” |
 | `verification/T007-log-siklus.txt` | log 4 siklus deteksi/hilang |
+| `verification/T006-note-bar.png` | note bar 1–7 F-02 |
+| `verification/T007-note-feedback.png` | tombol 4 menyala + label “Nada 4” |
+| `verification/T008-saron-tanpa-tabuh-ar.png` | Saron tanpa tabuh di AR |
+| `verification/T008-marker-hilang-notebar.png` | marker hilang → note bar hilang |
+| `verification/T008-audio-play-log.txt` | log nada 1/4/7 dan tap beruntun |
 
 ## Catatan implementasi
 

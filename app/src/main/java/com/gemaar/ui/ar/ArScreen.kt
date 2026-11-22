@@ -5,7 +5,6 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
@@ -44,6 +43,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
@@ -63,18 +63,25 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.gemaar.ar.ArController
 import com.gemaar.ar.ArUiState
+import com.gemaar.ar.NoteIndex
+import com.gemaar.audio.NotePlayerState
+import com.gemaar.audio.SoundPoolNotePlayer
 import com.gemaar.data.MarkerSharer
+import com.gemaar.data.Note
 import com.gemaar.data.PetunjukStore
+import com.gemaar.data.SaronNoteMap
 import com.gemaar.ui.components.PlaqueTitle
 import com.gemaar.ui.theme.GemaARBody
 import com.gemaar.ui.theme.GemaARColors
 import com.google.ar.core.ArCoreApk
 import io.github.sceneview.ar.arcore.awaitAvailability
+import kotlinx.coroutines.delay
 
 /**
  * S4 AR — F-01.
@@ -87,6 +94,12 @@ import io.github.sceneview.ar.arcore.awaitAvailability
 fun ArScreen(onBack: () -> Unit) {
     val context = LocalContext.current
     val petunjukStore = remember(context) { PetunjukStore(context) }
+    val notePlayer = remember(context) { SoundPoolNotePlayer(context) }
+    val notePlayerState by notePlayer.state.collectAsState()
+
+    var activeNoteId by remember { mutableStateOf<Int?>(null) }
+    var noteLabel by remember { mutableStateOf<String?>(null) }
+    var noteFeedbackToken by remember { mutableIntStateOf(0) }
 
     var petunjukVisible by remember { mutableStateOf(!petunjukStore.hasSeenPetunjuk) }
     var arStarted by remember { mutableStateOf(petunjukStore.hasSeenPetunjuk) }
@@ -100,6 +113,34 @@ fun ArScreen(onBack: () -> Unit) {
         mutableStateOf<ArCoreApk.Availability?>(null)
     }
     var arCoreCheckToken by remember { mutableIntStateOf(0) }
+
+    fun playNote(note: Note) {
+        if (notePlayerState != NotePlayerState.Ready) return
+        notePlayer.play(note)
+        activeNoteId = note.id
+        noteLabel = note.label
+        noteFeedbackToken += 1
+    }
+
+    LaunchedEffect(noteFeedbackToken) {
+        if (noteFeedbackToken > 0) {
+            delay(220)
+            activeNoteId = null
+            delay(680)
+            noteLabel = null
+        }
+    }
+
+    LaunchedEffect(uiState) {
+        if (uiState !is ArUiState.Placed) {
+            activeNoteId = null
+            noteLabel = null
+        }
+    }
+
+    DisposableEffect(notePlayer) {
+        onDispose { notePlayer.release() }
+    }
 
     LaunchedEffect(arStarted, arCoreCheckToken) {
         if (!arStarted) return@LaunchedEffect
@@ -140,6 +181,14 @@ fun ArScreen(onBack: () -> Unit) {
         onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
     }
 
+    DisposableEffect(lifecycleOwner, notePlayer) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_PAUSE) notePlayer.stopAll()
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+    }
+
     fun dismissPetunjuk() {
         petunjukStore.markPetunjukSeen()
         petunjukVisible = false
@@ -169,6 +218,9 @@ fun ArScreen(onBack: () -> Unit) {
                     modifier = Modifier.fillMaxSize(),
                     retryToken = retryToken,
                     onUiState = { uiState = it },
+                    onModelTap = { x ->
+                        playNote(SaronNoteMap.noteAt(NoteIndex.forMarkerLocalX(x)))
+                    },
                     onCameraPermissionChanged = { cameraBlocked = it },
                     onArCoreAvailabilityChanged = { arCoreBlocked = it },
                     cameraPermissionOverlay = { state ->
@@ -192,6 +244,10 @@ fun ArScreen(onBack: () -> Unit) {
             ArHud(
                 uiState = uiState,
                 chromeVisible = !petunjukVisible,
+                notePlayerState = notePlayerState,
+                activeNoteId = activeNoteId,
+                noteLabel = noteLabel,
+                onNoteClick = { playNote(it) },
                 onHome = {
                     if (arStarted) showExitDialog = true else onBack()
                 },
@@ -224,6 +280,10 @@ fun ArScreen(onBack: () -> Unit) {
 private fun BoxScope.ArHud(
     uiState: ArUiState,
     chromeVisible: Boolean,
+    notePlayerState: NotePlayerState,
+    activeNoteId: Int?,
+    noteLabel: String?,
+    onNoteClick: (Note) -> Unit,
     onHome: () -> Unit,
     onHelp: () -> Unit,
     onRetryModel: () -> Unit,
@@ -302,7 +362,15 @@ private fun BoxScope.ArHud(
                     .align(Alignment.BottomCenter)
                     .padding(bottom = 24.dp),
             )
-            ArUiState.Placed -> Unit
+            ArUiState.Placed -> NoteBarSection(
+                playerState = notePlayerState,
+                activeNoteId = activeNoteId,
+                noteLabel = noteLabel,
+                onNoteClick = onNoteClick,
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 20.dp),
+            )
         }
 
         StatusPill(
@@ -310,6 +378,57 @@ private fun BoxScope.ArHud(
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .padding(start = 20.dp, bottom = 20.dp),
+        )
+    }
+}
+
+@Composable
+private fun NoteBarSection(
+    playerState: NotePlayerState,
+    activeNoteId: Int?,
+    noteLabel: String?,
+    onNoteClick: (Note) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        if (playerState == NotePlayerState.Failed) {
+            Text(
+                text = "Audio tidak bisa dimuat",
+                color = GemaARColors.Fg,
+                fontFamily = GemaARBody,
+                fontWeight = FontWeight.Bold,
+                fontSize = 13.sp,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(999.dp))
+                    .background(GemaARColors.Danger.copy(alpha = 0.92f))
+                    .border(1.dp, GemaARColors.Border, RoundedCornerShape(999.dp))
+                    .padding(horizontal = 12.dp, vertical = 6.dp),
+            )
+            Spacer(Modifier.height(8.dp))
+        }
+        if (noteLabel != null) {
+            Text(
+                text = noteLabel,
+                color = GemaARColors.Primary,
+                fontFamily = GemaARBody,
+                fontWeight = FontWeight.Bold,
+                fontSize = 15.sp,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(999.dp))
+                    .background(GemaARColors.Surface.copy(alpha = 0.94f))
+                    .border(1.dp, GemaARColors.Border, RoundedCornerShape(999.dp))
+                    .padding(horizontal = 14.dp, vertical = 6.dp),
+            )
+            Spacer(Modifier.height(8.dp))
+        }
+        NoteBar(
+            notes = SaronNoteMap.notes,
+            activeNoteId = activeNoteId,
+            enabled = playerState == NotePlayerState.Ready,
+            onNoteClick = onNoteClick,
         )
     }
 }
@@ -523,16 +642,15 @@ private fun ModelErrorCard(
 private fun openArCoreStore(context: Context) {
     val market = Intent(
         Intent.ACTION_VIEW,
-        Uri.parse("market://details?id=com.google.ar.core"),
+        "market://details?id=com.google.ar.core".toUri(),
     )
     runCatching { context.startActivity(market) }.onFailure {
         if (it is ActivityNotFoundException) {
             context.startActivity(
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse(
-                        "https://play.google.com/store/apps/details?id=com.google.ar.core",
-                    ),
+                    "https://play.google.com/store/apps/details?id=com.google.ar.core"
+                        .toUri(),
                 ),
             )
         }

@@ -47,8 +47,8 @@ Boundary:
 | Pemutar | `SoundPool`, maxStreams 8, `USAGE_GAME`, `CONTENT_TYPE_SONIFICATION` |
 | Overlap | biarkan sampel sebelumnya berdecay; tidak `stop()` saat nada baru |
 | Tap | `ARSceneView.onTouchEvent` + `HitResult.worldPosition`; ACTION_UP, gerak < 12 dp |
-| Mapping | `markerPose.inverse().transformPoint(hit.worldPosition).x` dinormalisasi ke 0..6 |
-| Batas model | setengah lebar model setelah `scaleToUnits = 0.5f` → ±0,25 m |
+| Mapping | `markerPose.inverse().transformPoint(hit.worldPosition).x` → pusat bilah terdekat |
+| Pusat bilah | 7 pusat hasil ukur mesh `Object_33`, diskalakan 0,53561095 → -0,1321..0,1373 m |
 | Note bar | 7 tombol, tampil saat `ArUiState.Placed`; nonaktif saat audio Loading/Failed |
 | Feedback | tombol menyala ±220 ms, label “Nada N” ±900 ms; tanpa getar |
 | Error audio | state `Failed` → pesan “Audio tidak bisa dimuat”, note bar nonaktif |
@@ -72,7 +72,7 @@ interface NotePlayer {
 }
 
 // pure, mudah diuji
-fun noteIndexFor(normalizedX: Float): Int   // 0..6
+fun forMarkerLocalX(x: Float): Int   // 0..6, pusat bilah terdekat
 
 // ArController
 onModelTap: (normalizedX: Float) -> Unit
@@ -149,7 +149,8 @@ Manual di Tab S9:
 ## Risiko
 
 - Tap mapping meleset kalau model dilihat dari sudut ekstrem → uji 3 sudut;
-  kalau perlu, kalibrasi batas X atau tambah 7 hitbox.
+  pusat bilah sudah diukur, tetapi kalau masih meleset kalibrasi ulang atau
+  tambah 7 hitbox.
 - Latency audio pada tablet → ukur; SoundPool seharusnya <100 ms.
 - Sampel 7,7–12 detik jika tidak dipotong → file besar; wajib trim.
 - Lisensi Artistic 2.0 → wajib sertakan lisensi/atribusi dan tandai modifikasi.

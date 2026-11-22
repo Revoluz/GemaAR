@@ -41,6 +41,23 @@
 
 ## Log
 
+## 2026-11-22 17:20 — F-02 — selesai
+- Done: T001a–T009; 7 sampel audio, NoteMap, NotePlayer, tap mapping pusat bilah, note bar, feedback, lifecycle
+- Contract: `NotePlayer` + `NoteIndex`; mapping bug bilah 1→2 / 7→6 diperbaiki
+- Docs: `docs/specs/F-02-play-note/converge.md`, `tasks.md`, `feature_list.json`, `ROADMAP.md`, `CREDITS.md`, `assets/audio/`, `verification/T006–T008*`
+- Verify: 18 unit test, lint 0, `init.sh --check`, `verify-docs.sh`; device Tab S9
+- Next: F-03 katalog + pilih alat
+- Blocked: none
+
+## Handoff — 17:20, F-02 → F-03
+- Selesai: F-02 `passes: true`; audio Saron 7 nada, tap + note bar jalan
+- Kontrak: `NotePlayer`, `NoteIndex`, `SaronNoteMap`; pindahkan note map ke `catalog.json` di F-03
+- Belum: katalog 6 alat, pilih/ganti model
+- Boleh mulai: grill + spec F-03 (folder belum ada)
+- Jebakan: lisensi audio Artistic 2.0; tabuh sudah dihapus; mapping pakai pusat bilah, bukan lebar model
+- Baca: `docs/specs/F-02-play-note/converge.md`, `app/src/main/assets/audio/NOTICE.md`
+- Fokus sesi berikutnya: F-03
+
 ## 2026-11-22 16:45 — F-02 — T001a selesai
 - Done: tabuh (`Object_109` + `Object_112`) dihapus; `saron.glb` 463 KB, 5.058 tris; preview diperbarui
 - Contract: model F-02 tanpa tabuh; bbox X/Y tetap, tinggi 0,3205 m
