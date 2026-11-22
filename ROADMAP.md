@@ -24,9 +24,8 @@ Satu halaman. Cetak, tempel, centang.
 - [x] `sdk.dir` di `local.properties` (jangan commit)
 - [x] `adb` berfungsi (emulator API 35)
 - [x] Device fisik terhubung (Galaxy Tab S9 / SM-X710)
-- [ ] Google Play Services for AR (`com.google.ar.core`) terpasang:
-      `adb shell pm list packages | grep -i arcore`
-- [ ] Device ada di daftar ARCore-supported: https://developers.google.com/ar/devices
+- [x] Google Play Services for AR (`com.google.ar.core`) terpasang (1.57)
+- [x] Device ada di daftar ARCore-supported: Galaxy Tab S9 (SM-X710)
 - [x] Koneksi internet untuk unduh dependency Gradle
 - [x] Blender + Node (`npx`) untuk pipeline aset 3D
 
@@ -78,7 +77,8 @@ Lalu audit: `/design-system audit` sebelum rilis besar.
 
 ## Fase 4 — Per fitur (ulangi)
 
-Mulai dari **F-01 — penempatan model di marker**.
+**F-01 — penempatan model di marker: selesai 2026-11-22**
+(`docs/specs/F-01-ar-placement/converge.md`)
 
 - [ ] **4.1 Grill** — wawancara sampai bisa menulis spec tanpa menebak
 - [ ] **4.2 Research** — hanya kalau butuh fakta eksternal (ARCore device support, SceneView API)

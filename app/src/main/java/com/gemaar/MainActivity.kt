@@ -16,7 +16,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.gemaar.ui.HomeScreen
-import com.gemaar.ui.ar.ArPlaceholderScreen
+import com.gemaar.ui.ar.ArScreen
 import com.gemaar.ui.theme.GemaARTheme
 
 private enum class Screen {
@@ -28,12 +28,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        WindowInsetsControllerCompat(window, window.decorView).apply {
-            hide(WindowInsetsCompat.Type.systemBars())
-            systemBarsBehavior =
-                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        }
+        hideSystemBars()
 
         setContent {
             GemaARTheme {
@@ -41,6 +36,20 @@ class MainActivity : ComponentActivity() {
                     GemaARApp()
                 }
             }
+        }
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) hideSystemBars()
+    }
+
+    private fun hideSystemBars() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        WindowInsetsControllerCompat(window, window.decorView).apply {
+            hide(WindowInsetsCompat.Type.systemBars())
+            systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
     }
 }
@@ -51,6 +60,6 @@ private fun GemaARApp() {
 
     when (screen) {
         Screen.Home -> HomeScreen(onStart = { screen = Screen.Ar })
-        Screen.Ar -> ArPlaceholderScreen(onBack = { screen = Screen.Home })
+        Screen.Ar -> ArScreen(onBack = { screen = Screen.Home })
     }
 }

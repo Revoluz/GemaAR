@@ -9,52 +9,69 @@
       design: `docs/design/UI/exports/S1-beranda.png`
       files: `MainActivity.kt`, `ui/HomeScreen.kt`
       verify: `docs/design/UI/exports/verification/T001-S1-implemented.png`;
-              Mulai membuka AR placeholder `T001-mulai-AR.png`
+              Mulai membuka AR `T001-mulai-AR.png`
 
-- [ ] **T002** S3 Petunjuk overlay: 3 langkah, close, Mulai AR, “?”
+- [x] **T002** S3 Petunjuk overlay: 3 langkah, close, Mulai AR, “?”
       blocked by: T001
       design: `docs/design/UI/exports/S3-petunjuk.png`
       files: `ui/ar/PetunjukOverlay.kt`, `ui/ar/ArScreen.kt`
-      verify: overlay muncul; close kembali ke AR; “?” membuka lagi
+      verify: overlay muncul saat pertama kali;
+              `verification/T002-petunjuk-overlay.png`;
+              close/Mulai AR menutup overlay;
+              “?” membuka lagi `verification/T002-petunjuk-dibuka-lagi.png`
 
-- [ ] **T003** Flag Petunjuk sekali + share/save marker
+- [x] **T003** Flag Petunjuk sekali + share/save marker
       blocked by: T002
-      files: `data/PetunjukStore.kt`, `AndroidManifest.xml`, `res/xml/file_paths.xml`
-      verify: Petunjuk tidak muncul otomatis setelah pernah ditutup; share sheet terbuka
+      files: `data/PetunjukStore.kt`, `data/MarkerSharer.kt`,
+             `AndroidManifest.xml`, `res/xml/file_paths.xml`
+      verify: setelah ditutup, Mulai berikutnya langsung ke AR;
+              share sheet terbuka dengan PNG marker
+              `verification/T003-unduh-marker-share.png`
 
 ## Phase 2: AR
 
-- [ ] **T004** S4 AR shell: plakat Saron, hint, status marker, HUD lengkap
+- [x] **T004** S4 AR shell: plakat Saron, hint, status marker, HUD lengkap
       blocked by: T001
       design: `docs/design/UI/exports/S4-ar.png`
       files: `ui/ar/ArScreen.kt`
-      verify: HUD home + “?” aktif; Katalog/Info/Settings nonaktif; note bar/scale belum tampil
+      verify: HUD home + “?” aktif; Katalog/Info/Settings nonaktif;
+              note bar/scale belum tampil `verification/T004-ar-scanning.png`;
+              konfirmasi keluar `verification/T004-konfirmasi-keluar-ar.png`
 
-- [ ] **T005** Izin kamera + ketersediaan AR + error state
+- [x] **T005** Izin kamera + ketersediaan AR + error state
       blocked by: T004
       design: `docs/design/UI/exports/states-S1-S7.png`
-      files: `ar/ArController.kt`, `ar/ArUiState.kt`, `ArScreen.kt`
-      verify: izin ditolak → error + Settings; AR unsupported → error
+      files: `ar/ArController.kt`, `ar/ArUiState.kt`, `ui/ar/ArErrorOverlays.kt`
+      verify: izin ditolak → error + Buka Pengaturan
+              `verification/T005-izin-kamera-ditolak.png`;
+              Settings terbuka `verification/T005-buka-pengaturan.png`;
+              kembali dari Settings dengan izin aktif → AR restart tanpa overlay;
+              ARCore tidak tersedia → overlay `Coba Lagi`
 
-- [ ] **T006** Marker database + deteksi + anchor + model Saron
+- [x] **T006** Marker database + deteksi + anchor + model Saron
       blocked by: T005
       files: `ar/MarkerRepository.kt`, `ar/ArController.kt`, `assets/markers/`
-      verify: marker terdeteksi → Saron muncul menempel
+      verify: marker terdeteksi → Saron menempel
+              `verification/T006-marker-terdeteksi.png`
 
-- [ ] **T007** Marker hilang → hide + hint; marker kembali → muncul lagi
+- [x] **T007** Marker hilang → hide + hint; marker kembali → muncul lagi
       blocked by: T006
-      files: `ar/ArController.kt`, `ArScreen.kt`
-      verify: 3× hilang/muncul tanpa crash
+      files: `ar/ArController.kt`, `ar/MarkerVisibility.kt`, `ArScreen.kt`
+      verify: 4 siklus `visible=true → visible=false` tanpa crash;
+              `verification/T007-marker-hilang.png`,
+              `verification/T007-log-siklus.txt`;
+              unit test `MarkerVisibilityTest`
 
 ## Phase 3: Polish & Converge
 
-- [ ] **T008** Uji device + rekam bukti
+- [x] **T008** Uji device + rekam bukti
       blocked by: T007
-      verify: video/screenshot marker → model; izin ditolak; marker hilang
+      verify: screenshot di `docs/design/UI/exports/verification/`;
+              unit test, lint, dan `init.sh --check` hijau
 
-- [ ] **T009** Update `feature_list.json`, `progress.md`, `ROADMAP.md`
+- [x] **T009** Update `feature_list.json`, `progress.md`, `ROADMAP.md`
       blocked by: T008
-      verify: `bash init.sh --check`; converge F-01
+      verify: `bash scripts/verify-docs.sh`; converge F-01
 
 ## Rules
 

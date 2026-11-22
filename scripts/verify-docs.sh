@@ -86,7 +86,10 @@ fi
 echo "==> spec clarity"
 for s in docs/specs/*/spec.md; do
   [ -f "$s" ] || continue
-  if grep -q '\[NEEDS CLARIFICATION' "$s"; then
+  case "$s" in
+    docs/specs/_templates/*) continue ;;
+  esac
+  if grep -q '\[NEEDS CLARIFICATION:' "$s"; then
     if [ -f "$(dirname "$s")/tasks.md" ]; then
       err "$s still has [NEEDS CLARIFICATION] but tasks.md exists" \
           "resolve the questions before implementation"

@@ -1,9 +1,13 @@
 {
   "$comment": "STATUS INDEX ONLY. Acceptance criteria hidup di docs/specs/<feature>/spec.md. Agent hanya boleh mengubah 'passes', 'evidence', 'updated'.",
   "project": "GemaAR",
-  "updated": "2026-11-21",
+  "updated": "2026-11-22",
   "rules": {
-    "agentMayEdit": ["passes", "evidence", "updated"],
+    "agentMayEdit": [
+      "passes",
+      "evidence",
+      "updated"
+    ],
     "criteriaLocation": "docs/specs/<feature>/spec.md",
     "passesTrueRequires": "evidence"
   },
@@ -22,9 +26,9 @@
       "title": "Tempatkan satu alat musik di marker",
       "priority": 1,
       "spec": "docs/specs/F-01-ar-placement/spec.md",
-      "passes": false,
-      "evidence": null,
-      "updated": null
+      "passes": true,
+      "evidence": "Galaxy Tab S9: Petunjuk tampil sekali + tombol ? membuka lagi; marker A4 21 cm terdeteksi dan Saron menempel di marker; 4 siklus hilang/muncul tanpa crash (T007-log-siklus.txt); izin kamera ditolak -> Buka Pengaturan; share marker PNG; konfirmasi keluar AR. Emulator tanpa ARCore -> gate error. assembleDebug OK; testDebugUnitTest OK (7 test); lintDebug 0 issue; init.sh --check OK; verify-docs.sh OK. Bukti: docs/design/UI/exports/verification/.",
+      "updated": "2026-11-22"
     },
     {
       "id": "F-02",

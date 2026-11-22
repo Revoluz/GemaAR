@@ -41,6 +41,25 @@
 
 ## Log
 
+
+## 2026-11-22 11:58 — F-01 — selesai
+- Done: S3 Petunjuk, S4 AR, marker A4 21 cm, Saron menempel, hilang/muncul 4×, izin kamera, gate ARCore, share marker, konfirmasi keluar
+- Contract: ya — deteksi wajib `FULL_TRACKING`; gate `ArCoreApk.awaitAvailability`; update `plan.md`
+- Docs: `docs/specs/F-01-ar-placement/converge.md`, `tasks.md`, `plan.md`, `feature_list.json`, `ROADMAP.md`, `docs/design/UI/exports/verification/`
+- Verify: 7 unit test, lint 0 issue, `init.sh --check`, `verify-docs.sh`
+- Next: F-02 ketuk alat → nada
+- Blocked: none
+
+## Handoff — 11:58, F-01 → F-02
+- Selesai: F-01 `passes: true`, semua task `[x]`
+- Kontrak: `ArController` membungkus SceneView/ARCore; UI hanya lihat `ArUiState`
+- Belum: audio, tap bilah, note bar
+- Boleh mulai: baca `docs/specs/F-02-play-note/spec.md`
+- Jebakan: `LAST_KNOWN_POSE` bukan marker terlihat; marker 21 cm; model 0,5 m
+- Baca: `docs/specs/F-01-ar-placement/converge.md`
+- Fokus sesi berikutnya: F-02
+
+
 ## 2026-11-22 10:35 — F-01 — T001 S1 Beranda
 - Done: S1 mengikuti `S1-beranda.png`; font Alfa Slab One/Nunito; background export Pen; Mulai → AR placeholder; Alat Musik/Pengaturan nonaktif
 - Contract: no

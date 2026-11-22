@@ -30,12 +30,30 @@ Hasil export dari `docs/design/UI/ui.pen` (frame 1912×862, scale 1x).
 | `assets/alat-slenthem.png` | ilustrasi alat |
 | `assets/alat-kendang.png` | ilustrasi alat |
 
+## Marker cetak
+
+| File | Isi |
+|---|---|
+| `marker-A4-21cm.pdf` | marker A4, lebar area 21 cm, siap cetak 100% |
+| `marker-A4-21cm.png` | preview/alternatif tampil di layar |
+
 ## Verifikasi
 
 | File | Isi |
 |---|---|
 | `verification/T001-S1-implemented.png` | S1 Beranda hasil implementasi di Tab S9 |
-| `verification/T001-mulai-AR.png` | hasil tap Mulai → AR placeholder |
+| `verification/T001-mulai-AR.png` | hasil tap Mulai → AR |
+| `verification/T002-petunjuk-overlay.png` | S3 Petunjuk tampil otomatis pertama kali |
+| `verification/T002-petunjuk-dibuka-lagi.png` | “?” membuka Petunjuk dari AR |
+| `verification/T003-unduh-marker-share.png` | share sheet PNG marker |
+| `verification/T004-ar-scanning.png` | S4 AR, hint + status “Mencari marker” |
+| `verification/T004-konfirmasi-keluar-ar.png` | konfirmasi keluar dari AR |
+| `verification/T005-izin-kamera-ditolak.png` | error izin kamera + Buka Pengaturan |
+| `verification/T005-buka-pengaturan.png` | tombol membuka Info aplikasi |
+| `verification/T005-arcore-tidak-tersedia.png` | gate ARCore di emulator tanpa ARCore |
+| `verification/T006-marker-terdeteksi.png` | Saron tampil di marker |
+| `verification/T007-marker-hilang.png` | Saron hilang + hint + status “Marker hilang” |
+| `verification/T007-log-siklus.txt` | log 4 siklus deteksi/hilang |
 
 ## Catatan implementasi
 

@@ -1,0 +1,9 @@
+11-22 11:44:57.071  7352  7352 D GemaArMarker: visible=true
+11-22 11:44:59.928  7352  7352 D GemaArMarker: visible=false state=PAUSED method=NOT_TRACKING
+11-22 11:45:00.078  7352  7352 D GemaArMarker: visible=true
+11-22 11:45:01.746  7352  7352 D GemaArMarker: visible=false state=TRACKING method=LAST_KNOWN_POSE
+11-22 11:45:04.146  7352  7352 D GemaArMarker: visible=true
+11-22 11:45:05.416  7352  7352 D GemaArMarker: visible=false state=TRACKING method=LAST_KNOWN_POSE
+11-22 11:45:07.281  7352  7352 D GemaArMarker: visible=true
+11-22 11:45:08.082  7352  7352 D GemaArMarker: visible=false state=TRACKING method=LAST_KNOWN_POSE
+11-22 11:47:26.446  7352  7352 D GemaArMarker: visible=true

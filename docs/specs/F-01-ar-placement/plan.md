@@ -39,9 +39,9 @@ Boundary:
 |---|---|
 | AR | SceneView 4.70 `ARSceneView` + ARCore `AugmentedImageDatabase` |
 | Marker | satu gambar, `physicalWidth = 0.21f` (A4) |
-| Model | `saron.glb`, `scaleToUnits = 0.5f` |
-| Detection | `AugmentedImage.trackingState == TRACKING` → anchor di center pose |
-| Lost | `TRACKING` berhenti → model disembunyikan, hint muncul |
+| Model | `saron.glb`, `scaleToUnits = 0.5f`, bottom-aligned ke marker (`centerOrigin = (0,-1,0)`) |
+| Detection | `trackingState == TRACKING` **dan** `trackingMethod == FULL_TRACKING` → anchor di center pose |
+| Lost | `FULL_TRACKING` berhenti (`LAST_KNOWN_POSE`/`PAUSED`) → model disembunyikan, hint muncul |
 | Permission | Activity Result `RequestPermission`; ditolak → error + Settings |
 | ARCore | `ArCoreApk.checkAvailability`; unsupported → error; not installed → prompt install |
 | Model loading | `rememberModelInstance` + `rememberModelLoadState` |
@@ -88,10 +88,12 @@ app/src/main/res/xml/file_paths.xml
 
 ## Contract
 
-- `ArUiState`: `NeedsPermission`, `ArUnavailable`, `Scanning`, `ModelLoading`,
-  `Placed`, `MarkerLost`, `ModelError`.
-- `ArController.start()/stop()`, `onMarkerDetected(...)`, `onMarkerLost()`.
-- `PetunjukStore.seen: Flow<Boolean>`, `markSeen()`.
+- `ArUiState`: `Scanning`, `ModelLoading(progress)`, `Placed`, `MarkerLost`,
+  `ModelError(message)`.
+- Izin kamera & ketersediaan ARCore ditangani `ARSceneView` lewat slot overlay;
+  error-nya tidak masuk `ArUiState`.
+- `ArController(...)` composable membungkus sesi; UI tidak menyentuh ARCore.
+- `PetunjukStore.hasSeenPetunjuk: Boolean`, `markPetunjukSeen()`.
 
 ## Verifikasi
 
