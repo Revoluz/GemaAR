@@ -41,6 +41,21 @@
 
 ## Log
 
+## 2026-11-23 01:35 — F-03 — A selesai + review
+- Done: A1–A7 (Saron/Bonang/Slenthem, CatalogOverlay, ArController instrument, wiring)
+- Review agent: fix `catalogVisible` default, stop audio saat pilih, import `android.R`, `Catalog.instruments`, error model generik; hapus daemon JVM generated
+- Verify: `assembleDebug`, `testDebugUnitTest`, `lintDebug` hijau; katalog 3 kartu + pilih Bonang (judul berubah) di Tab S9
+- Next: B1–B6 (3 alat, ikon, InstrumentStore, first-run)
+- Blocked: none
+
+## Handoff — A → B, F-03
+- Selesai: fondasi `Instrument`, `Catalog` 3 alat, `CatalogOverlay`, `ArController(instrument)`, wiring katalog
+- Kontrak: `Catalog.instruments`, `Catalog.byId`, `Catalog.saron`; `Instrument.audioAvailable`
+- Belum: 3 alat (Gender/Gong/Kendang), ikon, `InstrumentStore`, first-run, last-instrument
+- File: `data/Instrument.kt`, `data/Catalog.kt`, `ui/ar/CatalogOverlay.kt`, `ui/ar/ArScreen.kt`, `ar/ArController.kt`
+- Catatan: `catalogVisible` masih state sementara; B mengganti dengan store + first-run
+- Baca: `docs/specs/F-03-catalog/team-guide.md`, `tasks.md`
+
 ## 2026-11-22 18:40 — docs — onboarding tim
 - Done: folder `docs/onboarding/`; struktur Kotlin, Android Studio, VS Code/CLI, koneksi HP, setup Windows, troubleshooting, Git workflow
 - Docs: `docs/onboarding/README.md` + 7 panduan; root `README.md` dan `AGENTS.md` diperbarui

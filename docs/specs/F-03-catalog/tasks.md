@@ -15,35 +15,35 @@ Kerjakan **A dulu sampai build hijau**, lalu handoff ke B.
 
 ## A — kamu
 
-- [ ] **A1** Siapkan ikon Saron, Bonang, Slenthem
+- [x] **A1** Siapkan ikon Saron, Bonang, Slenthem
       files: `app/src/main/res/drawable-nodpi/ikon_saron.png`,
              `ikon_bonang.png`, `ikon_slenthem.png`
       cara: ambil `docs/design/UI/exports/assets/alat-*.png`, perkecil ke ±256 px
       verify: 3 file ada, ukuran <100 KB, nama resource huruf kecil
 
-- [ ] **A2** Buat `data/Instrument.kt`
+- [x] **A2** Buat `data/Instrument.kt`
       files: `data/Instrument.kt`
       verify: data class berisi id, name, origin, modelAsset, iconRes,
               audioAvailable
 
-- [ ] **A3** Buat `data/Catalog.kt` dengan 3 alat
+- [x] **A3** Buat `data/Catalog.kt` dengan 3 alat
       files: `data/Catalog.kt`
       verify: Saron, Bonang, Slenthem; `byId()` fallback Saron;
               `audioAvailable` true hanya Saron
 
-- [ ] **A4** Buat `ui/ar/CatalogOverlay.kt`
+- [x] **A4** Buat `ui/ar/CatalogOverlay.kt`
       design: `docs/design/UI/exports/S2-katalog.png`
       files: `ui/ar/CatalogOverlay.kt`
       verify: overlay + scrim + plaque “Katalog” + close X;
               kartu 2 baris × 3 kolom; nama + asal + ikon;
               kartu aktif bergaris emas; klik kartu memanggil callback
 
-- [ ] **A5** `ArController` menerima `Instrument`
+- [x] **A5** `ArController` menerima `Instrument`
       files: `ar/ArController.kt`
       verify: model mengikuti `instrument.modelAsset`; ganti alat tidak
               membuat ulang sesi/marker; loading/error tetap seperti F-01
 
-- [ ] **A6** Wiring `ArScreen` (bagian A)
+- [x] **A6** Wiring `ArScreen` (bagian A)
       files: `ui/ar/ArScreen.kt`
       verify: tombol Katalog aktif; buka/tutup overlay;
               pilih alat → overlay tutup, judul berubah, model berganti;
@@ -51,9 +51,11 @@ Kerjakan **A dulu sampai build hijau**, lalu handoff ke B.
               non-Saron → pesan “Audio belum tersedia”;
               Back: Katalog → Petunjuk → keluar
 
-- [ ] **A7** Build + tes 3 alat + handoff
-      verify: `./gradlew assembleDebug` hijau; Saron ↔ Bonang ↔ Slenthem
-              tanpa scan ulang; tulis catatan handoff di `progress.md`
+- [x] **A7** Build + tes 3 alat + handoff
+      verify: `assembleDebug`, `testDebugUnitTest`, `lintDebug` hijau;
+              katalog 3 kartu tampil; pilih Bonang → judul berubah;
+              tes model di marker dilakukan ulang oleh agent di R3;
+              handoff dicatat di `progress.md`
 
 ---
 

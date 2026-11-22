@@ -15,6 +15,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import com.gemaar.data.Instrument
 import com.google.ar.core.AugmentedImage
 import com.google.ar.core.AugmentedImageDatabase
 import com.google.ar.core.Config
@@ -27,7 +28,6 @@ import io.github.sceneview.rememberEngine
 import io.github.sceneview.rememberModelLoadState
 import io.github.sceneview.rememberModelLoader
 
-private const val SARON_MODEL = "models/saron.glb"
 private const val SARON_TARGET_METERS = 0.5f
 
 /**
@@ -38,6 +38,7 @@ private const val SARON_TARGET_METERS = 0.5f
  */
 @Composable
 fun ArController(
+    instrument: Instrument,
     modifier: Modifier = Modifier,
     retryToken: Int = 0,
     onUiState: (ArUiState) -> Unit,
@@ -58,8 +59,8 @@ fun ArController(
     var trackedImage by remember { mutableStateOf<AugmentedImage?>(null) }
     var hasEverTracked by remember { mutableStateOf(false) }
 
-    val modelState = key(retryToken) {
-        rememberModelLoadState(modelLoader, SARON_MODEL)
+    val modelState = key(instrument.id, retryToken) {
+        rememberModelLoadState(modelLoader, instrument.modelAsset)
     }
 
     val hasMarker = trackedImage != null
@@ -72,7 +73,7 @@ fun ArController(
             ArUiState.ModelError("Marker AR tidak bisa dimuat.")
         modelState is ModelLoadState.Failed ->
             ArUiState.ModelError(
-                modelState.error.message ?: "Model Saron gagal dimuat.",
+                modelState.error.message ?: "Model ${instrument.name} gagal dimuat.",
             )
         modelState is ModelLoadState.Loading ->
             ArUiState.ModelLoading(modelState.progress.fraction)

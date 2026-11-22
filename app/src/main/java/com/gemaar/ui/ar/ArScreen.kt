@@ -72,6 +72,8 @@ import com.gemaar.ar.ArUiState
 import com.gemaar.ar.NoteIndex
 import com.gemaar.audio.NotePlayerState
 import com.gemaar.audio.SoundPoolNotePlayer
+import com.gemaar.data.Catalog
+import com.gemaar.data.Instrument
 import com.gemaar.data.MarkerSharer
 import com.gemaar.data.Note
 import com.gemaar.data.PetunjukStore
@@ -114,7 +116,12 @@ fun ArScreen(onBack: () -> Unit) {
     }
     var arCoreCheckToken by remember { mutableIntStateOf(0) }
 
+    // Simpan alat musik yang sedang dipilih (default: Saron)
+    var catalogVisible by remember { mutableStateOf(false) }
+    var selectedInstrument by remember { mutableStateOf(Catalog.saron) }
+
     fun playNote(note: Note) {
+        if (!selectedInstrument.audioAvailable) return // <-- Tambahkan baris ini
         if (notePlayerState != NotePlayerState.Ready) return
         notePlayer.play(note)
         activeNoteId = note.id
@@ -197,6 +204,7 @@ fun ArScreen(onBack: () -> Unit) {
 
     BackHandler {
         when {
+            catalogVisible -> catalogVisible = false
             petunjukVisible -> dismissPetunjuk()
             arStarted -> showExitDialog = true
             else -> onBack()
@@ -215,11 +223,14 @@ fun ArScreen(onBack: () -> Unit) {
             arCoreAvailability == null -> ArCoreChecking()
             arCoreReady -> key(sessionKey) {
                 ArController(
+                    instrument = selectedInstrument,
                     modifier = Modifier.fillMaxSize(),
                     retryToken = retryToken,
                     onUiState = { uiState = it },
                     onModelTap = { x ->
-                        playNote(SaronNoteMap.noteAt(NoteIndex.forMarkerLocalX(x)))
+                        if (selectedInstrument.audioAvailable) {
+                            playNote(SaronNoteMap.noteAt(NoteIndex.forMarkerLocalX(x)))
+                        }
                     },
                     onCameraPermissionChanged = { cameraBlocked = it },
                     onArCoreAvailabilityChanged = { arCoreBlocked = it },
@@ -243,8 +254,9 @@ fun ArScreen(onBack: () -> Unit) {
         if (arCoreReady && !cameraBlocked && !arCoreBlocked) {
             ArHud(
                 uiState = uiState,
-                chromeVisible = !petunjukVisible,
+                chromeVisible = !petunjukVisible && !catalogVisible,
                 notePlayerState = notePlayerState,
+                selectedInstrument = selectedInstrument,
                 activeNoteId = activeNoteId,
                 noteLabel = noteLabel,
                 onNoteClick = { playNote(it) },
@@ -253,6 +265,10 @@ fun ArScreen(onBack: () -> Unit) {
                 },
                 onHelp = { petunjukVisible = true },
                 onRetryModel = { retryToken += 1 },
+                onCatalog = {
+                    notePlayer.stopAll()
+                    catalogVisible = true
+                },
             )
         }
 
@@ -261,6 +277,18 @@ fun ArScreen(onBack: () -> Unit) {
                 onClose = { dismissPetunjuk() },
                 onDownloadMarker = { MarkerSharer.share(context) },
                 onStartAr = { dismissPetunjuk() },
+            )
+        }
+        if (catalogVisible) {
+            CatalogOverlay(
+                instruments = Catalog.instruments,
+                selectedId = selectedInstrument.id,
+                onSelect = { instrument ->
+                    notePlayer.stopAll()
+                    selectedInstrument = instrument
+                    catalogVisible = false
+                },
+                onClose = { catalogVisible = false },
             )
         }
 
@@ -282,15 +310,17 @@ private fun BoxScope.ArHud(
     chromeVisible: Boolean,
     notePlayerState: NotePlayerState,
     activeNoteId: Int?,
+    selectedInstrument: Instrument,
     noteLabel: String?,
     onNoteClick: (Note) -> Unit,
     onHome: () -> Unit,
     onHelp: () -> Unit,
+    onCatalog: () -> Unit,
     onRetryModel: () -> Unit,
 ) {
     val title = when (uiState) {
         is ArUiState.ModelLoading -> "Memuat model"
-        else -> "Saron"
+        else -> selectedInstrument.name
     }
 
     if (chromeVisible) {
@@ -317,9 +347,9 @@ private fun BoxScope.ArHud(
         )
         HudButton(
             icon = Icons.AutoMirrored.Filled.List,
-            contentDescription = "Katalog (belum aktif)",
-            enabled = false,
-            onClick = {},
+            contentDescription = "Katalog",
+            enabled = true,
+            onClick =  onCatalog,
         )
         HudButton(
             icon = null,
@@ -362,15 +392,34 @@ private fun BoxScope.ArHud(
                     .align(Alignment.BottomCenter)
                     .padding(bottom = 24.dp),
             )
-            ArUiState.Placed -> NoteBarSection(
-                playerState = notePlayerState,
-                activeNoteId = activeNoteId,
-                noteLabel = noteLabel,
-                onNoteClick = onNoteClick,
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(bottom = 20.dp),
-            )
+                ArUiState.Placed ->  {
+                    if (selectedInstrument.audioAvailable) {
+                        NoteBarSection(
+                            playerState = notePlayerState,
+                            activeNoteId = activeNoteId,
+                            noteLabel = noteLabel,
+                            onNoteClick = onNoteClick,
+                            modifier = Modifier
+                                .align(Alignment.BottomCenter)
+                                .padding(bottom = 20.dp),
+                        )
+                    } else {
+                        Text(
+                            text = "Audio belum tersedia untuk alat ini",
+                            color = GemaARColors.Muted,
+                            fontFamily = GemaARBody,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 14.sp,
+                            modifier = Modifier
+                                .align(Alignment.BottomCenter)
+                                .padding(bottom = 24.dp)
+                                .clip(RoundedCornerShape(999.dp))
+                                .background(GemaARColors.Surface.copy(alpha = 0.94f))
+                                .border(1.dp, GemaARColors.Border, RoundedCornerShape(999.dp))
+                                .padding(horizontal = 16.dp, vertical = 8.dp),
+                        )
+                    }
+                }
         }
 
         StatusPill(
@@ -579,7 +628,7 @@ private fun LoadingCard(progress: Float, modifier: Modifier = Modifier) {
         )
         Spacer(Modifier.height(10.dp))
         Text(
-            text = "Menyiapkan Saron…",
+            text = "Menyiapkan Alat Musik…",
             color = GemaARColors.Muted,
             fontFamily = GemaARBody,
             fontWeight = FontWeight.SemiBold,
