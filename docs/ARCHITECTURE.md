@@ -51,6 +51,32 @@ Aturan:
 7. `NotePlayer` memutar sampel dari `res/raw/` lewat `SoundPool`.
 8. (Opsional) progres koleksi dan volume musik disimpan di `DataStore`; tanpa database.
 
+## Skema `assets/catalog.json` (versi 1 — F-03)
+
+```json
+{
+  "schemaVersion": 1,
+  "instruments": [
+    {
+      "id": "saron",
+      "name": "Saron",
+      "origin": "Jawa",
+      "model": "models/saron.glb",
+      "icon": "saron",
+      "audioAvailable": true
+    }
+  ]
+}
+```
+
+- `id` unik dan stabil.
+- `model` relatif terhadap `assets/`.
+- `icon` adalah kunci ikon UI.
+- `audioAvailable` hanya `true` untuk alat yang punya sample (F-03: Saron).
+- F-04 menambahkan pemetaan nada/pukulan per alat tanpa mengubah versi skema
+  dasar; jika bentuk data berubah, naikkan `schemaVersion`.
+
+
 ## Where knowledge lives
 
 | Jenis | Lokasi | Manual / generated |

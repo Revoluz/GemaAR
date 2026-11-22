@@ -66,7 +66,8 @@ Hasil export dari `docs/design/UI/ui.pen` (frame 1912×862, scale 1x).
 - **S3 Petunjuk:** kartu marker di Pen masih kosong. Di aplikasi, tampilkan
   `app/src/main/assets/markers/marker_placeholder.png` (atau marker final).
 - **S4 AR:** frame Pen memakai Bonang sebagai contoh. F-01 memakai **Saron**;
-  NoteBar dan pemilih Pelog/Slendro ditunda ke F-02/F-04.
+  NoteBar sudah ada di F-02. Pemilih Pelog/Slendro dan oktaf **dihapus dari
+  MVP**; F-04 berfokus pada audio semua alat selain Saron.
 - **S6 Alat Musik:** badge “Sudah/Belum dimainkan” adalah bagian dari desain.
 - **S2/S3** adalah overlay di atas S4, bukan layar penuh terpisah.
 - Jangan mengubah layout, warna, font, atau ukuran dari export tanpa update

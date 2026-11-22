@@ -41,6 +41,14 @@
 
 ## Log
 
+## 2026-11-22 18:00 — F-03/F-04 — spec
+- Done: F-03 katalog (model swap, last instrument, first-run, audio Saron saja); F-04 audio semua alat selain Saron (menggantikan scale/oktaf)
+- Contract: `catalog.json` v1, `Instrument`, `InstrumentStore`, `InstrumentAudio`, `InstrumentControls`
+- Docs: `docs/specs/F-03-catalog/`, `docs/specs/F-04-instrument-audio/`, `SCREENS.md`, `COMPONENTS.md`, `ARCHITECTURE.md`, `PRODUCT.md`, `ROADMAP.md`, `feature_list.json`
+- Catatan: Slenthem ada di CDM sebagai `GENDER/GSPL*`; Kendang memakai 7 pukulan subset
+- Next: implement F-03 T001 (`catalog.json` + repository)
+- Blocked: none
+
 ## 2026-11-22 17:20 — F-02 — selesai
 - Done: T001a–T009; 7 sampel audio, NoteMap, NotePlayer, tap mapping pusat bilah, note bar, feedback, lifecycle
 - Contract: `NotePlayer` + `NoteIndex`; mapping bug bilah 1→2 / 7→6 diperbaiki

@@ -53,7 +53,7 @@ memberi pengalaman "alat musik muncul di atas kartu" tanpa perangkat khusus.
 |---|---|---|---|
 | Q1 | Alat pertama untuk F-01: **Saron** (diputuskan 2026-11-21) | product | closed |
 | Q2 | Perlu mode tanpa AR (3D viewer) sebagai fallback HP non-ARCore? | product | open |
-| Q3 | Sumber model 3D & sampel audio: buat sendiri atau lisensi CC? | product | closed — model dibuat sendiri; sampel Saron dari CDM Gamelan Sample Library (Artistic 2.0), lihat ADR 0003 |
+| Q3 | Sumber model 3D & sampel audio: buat sendiri atau lisensi CC? | product | closed — model dibuat sendiri; sampel audio gamelan dari CDM Gamelan Sample Library (Artistic 2.0) untuk Saron, Bonang, Gender, Slenthem, Gong, Kendang; lihat ADR 0003 |
 
 ---
 

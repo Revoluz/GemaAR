@@ -83,6 +83,12 @@ Lalu audit: `/design-system audit` sebelum rilis besar.
 **F-02 — ketuk alat → nada: selesai 2026-11-22**
 (`docs/specs/F-02-play-note/converge.md`)
 
+**F-03 — katalog + pilih alat: spec siap, belum implementasi**
+(`docs/specs/F-03-catalog/spec.md`)
+
+**F-04 — audio semua alat selain Saron: spec siap, belum implementasi**
+(`docs/specs/F-04-instrument-audio/spec.md`)
+
 - [ ] **4.1 Grill** — wawancara sampai bisa menulis spec tanpa menebak
 - [ ] **4.2 Research** — hanya kalau butuh fakta eksternal (ARCore device support, SceneView API)
 - [ ] **4.3 Spec** — apa & kenapa, tanpa teknologi

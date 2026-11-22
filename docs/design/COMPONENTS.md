@@ -17,10 +17,12 @@
 | `IconButton` | primitive | S1–S4 | home, katalog, petunjuk, info, close | F-01…F-05 | draft |
 | `ActionButton` | primitive | S1, S2, S3 | gold (utama), green (unduh), wood (sekunder) | F-01, F-03 | draft |
 | `InstrumentCard` | composite | S2, S6 | default, selected, played (S6) | F-03, F-06 | draft |
+| `InstrumentIcon` | primitive | S2 | 6 ikon alat | F-03 | draft |
+| `CatalogOverlay` | composite | S2 | loading, empty, error, grid | F-03 | draft |
+| `InstrumentControls` | composite | S4 | note bar, 2 baris, pad | F-04 | draft |
 | `ProgressBadge` | primitive | S6 | sudah / belum dimainkan | F-06 | draft |
-| `NoteBar` | composite | S4 | 7 bilah, 14 bilah | F-02 | ada |
+| `NoteBar` | composite | S4 | 1 baris, 2 baris, pad | F-02, F-04 | ada |
 | `NoteKey` | primitive | S4 | idle, pressed, active | F-02 | ada |
-| `ScaleSelector` | composite | S4 | slendro, pelog + oktaf | F-04 | draft |
 | `InfoPanel` | composite | S5 | side-panel, scroll | F-05 | draft |
 | `HintOverlay` | composite | S3, S4 | reticle, marker, permission | F-01 | draft |
 | `EmptyState` | composite | S2, S6 | — | F-03, F-06 | draft |

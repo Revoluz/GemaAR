@@ -50,9 +50,9 @@
     },
     {
       "id": "F-04",
-      "title": "Pilihan tangga nada dan oktaf",
+      "title": "Audio semua alat selain Saron",
       "priority": 4,
-      "spec": "docs/specs/F-04-scale/spec.md",
+      "spec": "docs/specs/F-04-instrument-audio/spec.md",
       "passes": false,
       "evidence": null,
       "updated": null
