@@ -41,6 +41,21 @@
 
 ## Log
 
+## 2026-11-24 14:53 — F-03 — B selesai (3 alat + persistence)
+- Done: ikon `ikon_gender_barung`/`ikon_gong_kempul`/`ikon_kendang`; `Catalog` 6 alat; `InstrumentStore`; `ArScreen` restore alat terakhir + simpan pilihan + katalog first-run sekali; warning UseKtx dibersihkan
+- Uji device SM-A356E: 6 kartu, tiap alat dipilih tanpa scan ulang marker, non-Saron pesan audio + note bar hilang, kembali ke Saron audio hidup, marker hilang/muncul, Back, alat terakhir pulih, first-run sekali setelah reset data (user-confirmed)
+- Contract: no
+- Docs: docs/specs/F-03-catalog/tasks.md (B1–B6)
+- Next: R1–R4 review, build/lint, uji device, converge F-03
+- Blocked: none
+
+## 2026-11-24 10:32 — setup — environment Windows
+- Done: install Temurin JDK 21.0.13.1 (winget); set `JAVA_HOME`, `ANDROID_HOME`, `ANDROID_SDK_ROOT` + Path user; `assembleDebug` OK, `testDebugUnitTest` OK, `lintDebug` OK (1 info versi SceneView), `init.sh --check` OK
+- Contract: no
+- Docs: docs/onboarding/05-setup-windows.md (dibaca, tidak diubah)
+- Next: hubungkan HP ARCore via USB (04-hubungkan-hp.md) lalu `installDebug`
+- Blocked: belum ada HP terhubung (`adb devices` kosong)
+
 ## 2026-11-23 01:35 — F-03 — A selesai + review
 - Done: A1–A7 (Saron/Bonang/Slenthem, CatalogOverlay, ArController instrument, wiring)
 - Review agent: fix `catalogVisible` default, stop audio saat pilih, import `android.R`, `Catalog.instruments`, error model generik; hapus daemon JVM generated

@@ -61,34 +61,34 @@ Kerjakan **A dulu sampai build hijau**, lalu handoff ke B.
 
 ## B — temanmu
 
-- [ ] **B1** Siapkan ikon Gender, Gong & Kempul, Kendang
+- [x] **B1** Siapkan ikon Gender, Gong & Kempul, Kendang
       files: `app/src/main/res/drawable-nodpi/ikon_gender_barung.png`,
              `ikon_gong_kempul.png`, `ikon_kendang.png`
       verify: 3 file ada, <100 KB, nama resource benar
 
-- [ ] **B2** Tambah 3 alat ke `data/Catalog.kt`
+- [x] **B2** Tambah 3 alat ke `data/Catalog.kt`
       files: `data/Catalog.kt`
       verify: total 6 alat; id unik; model path benar;
               `audioAvailable = false` untuk 3 alat ini
 
-- [ ] **B3** Buat `data/InstrumentStore.kt`
+- [x] **B3** Buat `data/InstrumentStore.kt`
       files: `data/InstrumentStore.kt`
       verify: simpan/baca `selected_instrument`;
               simpan/baca `catalog_auto_opened`;
               default null/false
 
-- [ ] **B4** Wiring persistence + first-run di `ArScreen`
+- [x] **B4** Wiring persistence + first-run di `ArScreen`
       files: `ui/ar/ArScreen.kt`
       verify: saat mulai, baca alat terakhir; fallback Saron;
               pilih alat → simpan;
               setelah Petunjuk pertama → Katalog terbuka sekali;
               flag disimpan segera agar tidak terbuka dua kali
 
-- [ ] **B5** Cek 6 alat + audio non-Saron + kembali ke Saron
+- [x] **B5** Cek 6 alat + audio non-Saron + kembali ke Saron
       verify: 6 kartu tampil; pilih tiap alat; non-Saron pesan audio;
               Saron kembali → note bar + audio; tutup/buka app → alat terakhir
 
-- [ ] **B6** Handoff ke agent
+- [x] **B6** Handoff ke agent
       verify: build hijau; catat file yang diubah dan yang belum diuji
 
 ---
