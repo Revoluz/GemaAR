@@ -74,6 +74,7 @@ import com.gemaar.audio.NotePlayerState
 import com.gemaar.audio.SoundPoolNotePlayer
 import com.gemaar.data.Catalog
 import com.gemaar.data.Instrument
+import com.gemaar.data.InstrumentStore
 import com.gemaar.data.MarkerSharer
 import com.gemaar.data.Note
 import com.gemaar.data.PetunjukStore
@@ -117,8 +118,12 @@ fun ArScreen(onBack: () -> Unit) {
     var arCoreCheckToken by remember { mutableIntStateOf(0) }
 
     // Simpan alat musik yang sedang dipilih (default: Saron)
+    val instrumentStore = remember(context) { InstrumentStore(context) }
     var catalogVisible by remember { mutableStateOf(false) }
-    var selectedInstrument by remember { mutableStateOf(Catalog.saron) }
+    var selectedInstrument by remember {
+        mutableStateOf(Catalog.byId(instrumentStore.selectedInstrumentId))
+    }
+
 
     fun playNote(note: Note) {
         if (!selectedInstrument.audioAvailable) return // <-- Tambahkan baris ini
@@ -200,6 +205,11 @@ fun ArScreen(onBack: () -> Unit) {
         petunjukStore.markPetunjukSeen()
         petunjukVisible = false
         arStarted = true
+        // First run: katalog terbuka otomatis sekali, tepat setelah Petunjuk.
+        if (!instrumentStore.catalogAutoOpened) {
+            instrumentStore.catalogAutoOpened = true
+            catalogVisible = true
+        }
     }
 
     BackHandler {
@@ -286,6 +296,7 @@ fun ArScreen(onBack: () -> Unit) {
                 onSelect = { instrument ->
                     notePlayer.stopAll()
                     selectedInstrument = instrument
+                    instrumentStore.selectedInstrumentId = instrument.id
                     catalogVisible = false
                 },
                 onClose = { catalogVisible = false },
