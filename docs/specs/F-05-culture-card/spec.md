@@ -1,7 +1,7 @@
 # Spec: F-05 — Kartu info budaya tiap alat
 
 **Feature ID:** F-05
-**Status:** draft
+**Status:** approved
 **Owner:** product + engineering
 
 ---

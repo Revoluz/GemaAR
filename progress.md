@@ -41,6 +41,12 @@
 
 ## Log
 
+## 2026-11-25 12:25 — F-05 — plan + tasks
+- Done: `plan.md` (arsitektur `CultureCard`/`CultureCardMap`, panel `InfoPanel`, wiring `ArScreen`) dan `tasks.md` T001–T005
+- Spec: status `approved`; design acuan S5, tanpa chip Pelog/Slendro
+- Next: T001 model data + naskah 6 alat + unit test
+- Blocked: none
+
 ## 2026-11-25 12:10 — F-05 — spec kartu budaya
 - Done: `docs/specs/F-05-culture-card/spec.md` — problem, 3 user story, FR, edge case, content brief 6 alat, success criteria
 - Sumber daring: UNESCO Gamelan 01607, Wikipedia Saron/Bonang/Slenthem/Gendèr/Gong ageng/Kempul/Kendang
