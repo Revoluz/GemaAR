@@ -27,6 +27,7 @@ object Catalog {
             modelAsset = "models/slenthem.glb",
             iconRes = R.drawable.ikon_slenthem,
             audioAvailable = false,
+            modelScale = 0.3f,
         ),
         Instrument(
             id = "gong_kempul",

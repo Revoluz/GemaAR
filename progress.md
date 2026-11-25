@@ -41,6 +41,12 @@
 
 ## Log
 
+## 2026-11-25 10:35 — F-03 — skala Slenthem
+- Done: `slenthem` modelScale 0,3 m; Kendang 0,3 m; alat lain 0,5 m
+- Verify: build/test/lint OK; 24 unit test
+- Next: cek visual Slenthem di device
+- Blocked: none
+
 ## 2026-11-25 10:25 — F-03 — skala Kendang
 - Done: `Instrument.modelScale`; default 0,5 m; Kendang 0,3 m; `ArScreen` memakai skala per alat
 - Docs: F-03 plan/converge, ARCHITECTURE, assets README, BUG-001
