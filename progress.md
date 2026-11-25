@@ -41,6 +41,13 @@
 
 ## Log
 
+## 2026-11-25 09:35 — F-03 — review B + flicker
+- Done: compact catalog untuk HP, first-run via `LaunchedEffect(arStarted)`, grace marker 500 ms, `CatalogTest`
+- Verify: 23 unit test, lint 0, build OK; katalog 6 alat di HP landscape; Tab S9 stabil
+- Temuan: A25 (SM-A256E) flicker pada model; Tab S9 tidak. Perlu diagnosis jarak/device
+- Next: R3 device test Tab S9 + keputusan flicker A25
+- Blocked: A25 flicker (device-specific)
+
 ## 2026-11-24 14:53 — F-03 — B selesai (3 alat + persistence)
 - Done: ikon `ikon_gender_barung`/`ikon_gong_kempul`/`ikon_kendang`; `Catalog` 6 alat; `InstrumentStore`; `ArScreen` restore alat terakhir + simpan pilihan + katalog first-run sekali; warning UseKtx dibersihkan
 - Uji device SM-A356E: 6 kartu, tiap alat dipilih tanpa scan ulang marker, non-Saron pesan audio + note bar hilang, kembali ke Saron audio hidup, marker hilang/muncul, Back, alat terakhir pulih, first-run sekali setelah reset data (user-confirmed)
