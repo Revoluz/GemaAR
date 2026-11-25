@@ -41,6 +41,12 @@
 
 ## Log
 
+## 2026-11-25 13:40 — F-07 — plan + tasks
+- Done: `plan.md` (MusicVolume, AudioSettingsStore, NotePlayer volume, SettingsPanel, global overlay, pause AR) dan `tasks.md` T001–T007
+- Spec: status `approved`; design S7; satu slider Musik; auto-save; X dalam panel
+- Next: T001 nilai + penyimpanan
+- Blocked: belum ada eksekusi kode sesuai permintaan
+
 ## 2026-11-25 13:30 — F-07 — spec volume
 - Done: `docs/specs/F-07-volume/spec.md` — problem, 3 user story, FR, edge case, SC, non-goals
 - Design: `S7-pengaturan.png`, `SCREENS.md`, `DESIGN.md`, `COMPONENTS.md`; satu baris Musik, X di dalam panel

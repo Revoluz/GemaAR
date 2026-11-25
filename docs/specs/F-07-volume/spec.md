@@ -1,7 +1,7 @@
 # Spec: F-07 — Pengaturan volume musik
 
 **Feature ID:** F-07
-**Status:** draft
+**Status:** approved
 **Owner:** product + engineering
 
 ---
