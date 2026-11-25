@@ -41,6 +41,13 @@
 
 ## Log
 
+## 2026-11-25 13:30 — F-07 — spec volume
+- Done: `docs/specs/F-07-volume/spec.md` — problem, 3 user story, FR, edge case, SC, non-goals
+- Design: `S7-pengaturan.png`, `SCREENS.md`, `DESIGN.md`, `COMPONENTS.md`; satu baris Musik, X di dalam panel
+- Keputusan: volume = semua bunyi alat; default 100%; auto-save; AR pause saat panel dari S4
+- Next: review spec, lalu `plan.md` + `tasks.md`
+- Blocked: butuh approval sebelum implementasi
+
 ## 2026-11-25 13:10 — F-06 — converge
 - Done: `CollectionProgress` + `InstrumentStore.playedInstrumentIds/markPlayed`, `CollectionScreen` S6, navigasi Home↔S6, tandai di `playNote`
 - Design: latar Beranda, panel 720dp, plakat, grid 3×2, badge hijau/terang, tanpa aksi kartu
