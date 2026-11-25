@@ -34,12 +34,13 @@ mendengar nada yang sesuai.
 
 **Acceptance scenarios:**
 
-1. **Given** Bonang aktif dan model tampil, **Then** semua pencon yang terlihat
-   bisa diketuk dan menghasilkan nada berbeda.
+1. **Given** Bonang aktif dan model tampil, **Then** 12 pencon (6 bawah +
+   6 atas) bisa diketuk dan menghasilkan nada berbeda.
 2. **Given** Gender Barung aktif, **Then** semua bilah yang terlihat bisa
-   diketuk dan menghasilkan nada berbeda.
+   diketuk dan berbunyi; bilah nada 4 memakai sample nada 3 sebagai tetangga
+   terdekat dan tetap berlabel “4”.
 3. **Given** Bonang/Gender aktif, **Then** baris nada disusun mengikuti dua baris
-   alat, bukan baris Saron 1–7.
+   alat (Bonang 6+6, Gender 7+7), bukan baris Saron 1–7.
 4. **Given** pengguna mengetuk cepat beberapa bagian, **Then** nada boleh
    tumpang tindih dan aplikasi tidak berhenti.
 
@@ -137,9 +138,9 @@ Audio mengikuti alat yang dipilih; kontrol dan suara tidak tercampur.
 
 - **FR-001**: F-04 MUST mengaktifkan audio untuk Bonang, Gender Barung,
   Slenthem, Gong & Kempul, dan Kendang.
-- **FR-002**: Bonang MUST memetakan semua pencon yang terlihat ke nada berbeda.
-- **FR-003**: Gender Barung MUST memetakan semua bilah yang terlihat ke nada
-  berbeda.
+- **FR-002**: Bonang MUST memetakan 12 pencon: 6 nada bawah + 6 nada atas.
+- **FR-003**: Gender Barung MUST memetakan 14 bilah; bilah nada 4 memakai
+  sample nada 3 (`GBPL3`/`GBPL3h`) sebagai tetangga terdekat.
 - **FR-004**: Slenthem MUST memetakan tujuh bilah ke tujuh nada berbeda pada
   oktaf rendah.
 - **FR-005**: Gong & Kempul MUST membunyikan setiap gong/kempul yang terlihat.
@@ -183,6 +184,8 @@ Audio mengikuti alat yang dipilih; kontrol dan suara tidak tercampur.
 
 - Pemilih Pelog/Slendro dan pindah oktaf (dihapus dari MVP).
 - Simulasi dua kepala Kendang secara penuh; F-04 memakai subset pukulan CDM.
+- Sample asli nada 4 Gender Barung; F-04 memakai sample nada 3 sebagai
+  tetangga terdekat sampai sample asli tersedia.
 - Merekam sample baru di dalam aplikasi.
 - Notasi, pelajaran musik, akor, multi-touch.
 - Animasi tabuh atau highlight per bilah 3D.
@@ -194,6 +197,10 @@ Audio mengikuti alat yang dipilih; kontrol dan suara tidak tercampur.
 - Sampel CDM tersedia untuk Bonang (`BBPL*`), Gender Barung (`GBPL*`),
   Slenthem (`GSPL*`), Gong/Kempul (`GA`, `GKPL*`, `GS`), dan Kendang
   (`DHA`, `DLANG`, `LUNG`, `TAK`, `THUNG`, `TONG`, `DHUNG`).
+- CDM Gender Barung Pelog tidak punya `GBPL4`; F-04 memakai `GBPL3`/`GBPL3h`
+  untuk bilah 4 dan mencatatnya sebagai keterbatasan sementara.
+- Bonang memakai 6 nada bawah + 6 nada atas (12 pencon).
+- Kendang memakai 7 pukulan, bukan simulasi dua kepala penuh.
 - Satu tangga nada default per alat; tidak ada pemilih.
 - Kendang memakai subset pukulan yang tersedia; bukan emulasi dua kepala penuh.
 - Model dan pusat bagian alat bisa diukur dari mesh, seperti Saron.

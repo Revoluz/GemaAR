@@ -41,6 +41,13 @@
 
 ## Log
 
+## 2026-11-25 11:20 — F-04 — grill selesai
+- Keputusan: urutan Slenthem→Bonang→Gender→Gong→Kendang; Bonang 6+6; Gender 14 bilah (nada 4 pakai sample 3/3h); Kendang 7 pad; tap 3D + kontrol
+- Catatan: CDM GENDER tidak punya GBPL4; sudah diverifikasi dari file dan PDF; Gender Barung Pelog memakai subset pathet
+- Docs: `docs/specs/F-04-instrument-audio/spec.md`, `plan.md`, `tasks.md`
+- Next: implement T001
+- Blocked: none
+
 ## 2026-11-25 11:05 — F-03 — skala Kendang/Slenthem 0,3
 - Done: Kendang + Slenthem modelScale 0,3 m; alat lain 0,5 m
 - Verify: build/test/lint OK

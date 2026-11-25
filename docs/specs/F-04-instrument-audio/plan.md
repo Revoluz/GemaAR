@@ -30,8 +30,8 @@ Boundary tetap: `ui → audio/ar → data`; audio dan AR tidak saling impor.
 
 | Alat | Sumber | Catatan |
 |---|---|---|
-| Bonang | `BONANG/BBPL1–7`, `BBPL1h–7h` | model 12 pencon, 2 baris |
-| Gender Barung | `GENDER/GBPL*` | model 14 bilah, 2 baris; tidak ada `GBPL4` |
+| Bonang | `BONANG/BBPL1–6`, `BBPL1h–6h` | model 12 pencon, 2 baris; 6 bawah + 6 atas |
+| Gender Barung | `GENDER/GBPL*` | model 14 bilah, 2 baris; bilah 4 memakai `GBPL3`/`GBPL3h` |
 | Slenthem | `GENDER/GSPL1–7` | 7 bilah, oktaf rendah |
 | Gong & Kempul | `GONG/GA`, `GKPL1–7`, `GS` | gong ageng, kempul, suwukan |
 | Kendang | `KENDHANG AGENG/DHA`, `CIBLON/*`, `KETIPUNG/*` | 7 pukulan unik |
@@ -44,16 +44,16 @@ fade-out, OGG <300 KB. Script diperluas menjadi
 
 | Alat | Kontrol | Pemetaan tap |
 |---|---|---|
-| Bonang | 2 baris × 6 pencon | pusat 2D pencon dari mesh |
-| Gender Barung | 2 baris × 7 bilah | pusat 2D bilah dari mesh |
+| Bonang | 2 baris × 6 pencon (1–6, 1h–6h) | pusat 2D pencon dari mesh |
+| Gender Barung | 2 baris × 7 bilah | pusat 2D bilah; bilah 4 → sample nada 3 |
 | Slenthem | 1 baris × 7 bilah | pusat X bilah dari mesh |
 | Gong & Kempul | pad per gong/kempul | pusat X tiap gong |
 | Kendang | 7 pad pukulan | pad UI; tap model tidak wajib |
 
-Catatan Gender: sample `GBPL4` tidak ada. Sebelum implementasi, verifikasi
-apakah bilah ke-4 memang tidak dipakai; jika ada, cari/sediakan sample pengganti
-atau dokumentasikan bilah yang tidak dapat dimainkan. Jangan diam-diam memakai
-sample nada lain.
+Keputusan Gender: CDM tidak punya `GBPL4` (subset pathet Pelog). Bilah nada 4
+memakai sample nada 3 (`GBPL3` untuk oktaf bawah, `GBPL3h` untuk oktaf atas)
+sebagai tetangga terdekat. Label UI tetap “4”; keterbatasan dicatat di NOTICE
+dan converge. Ini keputusan sementara, bukan sample asli nada 4.
 
 ## Kontrol UI
 
@@ -110,7 +110,8 @@ Manual di Tab S9, untuk tiap alat:
 
 ## Risiko
 
-- Gender `GBPL4` tidak ada → perlu keputusan sample/pemetaan.
+- Gender `GBPL4` tidak ada → bilah 4 memakai sample nada 3; bisa terdengar
+  tidak tepat dan harus dicatat.
 - Bonang/Gender 2 baris → pusat pencon/bilah harus diukur; jangan pakai lebar
   model seperti bug Saron.
 - Banyak sample (49+) → waktu muat dan memori; muat per alat, bukan semua.
@@ -118,6 +119,7 @@ Manual di Tab S9, untuk tiap alat:
 - Kendang bukan alat bernada; pad lebih tepat daripada note bar.
 - Model alat lain mungkin punya tabuh yang menutupi bagian; pertimbangkan
   menghapus tabuh seperti Saron jika perlu.
+- Urutan implementasi: Slenthem → Bonang → Gender → Gong/Kempul → Kendang.
 
 ## Constitution check
 
