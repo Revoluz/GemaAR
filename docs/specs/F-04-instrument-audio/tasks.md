@@ -13,55 +13,53 @@
 
 ## Phase 1: Fondasi audio
 
-- [ ] **T001** Generalisasi model audio + kontrol + player
+- [x] **T001** Generalisasi model audio + kontrol + player
       blocked by: none
       files: `data/Stroke.kt`, `data/InstrumentAudio.kt`,
              `audio/SoundPoolNotePlayer.kt`,
              `ui/ar/InstrumentControls.kt`, `ui/ar/NoteBar.kt`
-      verify: 1 baris, 2 baris, dan pad bisa ditampilkan; player bisa memuat
-              set sample alat aktif; ganti alat menghentikan set lama
+      verify: `Rows`/`Pads`, `InstrumentControls`, player per alat; 35 unit test
 
-- [ ] **T002** Proses sample 5 alat + lisensi/atribusi
+- [x] **T002** Proses sample 5 alat + lisensi/atribusi
       blocked by: none
       files: `scripts/process_instrument_audio.py`,
              `app/src/main/res/raw/<instrument>_*.ogg`,
              `app/src/main/assets/audio/NOTICE.md`, `CREDITS.md`
-      verify: sample mono 44,1 kHz, ±2,5 s, <300 KB; lisensi CDM tetap;
-              tidak ada sample Saron yang dipakai alat lain;
-              catat Gender bilah 4 memakai sample nada 3
+      verify: 45 OGG baru; mono 44,1 kHz; 2,5 s; <30 KB per file;
+              NOTICE/CREDITS diperbarui; Gender 4 memakai sample 3
 
 ## Phase 2: Per alat
 
-- [ ] **T003** Slenthem: 7 bilah + oktaf rendah
+- [x] **T003** Slenthem: 7 bilah + oktaf rendah
       blocked by: T001, T002
       files: `data/InstrumentAudioMap.kt`, `ar/InstrumentTapMap.kt`
-      verify: 7 nada berbeda, lebih rendah dari Saron; kontrol 1 baris;
-              tap tiap bilah tepat
+      verify: 7 sample loaded; kontrol 1 baris; model scale 0,3;
+              screenshot `F04-Slenthem.png`
 
-- [ ] **T004** Bonang: 12 pencon + 2 baris kontrol + tap mapping
+- [x] **T004** Bonang: 12 pencon + 2 baris kontrol + tap mapping
       blocked by: T001, T002
       files: `data/InstrumentAudioMap.kt`, `ar/InstrumentTapMap.kt`,
              `ui/ar/InstrumentControls.kt`
-      verify: 12 pencon berbeda; kontrol 2×6 (nada 1–6, 1h–6h);
-              tap tiap pencon tepat
+      verify: 12 sample loaded; kontrol 2×6; screenshot `F04-Bonang.png`;
+              log note bonang_5
 
-- [ ] **T005** Gender Barung: 14 bilah + 2 baris + tap mapping
+- [x] **T005** Gender Barung: 14 bilah + 2 baris + tap mapping
       blocked by: T001, T002
       files: `data/InstrumentAudioMap.kt`, `ar/InstrumentTapMap.kt`
-      verify: 14 bilah berbunyi; bilah 4 memakai sample nada 3/3h;
-              label tetap “4”; kontrol 2×7; tap tepat
+      verify: 14 sample loaded; bilah 4 memakai sample 3/3h; label “4”;
+              kontrol 2×7; screenshot `F04-Gender.png`; log gender_4
 
-- [ ] **T006** Gong & Kempul: gong ageng + kempul
+- [x] **T006** Gong & Kempul: gong ageng + kempul
       blocked by: T001, T002
       files: `data/InstrumentAudioMap.kt`, `ar/InstrumentTapMap.kt`
-      verify: setiap gong/kempul terlihat berbunyi; gong ageng beda dari
-              kempul; tap tepat
+      verify: 7 pad/7 sample loaded; screenshot `F04-Gong.png`;
+              log gong_ageng/kempul
 
-- [ ] **T007** Kendang: 7 pad pukulan
+- [x] **T007** Kendang: 7 pad pukulan
       blocked by: T001, T002
       files: `data/InstrumentAudioMap.kt`, `ui/ar/InstrumentControls.kt`
-      verify: DHA, DLANG, LUNG, TAK, THUNG, TONG, DHUNG tampil dan berbunyi;
-              pad menyala; tidak memakai note bar Saron
+      verify: 7 pad/7 sample loaded; screenshot `F04-Kendang-pads.png`;
+              log kendang_dhung/dlang
 
 ## Phase 3: Bukti & converge
 

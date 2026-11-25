@@ -9,14 +9,21 @@ class SaronNoteMapTest {
     @Test
     fun `has seven notes in low to high order`() {
         assertEquals(7, SaronNoteMap.count)
-        assertEquals((1..7).toList(), SaronNoteMap.notes.map { it.id })
+        assertEquals(
+            (1..7).map { "saron_$it" },
+            SaronNoteMap.notes.map { it.id },
+        )
     }
 
     @Test
     fun `labels follow note ids`() {
         assertEquals(
             (1..7).map { "Nada $it" },
-            SaronNoteMap.notes.map { it.label },
+            SaronNoteMap.notes.map { it.feedbackLabel },
+        )
+        assertEquals(
+            (1..7).map { it.toString() },
+            SaronNoteMap.notes.map { it.keyLabel },
         )
     }
 
@@ -28,17 +35,17 @@ class SaronNoteMapTest {
 
     @Test
     fun `noteAt clamps the key index`() {
-        assertEquals(1, SaronNoteMap.noteAt(-4).id)
-        assertEquals(1, SaronNoteMap.noteAt(0).id)
-        assertEquals(4, SaronNoteMap.noteAt(3).id)
-        assertEquals(7, SaronNoteMap.noteAt(6).id)
-        assertEquals(7, SaronNoteMap.noteAt(99).id)
+        assertEquals("saron_1", SaronNoteMap.noteAt(-4).id)
+        assertEquals("saron_1", SaronNoteMap.noteAt(0).id)
+        assertEquals("saron_4", SaronNoteMap.noteAt(3).id)
+        assertEquals("saron_7", SaronNoteMap.noteAt(6).id)
+        assertEquals("saron_7", SaronNoteMap.noteAt(99).id)
     }
 
     @Test
     fun `noteById returns the matching note`() {
-        assertEquals(2, SaronNoteMap.noteById(2)?.id)
-        assertNull(SaronNoteMap.noteById(0))
+        assertEquals("saron_2", SaronNoteMap.noteById("saron_2")?.id)
+        assertNull(SaronNoteMap.noteById("unknown"))
     }
 
     @Test

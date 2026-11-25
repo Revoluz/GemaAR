@@ -50,7 +50,7 @@ fun ArController(
     modelScale: Float = ModelScale.DEFAULT_TARGET_METERS,
     retryToken: Int = 0,
     onUiState: (ArUiState) -> Unit,
-    onModelTap: (markerLocalX: Float) -> Unit = {},
+    onModelTap: (markerLocalX: Float, markerLocalZ: Float) -> Unit = { _, _ -> },
     onCameraPermissionChanged: (Boolean) -> Unit = {},
     onArCoreAvailabilityChanged: (Boolean) -> Unit = {},
     cameraPermissionOverlay: (@Composable BoxScope.(ARCameraPermissionState) -> Unit)? = null,
@@ -165,7 +165,7 @@ fun ArController(
                             val local = markerPose.inverse().transformPoint(
                                 floatArrayOf(world.x, world.y, world.z),
                             )
-                            notifyTap(local[0])
+                            notifyTap(local[0], local[2])
                         }
                     }
                     isTap = false

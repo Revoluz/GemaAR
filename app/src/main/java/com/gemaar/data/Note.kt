@@ -3,14 +3,16 @@ package com.gemaar.data
 import androidx.annotation.RawRes
 
 /**
- * Satu nada yang bisa dibunyikan.
+ * Satu bunyi yang bisa dimainkan: nada alat bernada atau pukulan Kendang.
  *
- * @param id nomor nada 1..7, rendah ke tinggi.
- * @param label teks yang ditampilkan ke pengguna, mis. "Nada 3".
- * @param sampleRes berkas suara pendek untuk nada ini.
+ * @param id kunci unik lintas baris/alat, mis. "bonang_1", "gender_4h".
+ * @param keyLabel teks pendek pada tombol/pad, mis. "1", "1h", "DHA".
+ * @param feedbackLabel teks yang muncul saat bunyi dimainkan.
+ * @param sampleRes berkas suara pendek untuk bunyi ini.
  */
 data class Note(
-    val id: Int,
-    val label: String,
+    val id: String,
+    val keyLabel: String,
+    val feedbackLabel: String,
     @RawRes val sampleRes: Int,
 )

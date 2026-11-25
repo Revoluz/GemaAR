@@ -41,6 +41,13 @@
 
 ## Log
 
+## 2026-11-25 11:40 — F-04 — implementasi inti
+- Done: `Note` String id, `InstrumentAudio` Rows/Pads, `InstrumentAudioMap`, `InstrumentControls`, `InstrumentTapMap`, player per alat, 45 OGG baru
+- Alat: Slenthem 7, Bonang 12 (2×6), Gender 14 (bar 4 sample 3/3h), Gong 7 pad, Kendang 7 pad
+- Verify: 35 unit test, lint 0, build OK; log sample loaded 7/12/14/7/7; screenshot F04-*
+- Next: T008 uji tap 3D + marker semua alat, lalu converge
+- Blocked: tap 3D 2 baris perlu validasi device
+
 ## 2026-11-25 11:20 — F-04 — grill selesai
 - Keputusan: urutan Slenthem→Bonang→Gender→Gong→Kendang; Bonang 6+6; Gender 14 bilah (nada 4 pakai sample 3/3h); Kendang 7 pad; tap 3D + kontrol
 - Catatan: CDM GENDER tidak punya GBPL4; sudah diverifikasi dari file dan PDF; Gender Barung Pelog memakai subset pathet

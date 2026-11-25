@@ -18,13 +18,8 @@ class CatalogTest {
     }
 
     @Test
-    fun `only saron has audio in F-03`() {
-        assertTrue(Catalog.saron.audioAvailable)
-        assertTrue(
-            Catalog.instruments
-                .filter { it.id != "saron" }
-                .none { it.audioAvailable },
-        )
+    fun `all instruments have audio after F-04`() {
+        assertTrue(Catalog.instruments.all { it.audioAvailable })
     }
 
     @Test
@@ -34,8 +29,8 @@ class CatalogTest {
     }
 
     @Test
-    fun `bonang is not audio available`() {
-        assertFalse(Catalog.byId("bonang").audioAvailable)
+    fun `bonang is audio available`() {
+        assertTrue(Catalog.byId("bonang").audioAvailable)
     }
 
     @Test

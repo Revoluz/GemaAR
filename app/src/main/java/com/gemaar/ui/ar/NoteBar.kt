@@ -31,7 +31,7 @@ import com.gemaar.ui.theme.GemaARColors
 @Composable
 fun NoteBar(
     notes: List<Note>,
-    activeNoteId: Int?,
+    activeNoteId: String?,
     enabled: Boolean,
     onNoteClick: (Note) -> Unit,
     modifier: Modifier = Modifier,
@@ -83,7 +83,7 @@ private fun NoteKey(
         contentAlignment = Alignment.Center,
     ) {
         Text(
-            text = note.id.toString(),
+            text = note.keyLabel,
             color = foreground,
             fontFamily = GemaARBody,
             fontWeight = FontWeight.Bold,

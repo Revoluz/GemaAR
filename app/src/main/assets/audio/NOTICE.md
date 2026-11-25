@@ -56,3 +56,36 @@ repository.
 
 `SBPL1` is the lowest note and `SBPL7` the highest, matching the left-to-right
 key order of the playable Saron model.
+
+---
+
+# F-04 — Instrument audio
+
+The following samples are also derived from the same CDM collection, with the
+same processing (2.5 s trim, mono, −1 dBFS, 100 ms fade, OGG Vorbis quality 4,
+44.1 kHz).
+
+| App files | Original CDM files | Instrument |
+|---|---|---|
+| `slenthem_1..7.ogg` | `GENDER/GSPL1..7.wav` | Gender Slenthem (Pelog) |
+| `bonang_1..6.ogg` | `BONANG/BBPL1..6.wav` | Bonang barung (low row) |
+| `bonang_1h..6h.ogg` | `BONANG/BBPL1h..6h.wav` | Bonang barung (high row) |
+| `gender_1,2,3,5,6,7.ogg` | `GENDER/GBPL1,2,3,5,6,7.wav` | Gender Barung (low row) |
+| `gender_1h,2h,3h,5h,6h,7h.ogg` | `GENDER/GBPL1h,2h,3h,5h,6h,7h.wav` | Gender Barung (high row) |
+| `gong_ageng.ogg` | `GONG/GAf.wav` | Gong ageng |
+| `kempul_1,2,3,5,6,7.ogg` | `GONG/GKPL1f,2f,3f,5f,6f,7f.wav` | Kempul |
+| `kendang_dha.ogg` | `DRUMS/KENDHANG AGENG/DHA.wav` | Kendang ageng |
+| `kendang_dlang,lung,tak,thung,tong.ogg` | `DRUMS/CIBLON_TAMBOR_MEDIO/*.wav` | Kendang ciblon |
+| `kendang_dhung.ogg` | `DRUMS/KETIPUNG_TAMBOR PEQUENO/DHUNG.wav` | Kendang ketipung |
+
+## Known sample limitation
+
+CDM does not provide `GBPL4` (Gender Barung Pelog note 4). The app maps Gender
+bar 4 to the note-3 sample (`gender_3` / `gender_3h`) as the nearest neighbor.
+This is a temporary limitation and is documented in
+`docs/specs/F-04-instrument-audio/`.
+
+Kendang uses seven available strokes; it is not a complete two-head kendang
+simulation.
+
+Processing is reproducible with `scripts/process_instrument_audio.py`.

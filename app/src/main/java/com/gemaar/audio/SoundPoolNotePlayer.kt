@@ -5,7 +5,6 @@ import android.media.AudioAttributes
 import android.media.SoundPool
 import android.util.Log
 import com.gemaar.data.Note
-import com.gemaar.data.SaronNoteMap
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,7 +17,7 @@ import kotlinx.coroutines.flow.asStateFlow
  */
 class SoundPoolNotePlayer(
     context: Context,
-    private val notes: List<Note> = SaronNoteMap.notes,
+    private val notes: List<Note> = emptyList(),
 ) : NotePlayer {
     private val soundPool = SoundPool.Builder()
         .setMaxStreams(MAX_STREAMS)
@@ -30,7 +29,7 @@ class SoundPoolNotePlayer(
         )
         .build()
 
-    private val soundIdsByNoteId = mutableMapOf<Int, Int>()
+    private val soundIdsByNoteId = mutableMapOf<String, Int>()
     private var loadedCount = 0
     private var failed = false
     private var released = false
@@ -39,29 +38,33 @@ class SoundPoolNotePlayer(
     override val state: StateFlow<NotePlayerState> = _state.asStateFlow()
 
     init {
-        soundPool.setOnLoadCompleteListener { _, sampleId, status ->
-            if (status != 0) {
-                Log.e("GemaArAudio", "load failed sampleId=$sampleId status=$status")
-                failed = true
-                _state.value = NotePlayerState.Failed
-                return@setOnLoadCompleteListener
+        if (notes.isEmpty()) {
+            _state.value = NotePlayerState.Failed
+        } else {
+            soundPool.setOnLoadCompleteListener { _, sampleId, status ->
+                if (status != 0) {
+                    Log.e("GemaArAudio", "load failed sampleId=$sampleId status=$status")
+                    failed = true
+                    _state.value = NotePlayerState.Failed
+                    return@setOnLoadCompleteListener
+                }
+                loadedCount += 1
+                if (!failed && loadedCount == notes.size) {
+                    Log.d("GemaArAudio", "ready: ${notes.size} samples loaded")
+                    _state.value = NotePlayerState.Ready
+                }
             }
-            loadedCount += 1
-            if (!failed && loadedCount == notes.size) {
-                Log.d("GemaArAudio", "ready: ${notes.size} samples loaded")
-                _state.value = NotePlayerState.Ready
-            }
-        }
 
-        notes.forEach { note ->
-            val soundId = soundPool.load(context.applicationContext, note.sampleRes, 1)
-            if (soundId == 0) {
-                Log.e("GemaArAudio", "load returned 0 for note ${note.id}")
-                failed = true
-                _state.value = NotePlayerState.Failed
-            } else {
-                Log.d("GemaArAudio", "loading note=${note.id} sampleId=$soundId")
-                soundIdsByNoteId[note.id] = soundId
+            notes.forEach { note ->
+                val soundId = soundPool.load(context.applicationContext, note.sampleRes, 1)
+                if (soundId == 0) {
+                    Log.e("GemaArAudio", "load returned 0 for note ${note.id}")
+                    failed = true
+                    _state.value = NotePlayerState.Failed
+                } else {
+                    Log.d("GemaArAudio", "loading note=${note.id} sampleId=$soundId")
+                    soundIdsByNoteId[note.id] = soundId
+                }
             }
         }
     }

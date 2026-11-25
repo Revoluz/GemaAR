@@ -69,16 +69,17 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.gemaar.ar.ArController
 import com.gemaar.ar.ArUiState
-import com.gemaar.ar.NoteIndex
 import com.gemaar.audio.NotePlayerState
 import com.gemaar.audio.SoundPoolNotePlayer
 import com.gemaar.data.Catalog
+import com.gemaar.data.InstrumentAudio
+import com.gemaar.data.InstrumentAudioMap
+import com.gemaar.ar.InstrumentTapMap
 import com.gemaar.data.Instrument
 import com.gemaar.data.InstrumentStore
 import com.gemaar.data.MarkerSharer
 import com.gemaar.data.Note
 import com.gemaar.data.PetunjukStore
-import com.gemaar.data.SaronNoteMap
 import com.gemaar.ui.components.PlaqueTitle
 import com.gemaar.ui.theme.GemaARBody
 import com.gemaar.ui.theme.GemaARColors
@@ -97,10 +98,7 @@ import kotlinx.coroutines.delay
 fun ArScreen(onBack: () -> Unit) {
     val context = LocalContext.current
     val petunjukStore = remember(context) { PetunjukStore(context) }
-    val notePlayer = remember(context) { SoundPoolNotePlayer(context) }
-    val notePlayerState by notePlayer.state.collectAsState()
-
-    var activeNoteId by remember { mutableStateOf<Int?>(null) }
+    var activeNoteId by remember { mutableStateOf<String?>(null) }
     var noteLabel by remember { mutableStateOf<String?>(null) }
     var noteFeedbackToken by remember { mutableIntStateOf(0) }
 
@@ -124,12 +122,20 @@ fun ArScreen(onBack: () -> Unit) {
         mutableStateOf(Catalog.byId(instrumentStore.selectedInstrumentId))
     }
 
+    val selectedAudio = remember(selectedInstrument.id) {
+        InstrumentAudioMap.forInstrument(selectedInstrument.id)
+    }
+    val notePlayer = remember(context, selectedInstrument.id) {
+        SoundPoolNotePlayer(context, selectedAudio?.allNotes.orEmpty())
+    }
+    val notePlayerState by notePlayer.state.collectAsState()
+
     fun playNote(note: Note) {
-        if (!selectedInstrument.audioAvailable) return
+        if (selectedAudio == null) return
         if (notePlayerState != NotePlayerState.Ready) return
         notePlayer.play(note)
         activeNoteId = note.id
-        noteLabel = note.label
+        noteLabel = note.feedbackLabel
         noteFeedbackToken += 1
     }
 
@@ -239,16 +245,15 @@ fun ArScreen(onBack: () -> Unit) {
                     modelScale = selectedInstrument.modelScale,
                     retryToken = retryToken,
                     onUiState = { uiState = it },
-                    onModelTap = { x ->
-                        if (selectedInstrument.audioAvailable) {
-                            playNote(
-                                SaronNoteMap.noteAt(
-                                    NoteIndex.forMarkerLocalX(
-                                        x,
-                                        selectedInstrument.modelScale,
-                                    ),
-                                ),
+                    onModelTap = { x, z ->
+                        selectedAudio?.let { audio ->
+                            val index = InstrumentTapMap.noteIndexFor(
+                                selectedInstrument.id,
+                                x,
+                                z,
+                                selectedInstrument.modelScale,
                             )
+                            audio.allNotes.getOrNull(index)?.let(::playNote)
                         }
                     },
                     onCameraPermissionChanged = { cameraBlocked = it },
@@ -276,6 +281,7 @@ fun ArScreen(onBack: () -> Unit) {
                 chromeVisible = !petunjukVisible && !catalogVisible,
                 notePlayerState = notePlayerState,
                 selectedInstrument = selectedInstrument,
+                selectedAudio = selectedAudio,
                 activeNoteId = activeNoteId,
                 noteLabel = noteLabel,
                 onNoteClick = { playNote(it) },
@@ -329,7 +335,8 @@ private fun BoxScope.ArHud(
     uiState: ArUiState,
     chromeVisible: Boolean,
     notePlayerState: NotePlayerState,
-    activeNoteId: Int?,
+    selectedAudio: InstrumentAudio?,
+    activeNoteId: String?,
     selectedInstrument: Instrument,
     noteLabel: String?,
     onNoteClick: (Note) -> Unit,
@@ -413,8 +420,9 @@ private fun BoxScope.ArHud(
                     .padding(bottom = 24.dp),
             )
                 ArUiState.Placed ->  {
-                    if (selectedInstrument.audioAvailable) {
+                    if (selectedAudio != null) {
                         NoteBarSection(
+                            audio = selectedAudio,
                             playerState = notePlayerState,
                             activeNoteId = activeNoteId,
                             noteLabel = noteLabel,
@@ -453,8 +461,9 @@ private fun BoxScope.ArHud(
 
 @Composable
 private fun NoteBarSection(
+    audio: InstrumentAudio,
     playerState: NotePlayerState,
-    activeNoteId: Int?,
+    activeNoteId: String?,
     noteLabel: String?,
     onNoteClick: (Note) -> Unit,
     modifier: Modifier = Modifier,
@@ -493,8 +502,8 @@ private fun NoteBarSection(
             )
             Spacer(Modifier.height(8.dp))
         }
-        NoteBar(
-            notes = SaronNoteMap.notes,
+        InstrumentControls(
+            audio = audio,
             activeNoteId = activeNoteId,
             enabled = playerState == NotePlayerState.Ready,
             onNoteClick = onNoteClick,

@@ -18,7 +18,7 @@ object Catalog {
             origin = "Jawa",
             modelAsset = "models/bonang.glb",
             iconRes = R.drawable.ikon_bonang,
-            audioAvailable = false,
+            audioAvailable = true,
         ),
         Instrument(
             id = "slenthem",
@@ -26,7 +26,7 @@ object Catalog {
             origin = "Jawa",
             modelAsset = "models/slenthem.glb",
             iconRes = R.drawable.ikon_slenthem,
-            audioAvailable = false,
+            audioAvailable = true,
             modelScale = 0.3f,
         ),
         Instrument(
@@ -35,7 +35,7 @@ object Catalog {
             origin = "Jawa",
             modelAsset = "models/gong_kempul.glb",
             iconRes = R.drawable.ikon_gong_kempul,
-            audioAvailable = false,
+            audioAvailable = true,
         ),
         Instrument(
             id = "gender_barung",
@@ -43,7 +43,7 @@ object Catalog {
             origin = "Jawa",
             modelAsset = "models/gender_barung.glb",
             iconRes = R.drawable.ikon_gender_barung,
-            audioAvailable = false,
+            audioAvailable = true,
         ),
         Instrument(
             id = "kendang",
@@ -51,7 +51,7 @@ object Catalog {
             origin = "Jawa",
             modelAsset = "models/kendang.glb",
             iconRes = R.drawable.ikon_kendang,
-            audioAvailable = false,
+            audioAvailable = true,
             modelScale = 0.3f,
         ),
     )

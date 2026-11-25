@@ -28,3 +28,11 @@ Perubahan: dipotong 2,5 detik, mono, normalisasi, fade-out, OGG Vorbis.
 Teks lisensi lengkap dan daftar file ada di
 `app/src/main/assets/audio/NOTICE.md` dan
 `app/src/main/assets/audio/LICENSE-ARTISTIC-2.0.txt`.
+
+## Audio — F-04 instruments
+
+Sample Slenthem, Bonang, Gender Barung, Gong/Kempul, dan Kendang juga berasal
+dari **CDM Gamelan Sample Library** (Copyright © 2014 Digitopia — Casa da
+Música, Artistic License 2.0). Perubahan: dipotong 2,5 detik, mono, normalisasi,
+fade-out, OGG Vorbis. Daftar file dan keterbatasan Gender nada 4 ada di
+`app/src/main/assets/audio/NOTICE.md`.
