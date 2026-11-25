@@ -43,17 +43,17 @@
       verify: 12 sample loaded; kontrol 2×6; screenshot `F04-Bonang.png`;
               log note bonang_5
 
-- [x] **T005** Gender Barung: 14 bilah + 2 baris + tap mapping
+- [x] **T005** Gender Barung: 14 bilah satu deret + tap mapping
       blocked by: T001, T002
       files: `data/InstrumentAudioMap.kt`, `ar/InstrumentTapMap.kt`
       verify: 14 sample loaded; bilah 4 memakai sample 3/3h; label “4”;
-              kontrol 2×7; screenshot `F04-Gender.png`; log gender_4
+              kontrol 1×14; screenshot `F04-Gender.png`; log gender_4
 
-- [x] **T006** Gong & Kempul: gong ageng + kempul
+- [x] **T006** Gong & Kempul: gong ageng + kempul 1–7 + suwukan
       blocked by: T001, T002
       files: `data/InstrumentAudioMap.kt`, `ar/InstrumentTapMap.kt`
-      verify: 7 pad/7 sample loaded; screenshot `F04-Gong.png`;
-              log gong_ageng/kempul
+      verify: 9 pad; K4 memakai sample K3; screenshot `F04-Gong.png`;
+              log gong_ageng/kempul/suwukan
 
 - [x] **T007** Kendang: 7 pad pukulan
       blocked by: T001, T002

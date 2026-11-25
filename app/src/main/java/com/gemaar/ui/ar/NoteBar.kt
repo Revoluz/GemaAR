@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gemaar.data.Note
@@ -23,7 +25,10 @@ import com.gemaar.ui.theme.GemaARBody
 import com.gemaar.ui.theme.GemaARColors
 
 /**
- * Baris nada 1–7 di layar AR.
+ * Baris nada di layar AR.
+ *
+ * Lebar tombol menyesuaikan lebar layar. Gender Barung memakai satu baris
+ * 14 bilah; di HP tombolnya mengecil, bukan dipecah menjadi dua baris nada.
  *
  * Referensi visual: `docs/design/UI/exports/S4-ar.png` (baris angka di bawah).
  * Komponen ini hanya menampilkan state; pemutaran nada dilakukan pemanggil.
@@ -36,18 +41,24 @@ fun NoteBar(
     onNoteClick: (Note) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(6.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        notes.forEach { note ->
-            NoteKey(
-                note = note,
-                active = note.id == activeNoteId,
-                enabled = enabled,
-                onClick = { onNoteClick(note) },
-            )
+    val spacing = 6.dp
+    BoxWithConstraints(modifier = modifier) {
+        val keyWidth = ((maxWidth - spacing * (notes.size - 1)) / notes.size)
+            .coerceIn(20.dp, 44.dp)
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(spacing),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            notes.forEach { note ->
+                NoteKey(
+                    note = note,
+                    active = note.id == activeNoteId,
+                    enabled = enabled,
+                    width = keyWidth,
+                    onClick = { onNoteClick(note) },
+                )
+            }
         }
     }
 }
@@ -57,6 +68,7 @@ private fun NoteKey(
     note: Note,
     active: Boolean,
     enabled: Boolean,
+    width: Dp,
     onClick: () -> Unit,
 ) {
     val shape = RoundedCornerShape(8.dp)
@@ -73,7 +85,7 @@ private fun NoteKey(
 
     Box(
         modifier = Modifier
-            .width(44.dp)
+            .width(width)
             .height(56.dp)
             .shadow(if (enabled) 4.dp else 0.dp, shape)
             .clip(shape)

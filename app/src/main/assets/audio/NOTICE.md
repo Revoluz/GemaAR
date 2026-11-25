@@ -74,6 +74,7 @@ same processing (2.5 s trim, mono, −1 dBFS, 100 ms fade, OGG Vorbis quality 4,
 | `gender_1h,2h,3h,5h,6h,7h.ogg` | `GENDER/GBPL1h,2h,3h,5h,6h,7h.wav` | Gender Barung (high row) |
 | `gong_ageng.ogg` | `GONG/GAf.wav` | Gong ageng |
 | `kempul_1,2,3,5,6,7.ogg` | `GONG/GKPL1f,2f,3f,5f,6f,7f.wav` | Kempul |
+| `suwukan.ogg` | `GONG/GSf.wav` | Gong suwukan |
 | `kendang_dha.ogg` | `DRUMS/KENDHANG AGENG/DHA.wav` | Kendang ageng |
 | `kendang_dlang,lung,tak,thung,tong.ogg` | `DRUMS/CIBLON_TAMBOR_MEDIO/*.wav` | Kendang ciblon |
 | `kendang_dhung.ogg` | `DRUMS/KETIPUNG_TAMBOR PEQUENO/DHUNG.wav` | Kendang ketipung |
@@ -82,8 +83,11 @@ same processing (2.5 s trim, mono, −1 dBFS, 100 ms fade, OGG Vorbis quality 4,
 
 CDM does not provide `GBPL4` (Gender Barung Pelog note 4). The app maps Gender
 bar 4 to the note-3 sample (`gender_3` / `gender_3h`) as the nearest neighbor.
-This is a temporary limitation and is documented in
-`docs/specs/F-04-instrument-audio/`.
+CDM also does not provide `GKPL4` (Kempul Pelog note 4). The app maps Kempul 4
+to the Kempul-3 sample (`kempul_3`). Both are temporary limitations and are
+documented in `docs/specs/F-04-instrument-audio/`.
+
+Gong & Kempul uses nine model positions: Gong Ageng, Kempul 1–7, and Suwukan.
 
 Kendang uses seven available strokes; it is not a complete two-head kendang
 simulation.

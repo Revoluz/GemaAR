@@ -31,9 +31,9 @@ Boundary tetap: `ui → audio/ar → data`; audio dan AR tidak saling impor.
 | Alat | Sumber | Catatan |
 |---|---|---|
 | Bonang | `BONANG/BBPL1–6`, `BBPL1h–6h` | model 12 pencon, 2 baris; 6 bawah + 6 atas |
-| Gender Barung | `GENDER/GBPL*` | model 14 bilah, 2 baris; bilah 4 memakai `GBPL3`/`GBPL3h` |
+| Gender Barung | `GENDER/GBPL*` | model 14 bilah satu deret; bilah 4 memakai `GBPL3`/`GBPL3h` |
 | Slenthem | `GENDER/GSPL1–7` | 7 bilah, oktaf rendah |
-| Gong & Kempul | `GONG/GA`, `GKPL1–7`, `GS` | gong ageng, kempul, suwukan |
+| Gong & Kempul | `GONG/GA`, `GKPL1–7`, `GS` | 9 gong: ageng, kempul 1–7, suwukan; K4 memakai sample K3 |
 | Kendang | `KENDHANG AGENG/DHA`, `CIBLON/*`, `KETIPUNG/*` | 7 pukulan unik |
 
 Pemrosesan sama seperti F-02: potong ±2,5 s, mono 44,1 kHz, normalisasi,
@@ -45,22 +45,38 @@ fade-out, OGG <300 KB. Script diperluas menjadi
 | Alat | Kontrol | Pemetaan tap |
 |---|---|---|
 | Bonang | 2 baris × 6 pencon (1–6, 1h–6h) | pusat 2D pencon dari mesh |
-| Gender Barung | 2 baris × 7 bilah | pusat 2D bilah; bilah 4 → sample nada 3 |
-| Slenthem | 1 baris × 7 bilah | pusat X bilah dari mesh |
-| Gong & Kempul | pad per gong/kempul | pusat X tiap gong |
+| Gender Barung | 1 deret × 14 bilah (1–7, 1h–7h) | pusat X 14 bilah dari mesh; bilah 4 → sample nada 3 |
+| Slenthem | 1 baris × 7 bilah | pusat X 7 bilah terukur dari mesh |
+| Gong & Kempul | 9 pad (Gong, K1–K7, Suwukan) | pusat X 9 gong dari mesh |
 | Kendang | 7 pad pukulan | pad UI; tap model tidak wajib |
+
+Pusat bilah/gong diukur dari GLB dengan ray-cast permukaan atas (resolusi
+0,002 m), lalu di-scale dengan `modelScale / dimensiTerbesar`. Pemetaan memakai
+pusat terdekat, bukan pembagian lebar model rata. Slenthem: 7 pusat
+`-0.322 … 0.310`; Gender: 14 pusat `-0.535 … 0.688`; Gong: 9 pusat
+`-1.100 … 1.042`.
 
 Keputusan Gender: CDM tidak punya `GBPL4` (subset pathet Pelog). Bilah nada 4
 memakai sample nada 3 (`GBPL3` untuk oktaf bawah, `GBPL3h` untuk oktaf atas)
 sebagai tetangga terdekat. Label UI tetap “4”; keterbatasan dicatat di NOTICE
 dan converge. Ini keputusan sementara, bukan sample asli nada 4.
 
+Keputusan kontrol Gender: model hanya punya satu deret 14 bilah. Dua baris
+7+7 membuat nada terlihat ganda, jadi kontrolnya satu deret 14 tombol. Di HP
+lebar tombol mengecil otomatis (min 20 dp), bukan dipecah dua baris.
+
+Keputusan Gong: model punya 9 gong (Gong Ageng di tepi kiri, 7 kempul di
+tengah, Suwukan di tepi kanan). CDM tidak punya `GKPL4`, jadi K4 memakai
+sample Kempul 3 dan dicatat sebagai keterbatasan sementara.
+
 ## Kontrol UI
 
 - `InstrumentControls` memilih bentuk:
   - 1 baris 7 nada (Saron, Slenthem),
-  - 2 baris 6/7 nada (Bonang, Gender),
-  - pad berlabel (Gong/Kempul, Kendang).
+  - 1 baris 14 nada (Gender Barung),
+  - 2 baris 6 nada (Bonang),
+  - pad berlabel (Gong/Kempul 9, Kendang 7).
+- Lebar tombol menyesuaikan lebar layar supaya 14 bilah tetap muat di HP.
 - Highlight + label tetap seperti F-02.
 - Tidak ada pemilih Pelog/Slendro/oktaf.
 
@@ -112,8 +128,9 @@ Manual di Tab S9, untuk tiap alat:
 
 - Gender `GBPL4` tidak ada → bilah 4 memakai sample nada 3; bisa terdengar
   tidak tepat dan harus dicatat.
-- Bonang/Gender 2 baris → pusat pencon/bilah harus diukur; jangan pakai lebar
-  model seperti bug Saron.
+- Kempul `GKPL4` tidak ada → pad K4 memakai sample Kempul 3.
+- Pusat bilah/gong harus diukur dari mesh; pembagian lebar model rata membuat
+  tap Slenthem meleset (tap bilah 5 berbunyi 4).
 - Banyak sample (49+) → waktu muat dan memori; muat per alat, bukan semua.
 - Gong/Kempul jumlah dan posisi perlu dihitung dari mesh.
 - Kendang bukan alat bernada; pad lebih tepat daripada note bar.

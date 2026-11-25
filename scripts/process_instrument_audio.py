@@ -45,9 +45,11 @@ SAMPLES = [
     # Note 4 is not in CDM; the app maps bar 4 to note 3.
     *[("GENDER", f"GBPL{n}.wav", f"gender_{n}") for n in (1, 2, 3, 5, 6, 7)],
     *[("GENDER", f"GBPL{n}h.wav", f"gender_{n}h") for n in (1, 2, 3, 5, 6, 7)],
-    # Gong: ageng + 6 kempul (the model has 7 gongs)
+    # Gong: ageng + 6 sampled kempul + suwukan (9 gongs in the model).
+    # Kempul 4 is not in CDM; the app maps K4 to the kempul-3 sample.
     ("GONG", "GAf.wav", "gong_ageng"),
     *[("GONG", f"GKPL{n}f.wav", f"kempul_{n}") for n in (1, 2, 3, 5, 6, 7)],
+    ("GONG", "GSf.wav", "suwukan"),
     # Kendang: seven unique strokes
     ("DRUMS/KENDHANG AGENG", "DHA.wav", "kendang_dha"),
     ("DRUMS/CIBLON_TAMBOR_MEDIO", "DLANG.wav", "kendang_dlang"),

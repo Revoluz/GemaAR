@@ -45,36 +45,52 @@ object InstrumentAudioMap {
         note("bonang_6h", "6h", "Nada 6 atas", R.raw.bonang_6h),
     )
 
-    private val genderLow = listOf(
-        note("gender_1", "1", "Nada 1", R.raw.gender_1),
-        note("gender_2", "2", "Nada 2", R.raw.gender_2),
-        note("gender_3", "3", "Nada 3", R.raw.gender_3),
-        // CDM tidak punya GBPL4; pakai sample nada 3 sebagai tetangga terdekat.
-        note("gender_4", "4", "Nada 4", R.raw.gender_3),
-        note("gender_5", "5", "Nada 5", R.raw.gender_5),
-        note("gender_6", "6", "Nada 6", R.raw.gender_6),
-        note("gender_7", "7", "Nada 7", R.raw.gender_7),
+    /**
+     * Gender Barung: 14 bilah dalam satu baris.
+     *
+     * Model hanya punya satu deret 14 bilah, jadi kontrolnya juga satu deret
+     * (bukan dua baris 7 yang terlihat seperti nada ganda). Tujuh bilah kiri
+     * adalah oktaf rendah, tujuh bilah kanan oktaf tinggi.
+     */
+    private val gender = InstrumentAudio.Rows(
+        listOf(
+            listOf(
+                note("gender_1", "1", "Nada 1", R.raw.gender_1),
+                note("gender_2", "2", "Nada 2", R.raw.gender_2),
+                note("gender_3", "3", "Nada 3", R.raw.gender_3),
+                // CDM tidak punya GBPL4; pakai sample nada 3 sebagai tetangga terdekat.
+                note("gender_4", "4", "Nada 4", R.raw.gender_3),
+                note("gender_5", "5", "Nada 5", R.raw.gender_5),
+                note("gender_6", "6", "Nada 6", R.raw.gender_6),
+                note("gender_7", "7", "Nada 7", R.raw.gender_7),
+                note("gender_1h", "1h", "Nada 1 atas", R.raw.gender_1h),
+                note("gender_2h", "2h", "Nada 2 atas", R.raw.gender_2h),
+                note("gender_3h", "3h", "Nada 3 atas", R.raw.gender_3h),
+                note("gender_4h", "4h", "Nada 4 atas", R.raw.gender_3h),
+                note("gender_5h", "5h", "Nada 5 atas", R.raw.gender_5h),
+                note("gender_6h", "6h", "Nada 6 atas", R.raw.gender_6h),
+                note("gender_7h", "7h", "Nada 7 atas", R.raw.gender_7h),
+            ),
+        ),
     )
 
-    private val genderHigh = listOf(
-        note("gender_1h", "1h", "Nada 1 atas", R.raw.gender_1h),
-        note("gender_2h", "2h", "Nada 2 atas", R.raw.gender_2h),
-        note("gender_3h", "3h", "Nada 3 atas", R.raw.gender_3h),
-        note("gender_4h", "4h", "Nada 4 atas", R.raw.gender_3h),
-        note("gender_5h", "5h", "Nada 5 atas", R.raw.gender_5h),
-        note("gender_6h", "6h", "Nada 6 atas", R.raw.gender_6h),
-        note("gender_7h", "7h", "Nada 7 atas", R.raw.gender_7h),
-    )
-
+    /**
+     * Gong & Kempul: 9 gong sesuai model.
+     *
+     * Urutan sama dengan posisi kiri ke kanan: Gong Ageng, Kempul 1–7,
+     * Suwukan. CDM tidak punya GKPL4; K4 memakai sample kempul 3.
+     */
     private val gong = InstrumentAudio.Pads(
         listOf(
             note("gong_ageng", "Gong", "Gong Ageng", R.raw.gong_ageng),
             note("kempul_1", "K1", "Kempul 1", R.raw.kempul_1),
             note("kempul_2", "K2", "Kempul 2", R.raw.kempul_2),
             note("kempul_3", "K3", "Kempul 3", R.raw.kempul_3),
+            note("kempul_4", "K4", "Kempul 4", R.raw.kempul_3),
             note("kempul_5", "K5", "Kempul 5", R.raw.kempul_5),
             note("kempul_6", "K6", "Kempul 6", R.raw.kempul_6),
             note("kempul_7", "K7", "Kempul 7", R.raw.kempul_7),
+            note("suwukan", "Suwukan", "Suwukan", R.raw.suwukan),
         ),
     )
 
@@ -94,7 +110,7 @@ object InstrumentAudioMap {
         "saron" to InstrumentAudio.Rows(listOf(SaronNoteMap.notes)),
         "slenthem" to slenthem,
         "bonang" to InstrumentAudio.Rows(listOf(bonangLow, bonangHigh)),
-        "gender_barung" to InstrumentAudio.Rows(listOf(genderLow, genderHigh)),
+        "gender_barung" to gender,
         "gong_kempul" to gong,
         "kendang" to kendang,
     )

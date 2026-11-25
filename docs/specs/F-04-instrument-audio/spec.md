@@ -39,8 +39,9 @@ mendengar nada yang sesuai.
 2. **Given** Gender Barung aktif, **Then** semua bilah yang terlihat bisa
    diketuk dan berbunyi; bilah nada 4 memakai sample nada 3 sebagai tetangga
    terdekat dan tetap berlabel “4”.
-3. **Given** Bonang/Gender aktif, **Then** baris nada disusun mengikuti dua baris
-   alat (Bonang 6+6, Gender 7+7), bukan baris Saron 1–7.
+3. **Given** Bonang aktif, **Then** baris nada disusun dua baris (6+6).
+   **Given** Gender Barung aktif, **Then** baris nada disusun satu deret 14
+   bilah (1–7 lalu 1h–7h), mengikuti model yang hanya punya satu deret bilah.
 4. **Given** pengguna mengetuk cepat beberapa bagian, **Then** nada boleh
    tumpang tindih dan aplikasi tidak berhenti.
 
@@ -57,7 +58,9 @@ Pengguna memilih Slenthem dan memainkan bilahnya pada oktaf rendah.
 1. **Given** Slenthem aktif, **Then** tujuh bilahnya bisa diketuk dan
    menghasilkan tujuh nada berbeda.
 2. **Given** Slenthem aktif, **Then** baris nada menampilkan tujuh bilah.
-3. **Given** Slenthem dan Saron dibandingkan, **Then** Slenthem terdengar pada
+3. **Given** Slenthem diketuk di tengah tiap bilah, **Then** nada yang berbunyi
+   sama dengan nomor bilah yang disentuh (tap bilah 5 tidak berbunyi nada 4).
+4. **Given** Slenthem dan Saron dibandingkan, **Then** Slenthem terdengar pada
    oktaf yang lebih rendah.
 
 ### US3 — Memainkan Gong & Kempul (Priority: P1)
@@ -71,8 +74,8 @@ Pengguna memilih Gong & Kempul dan mengetuk gong atau kempul yang terlihat.
 
 **Acceptance scenarios:**
 
-1. **Given** Gong & Kempul aktif, **Then** setiap gong/kempul yang terlihat
-   bisa diketuk dan menghasilkan bunyi.
+1. **Given** Gong & Kempul aktif, **Then** sembilan gong (Gong Ageng,
+   Kempul 1–7, Suwukan) bisa diketuk dan menghasilkan bunyi.
 2. **Given** gong ageng diketuk, **Then** bunyinya berbeda dari kempul.
 3. **Given** pengguna mengetuk gong saat nada lain masih berbunyi, **Then**
    keduanya boleh tumpang tindih.
@@ -139,15 +142,17 @@ Audio mengikuti alat yang dipilih; kontrol dan suara tidak tercampur.
 - **FR-001**: F-04 MUST mengaktifkan audio untuk Bonang, Gender Barung,
   Slenthem, Gong & Kempul, dan Kendang.
 - **FR-002**: Bonang MUST memetakan 12 pencon: 6 nada bawah + 6 nada atas.
-- **FR-003**: Gender Barung MUST memetakan 14 bilah; bilah nada 4 memakai
-  sample nada 3 (`GBPL3`/`GBPL3h`) sebagai tetangga terdekat.
+- **FR-003**: Gender Barung MUST memetakan 14 bilah dalam satu deret kontrol;
+  bilah nada 4 memakai sample nada 3 (`GBPL3`/`GBPL3h`) sebagai tetangga
+  terdekat.
 - **FR-004**: Slenthem MUST memetakan tujuh bilah ke tujuh nada berbeda pada
   oktaf rendah.
-- **FR-005**: Gong & Kempul MUST membunyikan setiap gong/kempul yang terlihat.
+- **FR-005**: Gong & Kempul MUST membunyikan sembilan gong: Gong Ageng,
+  Kempul 1–7, dan Suwukan.
 - **FR-006**: Kendang MUST menyediakan tujuh pad pukulan: DHA, DLANG, LUNG, TAK,
   THUNG, TONG, DHUNG.
-- **FR-007**: Kontrol nada MUST menyesuaikan bentuk alat: baris 7, dua baris,
-  atau pad pukulan.
+- **FR-007**: Kontrol nada MUST menyesuaikan bentuk alat: baris 7, baris 14,
+  dua baris, atau pad pukulan.
 - **FR-008**: Mengetuk bagian alat MUST membunyikan nada/pukulan yang sesuai.
 - **FR-009**: Berpindah alat MUST menghentikan suara alat sebelumnya.
 - **FR-010**: Beberapa nada/pukulan MUST boleh tumpang tindih.
@@ -186,6 +191,8 @@ Audio mengikuti alat yang dipilih; kontrol dan suara tidak tercampur.
 - Simulasi dua kepala Kendang secara penuh; F-04 memakai subset pukulan CDM.
 - Sample asli nada 4 Gender Barung; F-04 memakai sample nada 3 sebagai
   tetangga terdekat sampai sample asli tersedia.
+- Sample asli Kempul 4; CDM tidak menyediakan `GKPL4`, jadi F-04 memakai
+  sample Kempul 3 untuk pad K4.
 - Merekam sample baru di dalam aplikasi.
 - Notasi, pelajaran musik, akor, multi-touch.
 - Animasi tabuh atau highlight per bilah 3D.
@@ -199,6 +206,10 @@ Audio mengikuti alat yang dipilih; kontrol dan suara tidak tercampur.
   (`DHA`, `DLANG`, `LUNG`, `TAK`, `THUNG`, `TONG`, `DHUNG`).
 - CDM Gender Barung Pelog tidak punya `GBPL4`; F-04 memakai `GBPL3`/`GBPL3h`
   untuk bilah 4 dan mencatatnya sebagai keterbatasan sementara.
+- CDM Gong Pelog tidak punya `GKPL4`; F-04 memakai sample Kempul 3 untuk K4
+  dan mencatatnya sebagai keterbatasan sementara.
+- Model Gong & Kempul punya sembilan gong: dua gong besar di tepi (Gong Ageng
+  dan Suwukan) dan tujuh kempul di tengah.
 - Bonang memakai 6 nada bawah + 6 nada atas (12 pencon).
 - Kendang memakai 7 pukulan, bukan simulasi dua kepala penuh.
 - Satu tangga nada default per alat; tidak ada pemilih.

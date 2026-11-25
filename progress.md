@@ -41,6 +41,15 @@
 
 ## Log
 
+## 2026-11-25 11:20 — F-04 — koreksi tap Slenthem/Gong/Gender
+- Done: pusat bilah/gong diukur dari GLB (ray-cast 0,002 m); tap pakai pusat terdekat, bukan lebar rata
+- Slenthem: 7 pusat `-0.322 … 0.310`; tap bilah 5 tidak lagi jatuh ke 4
+- Gong: 9 nada (Gong, K1–K7, Suwukan); K4 memakai sample K3 karena `GKPL4` tidak ada
+- Gender: satu deret 14 bilah; kontrol 1×14 menyesuaikan lebar layar, bukan 2×7
+- Verify: 40 unit test, lint 0, build OK; log gong 9 sample + semua pad; screenshot F04-Gong/Gender/Slenthem
+- Next: minta user cek tap 3D ketiga alat, lalu T008/T009 converge
+- Blocked: sebagian bilah/gong di luar layar karena jarak kamera; perlu cek user
+
 ## 2026-11-25 11:40 — F-04 — implementasi inti
 - Done: `Note` String id, `InstrumentAudio` Rows/Pads, `InstrumentAudioMap`, `InstrumentControls`, `InstrumentTapMap`, player per alat, 45 OGG baru
 - Alat: Slenthem 7, Bonang 12 (2×6), Gender 14 (bar 4 sample 3/3h), Gong 7 pad, Kendang 7 pad
