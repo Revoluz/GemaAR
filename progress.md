@@ -41,6 +41,13 @@
 
 ## Log
 
+## 2026-11-25 10:25 — F-03 — skala Kendang
+- Done: `Instrument.modelScale`; default 0,5 m; Kendang 0,3 m; `ArScreen` memakai skala per alat
+- Docs: F-03 plan/converge, ARCHITECTURE, assets README, BUG-001
+- Verify: 24 unit test, lint 0, build OK
+- Next: uji visual Kendang di device
+- Blocked: none
+
 ## 2026-11-25 10:10 — F-03 — selesai
 - Done: katalog 6 alat, pilih model tanpa rescan, last instrument, first-run, non-Saron message, compact catalog HP
 - Keputusan: skala model seragam **0,5 m** tablet+HP; kamera AR 1080p; grace marker 500 ms

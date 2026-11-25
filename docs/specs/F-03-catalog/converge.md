@@ -82,9 +82,8 @@ bash scripts/verify-docs.sh      # OK
    48 dp, panel 92%.
 3. **First-run** dipindah ke `LaunchedEffect(arStarted)` agar tetap bekerja
    kalau Petunjuk sudah pernah dilihat.
-4. **Skala model seragam 0,5 m** untuk tablet dan HP. Eksperimen 0,3 m
-   sempat dicoba dan stabil di A25, tetapi produk memilih 0,5 m seragam;
-   flicker A25 dicatat sebagai BUG-001.
+4. **Skala model per alat**: default 0,5 m untuk tablet dan HP; **Kendang 0,3 m**
+   karena model drum aslinya lebih kecil. Flicker A25 dicatat sebagai BUG-001.
 5. **Kamera AR** dibatasi 1920×1080, 30 FPS, kamera belakang; default
    SceneView memilih 4080×3060 di A25.
 6. **Grace 500 ms** sebelum model dianggap hilang saat `LAST_KNOWN_POSE`.

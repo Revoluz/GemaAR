@@ -42,6 +42,7 @@ Model disimpan pada skala sekarang (meter). Ukuran tampilan dinormalkan di
 SceneView:
 
 - Marker A4 (21 cm): `scaleToUnits = 0.5f`
+- Kendang: `scaleToUnits = 0.3f` (model drum asli lebih kecil)
 - Marker A3 (29,7 cm): `scaleToUnits = 0.7f`
 - `physicalWidth` di marker database harus sama dengan lebar cetakan
   (A4 = `0.21f`, A3 = `0.297f`).

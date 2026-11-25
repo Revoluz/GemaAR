@@ -9,4 +9,5 @@ data class Instrument(
     val modelAsset: String,
     @DrawableRes val iconRes: Int,
     val audioAvailable: Boolean,
+    val modelScale: Float = ModelScale.DEFAULT_TARGET_METERS,
 )

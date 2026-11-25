@@ -37,4 +37,14 @@ class CatalogTest {
     fun `bonang is not audio available`() {
         assertFalse(Catalog.byId("bonang").audioAvailable)
     }
+
+    @Test
+    fun `kendang uses a smaller display scale`() {
+        assertEquals(0.3f, Catalog.byId("kendang").modelScale, 0.0001f)
+        assertEquals(
+            ModelScale.DEFAULT_TARGET_METERS,
+            Catalog.byId("saron").modelScale,
+            0.0001f,
+        )
+    }
 }

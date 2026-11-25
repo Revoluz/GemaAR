@@ -57,13 +57,13 @@ GemaArMarker: visible=true
 - Kamera dibatasi ke **1920×1080, 30 FPS, kamera belakang**.
 - Grace period **500 ms** sebelum model dianggap hilang saat ARCore melaporkan
   `LAST_KNOWN_POSE`.
-- Eksperimen skala 0,3 m stabil di A25, tetapi produk memilih **0,5 m seragam**
-  untuk tablet dan HP; perbaikan ukuran ditunda bersama bug ini.
+- Eksperimen skala 0,3 m stabil di A25, tetapi produk memilih **0,5 m** untuk
+  alat selain Kendang; perbaikan ukuran ditunda bersama bug ini.
 - Katalog dibuat compact untuk layar HP landscape.
 
 Rekaman 0,3 m menunjukkan model stabil, tetapi keputusan produk: ukuran model
-tetap 0,5 m di semua device. Dengan 0,5 m, flicker A25 masih terjadi dan
-diperbaiki nanti.
+tetap 0,5 m untuk alat selain Kendang. Dengan 0,5 m, flicker A25 masih terjadi
+dan diperbaiki nanti.
 
 ## Rencana perbaikan berikutnya
 
