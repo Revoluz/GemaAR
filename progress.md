@@ -41,6 +41,12 @@
 
 ## Log
 
+## 2026-11-25 10:45 — F-03 — skala Kendang/Slenthem 0,25
+- Done: Kendang + Slenthem modelScale 0,25 m; alat lain 0,5 m
+- Verify: build/test/lint OK
+- Next: cek visual di device
+- Blocked: none
+
 ## 2026-11-25 10:35 — F-03 — skala Slenthem
 - Done: `slenthem` modelScale 0,3 m; Kendang 0,3 m; alat lain 0,5 m
 - Verify: build/test/lint OK; 24 unit test

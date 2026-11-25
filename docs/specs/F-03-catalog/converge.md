@@ -83,7 +83,7 @@ bash scripts/verify-docs.sh      # OK
 3. **First-run** dipindah ke `LaunchedEffect(arStarted)` agar tetap bekerja
    kalau Petunjuk sudah pernah dilihat.
 4. **Skala model per alat**: default 0,5 m untuk tablet dan HP; **Kendang dan
-   Slenthem 0,3 m** karena ukuran visualnya terlalu besar di marker. Flicker A25
+   Slenthem 0,25 m** karena ukuran visualnya terlalu besar di marker. Flicker A25
    dicatat sebagai BUG-001.
 5. **Kamera AR** dibatasi 1920×1080, 30 FPS, kamera belakang; default
    SceneView memilih 4080×3060 di A25.

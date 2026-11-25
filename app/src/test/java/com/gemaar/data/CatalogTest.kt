@@ -40,8 +40,8 @@ class CatalogTest {
 
     @Test
     fun `kendang and slenthem use a smaller display scale`() {
-        assertEquals(0.3f, Catalog.byId("kendang").modelScale, 0.0001f)
-        assertEquals(0.3f, Catalog.byId("slenthem").modelScale, 0.0001f)
+        assertEquals(0.25f, Catalog.byId("kendang").modelScale, 0.0001f)
+        assertEquals(0.25f, Catalog.byId("slenthem").modelScale, 0.0001f)
         assertEquals(
             ModelScale.DEFAULT_TARGET_METERS,
             Catalog.byId("saron").modelScale,

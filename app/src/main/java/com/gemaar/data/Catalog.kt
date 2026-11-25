@@ -27,7 +27,7 @@ object Catalog {
             modelAsset = "models/slenthem.glb",
             iconRes = R.drawable.ikon_slenthem,
             audioAvailable = false,
-            modelScale = 0.3f,
+            modelScale = 0.25f,
         ),
         Instrument(
             id = "gong_kempul",
@@ -52,7 +52,7 @@ object Catalog {
             modelAsset = "models/kendang.glb",
             iconRes = R.drawable.ikon_kendang,
             audioAvailable = false,
-            modelScale = 0.3f,
+            modelScale = 0.25f,
         ),
     )
 
