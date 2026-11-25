@@ -68,7 +68,8 @@ fun ArController(
     var hasEverTracked by remember { mutableStateOf(false) }
     var lostSince by remember { mutableStateOf<Long?>(null) }
 
-    val modelState = key(instrument.id, retryToken) {
+    Log.d("GemaArScale", "instrument=${instrument.id} scale=$modelScale")
+    val modelState = key(instrument.id, modelScale, retryToken) {
         rememberModelLoadState(modelLoader, instrument.modelAsset)
     }
 
