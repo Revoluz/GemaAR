@@ -44,7 +44,12 @@ object InstrumentTapMap {
         return (fraction * count).toInt().coerceIn(0, count - 1)
     }
 
-    private fun row(z: Float): Int = if (z >= 0f) 0 else 1
+    /**
+     * Baris kontrol Bonang sekarang: atas 1h–6h, bawah 1–6.
+     * Di model, +Z adalah baris depan (nada bawah), -Z baris belakang
+     * (nada atas), jadi indeks baris dibalik agar tap 3D tidak berubah.
+     */
+    private fun bonangRow(z: Float): Int = if (z >= 0f) 1 else 0
 
     private fun nearestCenter(x: Float, centers: FloatArray, scale: Float): Int {
         var bestIndex = 0
@@ -73,7 +78,7 @@ object InstrumentTapMap {
         )
         "bonang" -> {
             val columns = 6
-            val row = row(z)
+            val row = bonangRow(z)
             row * columns + column(x, 0.25f * (modelScale / 0.5f), columns)
         }
         "gender_barung" -> nearestCenter(

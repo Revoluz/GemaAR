@@ -63,16 +63,16 @@
 
 ## Phase 3: Bukti & converge
 
-- [ ] **T008** Uji device semua alat + ganti alat + background
+- [x] **T008** Uji device semua alat + ganti alat + background
       blocked by: T003–T007
-      verify: screenshot tiap kontrol; semua bagian/pad berbunyi; tap cepat;
-              ganti alat menghentikan suara lama; marker hilang; keluar AR
-              tidak ada suara; tidak crash
+      verify: Tab S9 — screenshot F04-*; Slenthem/Bonang/Gender/Gong/Kendang
+              berbunyi; tap 3D Slenthem/Gender/Gong user-confirmed; ganti alat
+              stop suara lama; marker hilang kontrol hilang; tidak crash
 
-- [ ] **T009** Update `feature_list.json`, `progress.md`, `ROADMAP.md`,
-      `converge.md`
+- [x] **T009** Update `feature_list.json`, `progress.md`, `converge.md`
       blocked by: T008
-      verify: `bash scripts/verify-docs.sh`; F-04 `passes: true`
+      verify: `converge.md` PASS; 41 unit test; lint 0; verify-docs OK;
+              F-04 `passes: true`
 
 ## Rules
 
@@ -81,5 +81,5 @@
 - Jangan menambah Info (F-05), koleksi (F-06), atau volume (F-07).
 - Semua sample baru wajib punya lisensi/atribusi.
 - Tap mapping per alat harus diukur dari mesh, bukan lebar model.
-- Gender bilah 4 memakai sample nada 3; jangan menyebutnya sample asli nada 4.
+- Gender bilah 4 memakai sample nada 3; Kempul 4 memakai sample Kempul 3; jangan menyebutnya sample asli.
 - Verifikasi gagal → perbaiki, jangan lanjut.

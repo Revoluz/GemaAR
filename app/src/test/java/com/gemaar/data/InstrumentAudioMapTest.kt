@@ -22,12 +22,20 @@ class InstrumentAudioMapTest {
     }
 
     @Test
-    fun `bonang has six low and six high notes`() {
+    fun `bonang has six high notes on top and six low notes below`() {
         val rows = audio("bonang") as InstrumentAudio.Rows
         assertEquals(2, rows.rows.size)
         assertEquals(6, rows.rows[0].size)
         assertEquals(6, rows.rows[1].size)
         assertEquals(12, rows.allNotes.size)
+        assertEquals(
+            listOf("1h", "2h", "3h", "4h", "5h", "6h"),
+            rows.rows[0].map { it.keyLabel },
+        )
+        assertEquals(
+            listOf("1", "2", "3", "4", "5", "6"),
+            rows.rows[1].map { it.keyLabel },
+        )
     }
 
     @Test

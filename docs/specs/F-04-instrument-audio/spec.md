@@ -39,7 +39,7 @@ mendengar nada yang sesuai.
 2. **Given** Gender Barung aktif, **Then** semua bilah yang terlihat bisa
    diketuk dan berbunyi; bilah nada 4 memakai sample nada 3 sebagai tetangga
    terdekat dan tetap berlabel “4”.
-3. **Given** Bonang aktif, **Then** baris nada disusun dua baris (6+6).
+3. **Given** Bonang aktif, **Then** baris nada disusun dua baris: 1h–6h di atas, 1–6 di bawah.
    **Given** Gender Barung aktif, **Then** baris nada disusun satu deret 14
    bilah (1–7 lalu 1h–7h), mengikuti model yang hanya punya satu deret bilah.
 4. **Given** pengguna mengetuk cepat beberapa bagian, **Then** nada boleh

@@ -53,9 +53,9 @@
       "title": "Audio semua alat selain Saron",
       "priority": 4,
       "spec": "docs/specs/F-04-instrument-audio/spec.md",
-      "passes": false,
-      "evidence": null,
-      "updated": null
+      "passes": true,
+      "evidence": "Tab S9: 5 alat berbunyi — Slenthem 7 bilah, Bonang 12 (2×6, atas 1h–6h), Gender 14 satu deret (1–7/1h–7h), Gong 9 (Gong Ageng, Kempul 1–7, Suwukan), Kendang 7 pad. Tap 3D dikalibrasi ke pusat bilah/gong dari mesh (user-confirmed). Ganti alat menghentikan suara lama. 41 unit test, lint 0, assembleDebug OK, verify-docs OK. Keterbatasan: Gender nada 4 dan Kempul 4 memakai sample nada 3. Bukti: docs/design/UI/exports/verification/F04-*; converge.md.",
+      "updated": "2026-11-25"
     },
     {
       "id": "F-05",

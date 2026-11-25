@@ -41,6 +41,21 @@
 
 ## Log
 
+## 2026-11-25 11:50 — F-04 — converge
+- Done: user-confirmed tap Slenthem, Gong 9 nada, Gender 1h–7h, Bonang 1h–6h di atas
+- Verify: 41 unit test, lint 0, assembleDebug OK, verify-docs OK; screenshot F04-*
+- Docs: `converge.md`, `tasks.md` T008/T009, `feature_list.json` F-04 `passes: true`
+- Known: Gender nada 4 & Kempul 4 memakai sample nada 3; BUG-001 A25 deferred
+- Next: F-05 (Info alat) sesuai prioritas
+- Blocked: none
+
+## 2026-11-25 11:40 — F-04 — Bonang 1h–6h di atas
+- Done: tukar urutan baris kontrol Bonang jadi 1h–6h atas, 1–6 bawah
+- Tap 3D tetap: +Z (baris depan) = nada bawah, -Z (belakang) = nada atas
+- Verify: test label baris + tap mapping; build/lint (menyusul device)
+- Next: pasang ke Tab S9, cek visual 2 baris Bonang
+- Blocked: none
+
 ## 2026-11-25 11:30 — F-04 — koreksi bar Gender 1h–7h
 - Bug: pusat Gender memakai `-0.535 … 0.688`; bilah 1 terlewat dan `0.688` ornamen ujung, jadi 1h–7h bergeser dan 7h di luar logam
 - Fix: 14 pusat `-0.629 … 0.594`; tambah test regresi 1h = bilah 8 dan 7h = bilah 14

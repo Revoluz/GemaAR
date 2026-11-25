@@ -41,11 +41,14 @@ class InstrumentTapMapTest {
     }
 
     @Test
-    fun `bonang maps two rows of six`() {
-        assertEquals(0, InstrumentTapMap.noteIndexFor("bonang", -0.25f, 0.05f, 0.5f))
-        assertEquals(5, InstrumentTapMap.noteIndexFor("bonang", 0.25f, 0.05f, 0.5f))
-        assertEquals(6, InstrumentTapMap.noteIndexFor("bonang", -0.25f, -0.05f, 0.5f))
-        assertEquals(11, InstrumentTapMap.noteIndexFor("bonang", 0.25f, -0.05f, 0.5f))
+    fun `bonang maps the front row to low notes and back row to high notes`() {
+        // allNotes: 0–5 = 1h–6h (atas), 6–11 = 1–6 (bawah).
+        // +Z = baris depan model = nada bawah.
+        assertEquals(6, InstrumentTapMap.noteIndexFor("bonang", -0.25f, 0.05f, 0.5f))
+        assertEquals(11, InstrumentTapMap.noteIndexFor("bonang", 0.25f, 0.05f, 0.5f))
+        // -Z = baris belakang model = nada atas.
+        assertEquals(0, InstrumentTapMap.noteIndexFor("bonang", -0.25f, -0.05f, 0.5f))
+        assertEquals(5, InstrumentTapMap.noteIndexFor("bonang", 0.25f, -0.05f, 0.5f))
     }
 
     @Test

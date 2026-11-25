@@ -65,7 +65,7 @@ Hasil export dari `docs/design/UI/ui.pen` (frame 1912×862, scale 1x).
 | `verification/F03-B-catalog-phone-6-alat.png` | katalog 6 alat compact di HP |
 | `verification/F03-B-pilih-alat-phone.png` | pilih alat non-Saron → pesan audio |
 | `verification/F04-Slenthem.png` | Slenthem + note bar 1–7 |
-| `verification/F04-Bonang.png` | Bonang + note bar 2×6 |
+| `verification/F04-Bonang.png` | Bonang + note bar 2×6 (atas 1h–6h, bawah 1–6) |
 | `verification/F04-Gender.png` | Gender Barung + note bar 1×14 (1–7, 1h–7h) |
 | `verification/F04-Gong.png` | Gong & Kempul + 9 pad (Gong, K1–K7, Suwukan) |
 | `verification/F04-Kendang-pads.png` | Kendang + 7 pad pukulan |

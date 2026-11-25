@@ -44,7 +44,7 @@ fade-out, OGG <300 KB. Script diperluas menjadi
 
 | Alat | Kontrol | Pemetaan tap |
 |---|---|---|
-| Bonang | 2 baris × 6 pencon (1–6, 1h–6h) | pusat 2D pencon dari mesh |
+| Bonang | 2 baris × 6 pencon (atas 1h–6h, bawah 1–6) | pusat 2D pencon dari mesh |
 | Gender Barung | 1 deret × 14 bilah (1–7, 1h–7h) | pusat X 14 bilah dari mesh; bilah 4 → sample nada 3 |
 | Slenthem | 1 baris × 7 bilah | pusat X 7 bilah terukur dari mesh |
 | Gong & Kempul | 9 pad (Gong, K1–K7, Suwukan) | pusat X 9 gong dari mesh |
@@ -75,7 +75,7 @@ sample Kempul 3 dan dicatat sebagai keterbatasan sementara.
 - `InstrumentControls` memilih bentuk:
   - 1 baris 7 nada (Saron, Slenthem),
   - 1 baris 14 nada (Gender Barung),
-  - 2 baris 6 nada (Bonang),
+  - 2 baris 6 nada (Bonang: atas 1h–6h, bawah 1–6),
   - pad berlabel (Gong/Kempul 9, Kendang 7).
 - Lebar tombol menyesuaikan lebar layar supaya 14 bilah tetap muat di HP.
 - Highlight + label tetap seperti F-02.

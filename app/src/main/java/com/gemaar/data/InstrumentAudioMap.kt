@@ -109,7 +109,8 @@ object InstrumentAudioMap {
     private val byInstrument: Map<String, InstrumentAudio> = mapOf(
         "saron" to InstrumentAudio.Rows(listOf(SaronNoteMap.notes)),
         "slenthem" to slenthem,
-        "bonang" to InstrumentAudio.Rows(listOf(bonangLow, bonangHigh)),
+        // Kontrol Bonang: nada atas (1h–6h) di baris atas, nada bawah 1–6 di bawah.
+        "bonang" to InstrumentAudio.Rows(listOf(bonangHigh, bonangLow)),
         "gender_barung" to gender,
         "gong_kempul" to gong,
         "kendang" to kendang,
