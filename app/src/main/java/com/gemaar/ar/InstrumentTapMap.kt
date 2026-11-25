@@ -22,9 +22,11 @@ object InstrumentTapMap {
     private const val SLENTHEM_MODEL_WIDTH = 0.8447165f
 
     // Gender Barung: 14 bilah satu deret, lebar model 1,444458 m.
+    // Bilah pertama ada di -0,629; 0,688 adalah ornamen kuningan ujung kanan,
+    // bukan bilah (dulu ikut terpakai sehingga 7h jatuh di luar logam).
     private val GENDER_CENTERS = floatArrayOf(
-        -0.535f, -0.441f, -0.347f, -0.253f, -0.159f, -0.065f, 0.029f,
-        0.123f, 0.217f, 0.311f, 0.406f, 0.500f, 0.594f, 0.688f,
+        -0.629f, -0.535f, -0.441f, -0.347f, -0.253f, -0.159f, -0.065f,
+        0.029f, 0.123f, 0.217f, 0.311f, 0.406f, 0.500f, 0.594f,
     )
     private const val GENDER_MODEL_WIDTH = 1.444458f
 

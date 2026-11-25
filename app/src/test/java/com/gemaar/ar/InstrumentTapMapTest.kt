@@ -51,8 +51,8 @@ class InstrumentTapMapTest {
     @Test
     fun `gender taps hit all fourteen bar centers in one row`() {
         val centers = floatArrayOf(
-            -0.535f, -0.441f, -0.347f, -0.253f, -0.159f, -0.065f, 0.029f,
-            0.123f, 0.217f, 0.311f, 0.406f, 0.500f, 0.594f, 0.688f,
+            -0.629f, -0.535f, -0.441f, -0.347f, -0.253f, -0.159f, -0.065f,
+            0.029f, 0.123f, 0.217f, 0.311f, 0.406f, 0.500f, 0.594f,
         )
         centers.forEachIndexed { index, center ->
             assertEquals(
@@ -65,6 +65,27 @@ class InstrumentTapMapTest {
                 ),
             )
         }
+    }
+
+    @Test
+    fun `gender 1h maps to the eighth bar and 7h stays on the last bar`() {
+        val eighthBar = 0.029f * genderScale
+        val lastBar = 0.594f * genderScale
+        val rightOrnament = 0.688f * genderScale
+
+        assertEquals(
+            7,
+            InstrumentTapMap.noteIndexFor("gender_barung", eighthBar, 0f, 0.5f),
+        )
+        assertEquals(
+            13,
+            InstrumentTapMap.noteIndexFor("gender_barung", lastBar, 0f, 0.5f),
+        )
+        // Ornamen ujung kanan bukan bilah; tap terdekat tetap bilah 14.
+        assertEquals(
+            13,
+            InstrumentTapMap.noteIndexFor("gender_barung", rightOrnament, 0f, 0.5f),
+        )
     }
 
     @Test

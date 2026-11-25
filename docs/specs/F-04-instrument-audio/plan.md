@@ -53,8 +53,9 @@ fade-out, OGG <300 KB. Script diperluas menjadi
 Pusat bilah/gong diukur dari GLB dengan ray-cast permukaan atas (resolusi
 0,002 m), lalu di-scale dengan `modelScale / dimensiTerbesar`. Pemetaan memakai
 pusat terdekat, bukan pembagian lebar model rata. Slenthem: 7 pusat
-`-0.322 … 0.310`; Gender: 14 pusat `-0.535 … 0.688`; Gong: 9 pusat
-`-1.100 … 1.042`.
+`-0.322 … 0.310`; Gender: 14 pusat `-0.629 … 0.594`; Gong: 9 pusat
+`-1.100 … 1.042`. Ornamen kuningan di ujung kanan Gender (x `0.688`)
+bukan bilah dan tidak boleh dipakai sebagai pusat nada 7h.
 
 Keputusan Gender: CDM tidak punya `GBPL4` (subset pathet Pelog). Bilah nada 4
 memakai sample nada 3 (`GBPL3` untuk oktaf bawah, `GBPL3h` untuk oktaf atas)

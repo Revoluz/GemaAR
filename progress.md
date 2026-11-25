@@ -41,6 +41,13 @@
 
 ## Log
 
+## 2026-11-25 11:30 — F-04 — koreksi bar Gender 1h–7h
+- Bug: pusat Gender memakai `-0.535 … 0.688`; bilah 1 terlewat dan `0.688` ornamen ujung, jadi 1h–7h bergeser dan 7h di luar logam
+- Fix: 14 pusat `-0.629 … 0.594`; tambah test regresi 1h = bilah 8 dan 7h = bilah 14
+- Verify: unit test + build/lint (menyusul device)
+- Next: pasang ke Tab S9 dan minta user cek 1h–7h
+- Blocked: none
+
 ## 2026-11-25 11:20 — F-04 — koreksi tap Slenthem/Gong/Gender
 - Done: pusat bilah/gong diukur dari GLB (ray-cast 0,002 m); tap pakai pusat terdekat, bukan lebar rata
 - Slenthem: 7 pusat `-0.322 … 0.310`; tap bilah 5 tidak lagi jatuh ke 4
