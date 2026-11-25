@@ -16,8 +16,8 @@
 | `PlaqueTitle` | composite | S1–S7 | statis, dinamis (nama alat) | semua | draft |
 | `IconButton` | primitive | S1–S4 | home, katalog, petunjuk, info, close | F-01…F-05 | draft |
 | `ActionButton` | primitive | S1, S2, S3 | gold (utama), green (unduh), wood (sekunder) | F-01, F-03 | draft |
-| `InstrumentCard` | composite | S2, S6 | default, selected, played (S6) | F-03, F-06 | draft |
-| `CatalogOverlay` | composite | S2 | grid 6 kartu, selected | F-03 | draft |
+| `InstrumentCard` | composite | S2, S6 | default, selected, played (S6) | F-03, F-06 | ada |
+| `CatalogOverlay` | composite | S2 | grid 6 kartu, selected | F-03 | ada |
 | `InstrumentControls` | composite | S4 | note bar, 2 baris, pad | F-04 | draft |
 | `ProgressBadge` | primitive | S6 | sudah / belum dimainkan | F-06 | draft |
 | `NoteBar` | composite | S4 | 1 baris, 2 baris, pad | F-02, F-04 | ada |

@@ -59,6 +59,7 @@ constitution > AGENTS.md > feature_list.json > spec.md > plan.md > tasks.md
 | Instrumented test | `app/src/androidTest/` |
 | Generated | `app/build/` — never hand-edit |
 | Specs | `docs/specs/` |
+| Bugs / known issues | `docs/bugs/` |
 | Onboarding tim (Android Studio, Windows, VS Code, HP) | `docs/onboarding/` |
 | UI design | `docs/design/` |
 | Decisions | `docs/decisions/` |

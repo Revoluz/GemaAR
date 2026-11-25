@@ -1,7 +1,7 @@
 {
   "$comment": "STATUS INDEX ONLY. Acceptance criteria hidup di docs/specs/<feature>/spec.md. Agent hanya boleh mengubah 'passes', 'evidence', 'updated'.",
   "project": "GemaAR",
-  "updated": "2026-11-22",
+  "updated": "2026-11-25",
   "rules": {
     "agentMayEdit": [
       "passes",
@@ -44,9 +44,9 @@
       "title": "Katalog alat musik + pilih dari daftar",
       "priority": 3,
       "spec": "docs/specs/F-03-catalog/spec.md",
-      "passes": false,
-      "evidence": null,
-      "updated": null
+      "passes": true,
+      "evidence": "Tab S9: katalog 6 alat, pilih alat tanpa scan ulang, judul/model berganti, last instrument, first-run katalog sekali, non-Saron pesan audio, Saron kembali. Uji tim SM-A356E: 6 alat + persistence. 23 unit test, lint 0, init --check OK, verify-docs OK. Katalog compact di HP landscape. Known issue: BUG-001 A25 flicker (deferred; Tab S9 stabil). Bukti: docs/design/UI/exports/verification/F03-*.",
+      "updated": "2026-11-25"
     },
     {
       "id": "F-04",

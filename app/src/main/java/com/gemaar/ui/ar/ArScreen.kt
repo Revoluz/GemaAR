@@ -75,6 +75,7 @@ import com.gemaar.audio.SoundPoolNotePlayer
 import com.gemaar.data.Catalog
 import com.gemaar.data.Instrument
 import com.gemaar.data.InstrumentStore
+import com.gemaar.data.ModelScale
 import com.gemaar.data.MarkerSharer
 import com.gemaar.data.Note
 import com.gemaar.data.PetunjukStore
@@ -96,6 +97,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun ArScreen(onBack: () -> Unit) {
     val context = LocalContext.current
+    val modelScale = ModelScale.DEFAULT_TARGET_METERS
     val petunjukStore = remember(context) { PetunjukStore(context) }
     val notePlayer = remember(context) { SoundPoolNotePlayer(context) }
     val notePlayerState by notePlayer.state.collectAsState()
@@ -236,11 +238,16 @@ fun ArScreen(onBack: () -> Unit) {
                 ArController(
                     instrument = selectedInstrument,
                     modifier = Modifier.fillMaxSize(),
+                    modelScale = modelScale,
                     retryToken = retryToken,
                     onUiState = { uiState = it },
                     onModelTap = { x ->
                         if (selectedInstrument.audioAvailable) {
-                            playNote(SaronNoteMap.noteAt(NoteIndex.forMarkerLocalX(x)))
+                            playNote(
+                                SaronNoteMap.noteAt(
+                                    NoteIndex.forMarkerLocalX(x, modelScale),
+                                ),
+                            )
                         }
                     },
                     onCameraPermissionChanged = { cameraBlocked = it },

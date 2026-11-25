@@ -95,12 +95,13 @@ Kerjakan **A dulu sampai build hijau**, lalu handoff ke B.
 
 ## R — agent
 
-- [ ] **R1** Review kode: boundary, kontrak, tidak ada fitur F-04+
-- [ ] **R2** `assembleDebug`, `testDebugUnitTest`, `lintDebug`,
+- [x] **R1** Review kode: boundary, kontrak, tidak ada fitur F-04+
+- [x] **R2** `assembleDebug`, `testDebugUnitTest`, `lintDebug`,
       `init.sh --check`, `verify-docs.sh`
-- [ ] **R3** Uji device: 6 alat, model swap, last instrument, first-run,
+- [x] **R3** Uji device: 6 alat, model swap, last instrument, first-run,
       non-Saron, marker hilang, Back, tidak crash
-- [ ] **R4** Perbaiki temuan, converge F-03, `passes: true`, commit/push
+      catatan: Tab S9 stabil; A25 flicker → BUG-001 deferred
+- [x] **R4** Perbaiki temuan, converge F-03, `passes: true`, commit/push
 
 ## Rules
 

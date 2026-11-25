@@ -63,7 +63,7 @@ Windows: gunakan `gradlew.bat` dan Git Bash untuk `init.sh`.
 Status saat ini:
 
 - F-00, F-01, F-02: `passes: true`
-- F-03: spec/plan/tasks siap; implementasi berikutnya
+- F-03: `passes: true` (known issue BUG-001 di Galaxy A25)
 - F-04: audio semua alat selain Saron
 
 Detail: `feature_list.json`, `progress.md`, `docs/specs/`.

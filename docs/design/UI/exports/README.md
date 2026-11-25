@@ -60,6 +60,10 @@ Hasil export dari `docs/design/UI/ui.pen` (frame 1912×862, scale 1x).
 | `verification/T008-saron-tanpa-tabuh-ar.png` | Saron tanpa tabuh di AR |
 | `verification/T008-marker-hilang-notebar.png` | marker hilang → note bar hilang |
 | `verification/T008-audio-play-log.txt` | log nada 1/4/7 dan tap beruntun |
+| `verification/F03-A-catalog-3-alat.png` | katalog 3 alat bagian A |
+| `verification/F03-A-pilih-bonang.png` | pilih Bonang → judul berubah |
+| `verification/F03-B-catalog-phone-6-alat.png` | katalog 6 alat compact di HP |
+| `verification/F03-B-pilih-alat-phone.png` | pilih alat non-Saron → pesan audio |
 
 ## Catatan implementasi
 

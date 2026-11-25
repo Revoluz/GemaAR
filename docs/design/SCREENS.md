@@ -14,10 +14,10 @@
 
 | ID | Layar | Bentuk | Tujuan | Data dibutuhkan | Fitur | Status |
 |---|---|---|---|---|---|---|
-| S1 | **Beranda** | layar penuh | Pintu masuk: Mulai, Alat Musik, Pengaturan | alat terakhir (opsional) | F-01, F-06, F-07 | draft |
-| S2 | **Katalog** | overlay di S4 | Memilih / mengganti alat saat AR | daftar 6 instrument (nama, ikon) | F-03 | draft |
-| S3 | **Petunjuk** | overlay di S4 | Menjelaskan cara memakai satu marker | langkah marker, aksi unduh/cetak, status izin kamera | F-01 | draft |
-| S4 | **AR** | layar penuh | Menampilkan & memainkan alat di atas marker | instrument aktif, model, kontrol nada per alat, status marker | F-01, F-02, F-04 | draft |
+| S1 | **Beranda** | layar penuh | Pintu masuk: Mulai, Alat Musik, Pengaturan | alat terakhir (opsional) | F-01, F-06, F-07 | built |
+| S2 | **Katalog** | overlay di S4 | Memilih / mengganti alat saat AR | daftar 6 instrument (nama, ikon) | F-03 | built |
+| S3 | **Petunjuk** | overlay di S4 | Menjelaskan cara memakai satu marker | langkah marker, aksi unduh/cetak, status izin kamera | F-01 | built |
+| S4 | **AR** | layar penuh | Menampilkan & memainkan alat di atas marker | instrument aktif, model, kontrol nada per alat, status marker | F-01, F-02, F-04 | built |
 | S5 | **Kartu Budaya** | panel kanan di S4 | Info asal & cara main tanpa keluar AR | teks budaya instrument | F-05 | draft |
 | S6 | **Alat Musik** | layar penuh | Melihat daftar 6 alat + status sudah/belum dimainkan | daftar instrument + status dimainkan | F-06 | draft |
 | S7 | **Pengaturan** | overlay / modal | Mengatur volume musik | nilai volume (0–100) tersimpan lokal | F-07 | draft |

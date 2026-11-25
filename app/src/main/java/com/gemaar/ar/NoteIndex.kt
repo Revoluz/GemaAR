@@ -1,5 +1,6 @@
 package com.gemaar.ar
 
+import com.gemaar.data.ModelScale
 import kotlin.math.abs
 
 /**
@@ -32,12 +33,21 @@ object NoteIndex {
         0.25643f,
     ).map { it * MODEL_SCALE }.toFloatArray()
 
-    /** Indeks bilah 0..6 untuk koordinat X lokal marker (meter). */
-    fun forMarkerLocalX(x: Float): Int {
+    /**
+     * Indeks bilah 0..6 untuk koordinat X lokal marker (meter).
+     *
+     * @param modelScale skala model yang dipakai (`scaleToUnits`). Pusat bilah
+     * di atas diukur untuk skala 0,5 m; skala lain mengikuti proporsi.
+     */
+    fun forMarkerLocalX(
+        x: Float,
+        modelScale: Float = ModelScale.DEFAULT_TARGET_METERS,
+    ): Int {
+        val factor = modelScale / 0.5f
         var bestIndex = 0
         var bestDistance = Float.MAX_VALUE
         for (index in BAR_CENTERS.indices) {
-            val distance = abs(x - BAR_CENTERS[index])
+            val distance = abs(x - BAR_CENTERS[index] * factor)
             if (distance < bestDistance) {
                 bestDistance = distance
                 bestIndex = index

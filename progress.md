@@ -41,6 +41,22 @@
 
 ## Log
 
+## 2026-11-25 10:10 — F-03 — selesai
+- Done: katalog 6 alat, pilih model tanpa rescan, last instrument, first-run, non-Saron message, compact catalog HP
+- Keputusan: skala model seragam **0,5 m** tablet+HP; kamera AR 1080p; grace marker 500 ms
+- Bug: BUG-001 A25 flicker dicatat `docs/bugs/BUG-001-a25-ar-flicker.md` (fix nanti; Tab S9 stabil)
+- Verify: build OK, 23 unit test, lint 0, init --check, verify-docs; F-03 `passes: true`
+- Next: F-04 audio semua alat selain Saron
+- Blocked: BUG-001 (device-specific, deferred)
+
+## Handoff — F-03 → F-04
+- Selesai: F-03 `passes: true`; Catalog 6 alat, InstrumentStore, CatalogOverlay
+- Kontrak: `Catalog.instruments`, `Instrument.audioAvailable`, `InstrumentStore`
+- Belum: audio Bonang/Gender/Slenthem/Gong/Kendang (F-04)
+- Baca: `docs/specs/F-04-instrument-audio/spec.md`, `plan.md`, `tasks.md`
+- Jebakan: Gender `GBPL4` tidak ada; Kendang subset pukulan; skala model 0,5 m
+- Fokus sesi berikutnya: F-04
+
 ## 2026-11-25 09:35 — F-03 — review B + flicker
 - Done: compact catalog untuk HP, first-run via `LaunchedEffect(arStarted)`, grace marker 500 ms, `CatalogTest`
 - Verify: 23 unit test, lint 0, build OK; katalog 6 alat di HP landscape; Tab S9 stabil

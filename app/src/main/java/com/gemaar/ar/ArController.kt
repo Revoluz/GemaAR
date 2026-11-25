@@ -19,7 +19,11 @@ import androidx.compose.ui.platform.LocalContext
 import com.gemaar.data.Instrument
 import com.google.ar.core.AugmentedImage
 import com.google.ar.core.AugmentedImageDatabase
+import com.google.ar.core.CameraConfig
+import com.google.ar.core.CameraConfigFilter
 import com.google.ar.core.Config
+import com.google.ar.core.Session
+import com.gemaar.data.ModelScale
 import io.github.sceneview.ModelLoadState
 import io.github.sceneview.ar.ARCoreAvailabilityState
 import io.github.sceneview.ar.ARCameraPermissionState
@@ -28,9 +32,9 @@ import io.github.sceneview.math.Position
 import io.github.sceneview.rememberEngine
 import io.github.sceneview.rememberModelLoadState
 import io.github.sceneview.rememberModelLoader
+import java.util.EnumSet
 import kotlinx.coroutines.delay
 
-private const val SARON_TARGET_METERS = 0.5f
 private const val MARKER_LOST_GRACE_MS = 500L
 
 /**
@@ -43,6 +47,7 @@ private const val MARKER_LOST_GRACE_MS = 500L
 fun ArController(
     instrument: Instrument,
     modifier: Modifier = Modifier,
+    modelScale: Float = ModelScale.DEFAULT_TARGET_METERS,
     retryToken: Int = 0,
     onUiState: (ArUiState) -> Unit,
     onModelTap: (markerLocalX: Float) -> Unit = {},
@@ -113,6 +118,15 @@ fun ArController(
         engine = engine,
         modelLoader = modelLoader,
         planeFindingMode = Config.PlaneFindingMode.DISABLED,
+        sessionCameraConfig = ::balancedCameraConfig,
+        onSessionCreated = { session ->
+            val camera = session.cameraConfig
+            Log.d(
+                "GemaArCamera",
+                "camera=${camera.cameraId} size=${camera.imageSize} " +
+                    "fps=${camera.fpsRange} facing=${camera.facingDirection}",
+            )
+        },
         sessionConfiguration = { session, config ->
             config.augmentedImageDatabase = AugmentedImageDatabase(session).also { database ->
                 markerBitmap?.let { bitmap ->
@@ -200,7 +214,7 @@ fun ArController(
                     (modelState as? ModelLoadState.Ready)?.let { ready ->
                         ModelNode(
                             modelInstance = ready.instance,
-                            scaleToUnits = SARON_TARGET_METERS,
+                            scaleToUnits = modelScale,
                             centerOrigin = Position(0f, -1f, 0f),
                         )
                     }
@@ -210,3 +224,29 @@ fun ArController(
     }
 }
 
+
+/**
+ * Pilih kamera belakang 30 FPS dengan resolusi maksimal 1080p.
+ *
+ * Default SceneView memilih resolusi tertinggi (di A25: 4080x3060). Stream
+ * sebesar itu membuat GPU/CPU A25 kewalahan dan model berkedip. 1080p tetap
+ * cukup untuk marker 21 cm.
+ */
+private fun balancedCameraConfig(session: Session): CameraConfig {
+    return runCatching {
+        val filter = CameraConfigFilter(session).apply {
+            facingDirection = CameraConfig.FacingDirection.BACK
+            targetFps = EnumSet.of(CameraConfig.TargetFps.TARGET_FPS_30)
+            depthSensorUsage = EnumSet.of(CameraConfig.DepthSensorUsage.DO_NOT_USE)
+            stereoCameraUsage = EnumSet.of(CameraConfig.StereoCameraUsage.DO_NOT_USE)
+        }
+        val configs = session.getSupportedCameraConfigs(filter)
+            .filter { it.facingDirection == CameraConfig.FacingDirection.BACK }
+        val fitting = configs.filter {
+            it.imageSize.width <= 1920 && it.imageSize.height <= 1080
+        }
+        fitting.maxByOrNull { it.imageSize.width * it.imageSize.height }
+            ?: configs.minByOrNull { it.imageSize.width * it.imageSize.height }
+            ?: session.cameraConfig
+    }.getOrElse { session.cameraConfig }
+}
