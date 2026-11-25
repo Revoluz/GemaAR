@@ -41,6 +41,14 @@
 
 ## Log
 
+## 2026-11-25 12:45 — F-05 — converge
+- Done: `CultureCard`/`CultureCardMap` 6 alat, `InfoPanel` S5, tombol Info aktif, BackHandler
+- Design: plakat Info, judul Caveat (font ditambahkan), body rata kanan + scroll, badge, tanpa chip laras
+- Verify: 45 unit test, lint 0, assembleDebug OK, init.sh --check OK, verify-docs OK; Tab S9 Bonang/Gong/Kendang
+- Docs: `converge.md`, `tasks.md` T001–T005, `feature_list.json` F-05 `passes: true`
+- Next: F-06 (progres koleksi alat)
+- Blocked: none
+
 ## 2026-11-25 12:25 — F-05 — plan + tasks
 - Done: `plan.md` (arsitektur `CultureCard`/`CultureCardMap`, panel `InfoPanel`, wiring `ArScreen`) dan `tasks.md` T001–T005
 - Spec: status `approved`; design acuan S5, tanpa chip Pelog/Slendro

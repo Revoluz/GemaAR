@@ -36,3 +36,12 @@ dari **CDM Gamelan Sample Library** (Copyright © 2014 Digitopia — Casa da
 Música, Artistic License 2.0). Perubahan: dipotong 2,5 detik, mono, normalisasi,
 fade-out, OGG Vorbis. Daftar file dan keterbatasan Gender nada 4 ada di
 `app/src/main/assets/audio/NOTICE.md`.
+
+## Fonts
+
+Aplikasi membundel font dari Google Fonts di `app/src/main/res/font/`, semuanya
+di bawah SIL Open Font License 1.1:
+
+- **Alfa Slab One** — display/plakat.
+- **Nunito** — body.
+- **Caveat** — nama alat di Kartu Budaya (F-05).

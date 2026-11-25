@@ -62,9 +62,9 @@
       "title": "Kartu info budaya tiap alat",
       "priority": 5,
       "spec": "docs/specs/F-05-culture-card/spec.md",
-      "passes": false,
-      "evidence": null,
-      "updated": null
+      "passes": true,
+      "evidence": "Tab S9: tombol Info membuka panel Kartu Budaya sisi kanan untuk Bonang, Gong & Kempul, dan Kendang; panel tetap terbuka saat marker hilang; body dapat digulir; X dan Back menutup panel tanpa keluar AR; isi berganti saat alat diganti. Panel mengikuti S5 (plakat Info, judul Caveat, body rata kanan, badge Kartu Budaya, tanpa chip Pelog/Slendro). 6 kartu lengkap; 45 unit test, lint 0, assembleDebug OK, init.sh --check OK, verify-docs OK. Bukti: docs/design/UI/exports/verification/F05-*; converge.md.",
+      "updated": "2026-11-25"
     },
     {
       "id": "F-06",

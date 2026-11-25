@@ -6,6 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -72,6 +77,7 @@ import com.gemaar.ar.ArUiState
 import com.gemaar.audio.NotePlayerState
 import com.gemaar.audio.SoundPoolNotePlayer
 import com.gemaar.data.Catalog
+import com.gemaar.data.CultureCardMap
 import com.gemaar.data.InstrumentAudio
 import com.gemaar.data.InstrumentAudioMap
 import com.gemaar.ar.InstrumentTapMap
@@ -80,6 +86,7 @@ import com.gemaar.data.InstrumentStore
 import com.gemaar.data.MarkerSharer
 import com.gemaar.data.Note
 import com.gemaar.data.PetunjukStore
+import com.gemaar.ui.components.InfoPanel
 import com.gemaar.ui.components.PlaqueTitle
 import com.gemaar.ui.theme.GemaARBody
 import com.gemaar.ui.theme.GemaARColors
@@ -118,12 +125,16 @@ fun ArScreen(onBack: () -> Unit) {
     // Simpan alat musik yang sedang dipilih (default: Saron)
     val instrumentStore = remember(context) { InstrumentStore(context) }
     var catalogVisible by remember { mutableStateOf(false) }
+    var infoVisible by remember { mutableStateOf(false) }
     var selectedInstrument by remember {
         mutableStateOf(Catalog.byId(instrumentStore.selectedInstrumentId))
     }
 
     val selectedAudio = remember(selectedInstrument.id) {
         InstrumentAudioMap.forInstrument(selectedInstrument.id)
+    }
+    val cultureCard = remember(selectedInstrument.id) {
+        CultureCardMap.forInstrument(selectedInstrument.id)
     }
     val notePlayer = remember(context, selectedInstrument.id) {
         SoundPoolNotePlayer(context, selectedAudio?.allNotes.orEmpty())
@@ -221,6 +232,7 @@ fun ArScreen(onBack: () -> Unit) {
 
     BackHandler {
         when {
+            infoVisible -> infoVisible = false
             catalogVisible -> catalogVisible = false
             petunjukVisible -> dismissPetunjuk()
             arStarted -> showExitDialog = true
@@ -288,12 +300,32 @@ fun ArScreen(onBack: () -> Unit) {
                 onHome = {
                     if (arStarted) showExitDialog = true else onBack()
                 },
-                onHelp = { petunjukVisible = true },
+                onHelp = {
+                    infoVisible = false
+                    petunjukVisible = true
+                },
                 onRetryModel = { retryToken += 1 },
                 onCatalog = {
+                    infoVisible = false
                     notePlayer.stopAll()
                     catalogVisible = true
                 },
+                onInfo = { infoVisible = true },
+            )
+        }
+
+        AnimatedVisibility(
+            visible = infoVisible,
+            enter = fadeIn(tween(180)) + slideInHorizontally(tween(180)) { it / 3 },
+            exit = fadeOut(tween(180)) + slideOutHorizontally(tween(180)) { it / 3 },
+            modifier = Modifier
+                .align(Alignment.CenterEnd)
+                .padding(end = 32.dp),
+        ) {
+            InfoPanel(
+                instrumentName = selectedInstrument.name,
+                card = cultureCard,
+                onClose = { infoVisible = false },
             )
         }
 
@@ -344,6 +376,7 @@ private fun BoxScope.ArHud(
     onHelp: () -> Unit,
     onCatalog: () -> Unit,
     onRetryModel: () -> Unit,
+    onInfo: () -> Unit,
 ) {
     val title = when (uiState) {
         is ArUiState.ModelLoading -> "Memuat model"
@@ -387,9 +420,9 @@ private fun BoxScope.ArHud(
         )
         HudButton(
             icon = Icons.Filled.Info,
-            contentDescription = "Info (belum aktif)",
-            enabled = false,
-            onClick = {},
+            contentDescription = "Info alat",
+            enabled = true,
+            onClick = onInfo,
         )
     }
 

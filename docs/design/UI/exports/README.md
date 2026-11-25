@@ -69,6 +69,9 @@ Hasil export dari `docs/design/UI/ui.pen` (frame 1912×862, scale 1x).
 | `verification/F04-Gender.png` | Gender Barung + note bar 1×14 (1–7, 1h–7h) |
 | `verification/F04-Gong.png` | Gong & Kempul + 9 pad (Gong, K1–K7, Suwukan) |
 | `verification/F04-Kendang-pads.png` | Kendang + 7 pad pukulan |
+| `verification/F05-Bonang.png` | Kartu Budaya Bonang (panel kanan) |
+| `verification/F05-Gong.png` | Kartu Budaya Gong & Kempul |
+| `verification/F05-Kendang.png` | Kartu Budaya Kendang; panel tetap terbuka saat marker hilang |
 
 ## Catatan implementasi
 

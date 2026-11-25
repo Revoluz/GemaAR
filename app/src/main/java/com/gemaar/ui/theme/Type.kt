@@ -4,6 +4,7 @@ import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.gemaar.R
@@ -14,6 +15,15 @@ val GemaARDisplay = FontFamily(
 
 val GemaARBody = FontFamily(
     Font(R.font.nunito),
+)
+
+/** Font script untuk nama alat di Kartu Budaya (DESIGN: Caveat 20/26). */
+val GemaARScript = FontFamily(
+    Font(
+        resId = R.font.caveat,
+        weight = FontWeight.Bold,
+        variationSettings = FontVariation.Settings(FontVariation.weight(700)),
+    ),
 )
 
 val GemaARTypography = Typography(
