@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gemaar.data.Note
@@ -45,6 +46,7 @@ fun NoteBar(
     BoxWithConstraints(modifier = modifier) {
         val keyWidth = ((maxWidth - spacing * (notes.size - 1)) / notes.size)
             .coerceIn(20.dp, 44.dp)
+        val fontSize = if (keyWidth < 32.dp) 12.sp else 18.sp
 
         Row(
             horizontalArrangement = Arrangement.spacedBy(spacing),
@@ -56,6 +58,7 @@ fun NoteBar(
                     active = note.id == activeNoteId,
                     enabled = enabled,
                     width = keyWidth,
+                    fontSize = fontSize,
                     onClick = { onNoteClick(note) },
                 )
             }
@@ -69,6 +72,7 @@ private fun NoteKey(
     active: Boolean,
     enabled: Boolean,
     width: Dp,
+    fontSize: TextUnit,
     onClick: () -> Unit,
 ) {
     val shape = RoundedCornerShape(8.dp)
@@ -99,7 +103,7 @@ private fun NoteKey(
             color = foreground,
             fontFamily = GemaARBody,
             fontWeight = FontWeight.Bold,
-            fontSize = 18.sp,
+            fontSize = fontSize,
         )
     }
 }
