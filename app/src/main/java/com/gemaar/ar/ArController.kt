@@ -1,5 +1,6 @@
 package com.gemaar.ar
 
+import android.os.SystemClock
 import android.util.Log
 import android.view.MotionEvent
 import android.view.ViewConfiguration
@@ -27,8 +28,10 @@ import io.github.sceneview.math.Position
 import io.github.sceneview.rememberEngine
 import io.github.sceneview.rememberModelLoadState
 import io.github.sceneview.rememberModelLoader
+import kotlinx.coroutines.delay
 
 private const val SARON_TARGET_METERS = 0.5f
+private const val MARKER_LOST_GRACE_MS = 500L
 
 /**
  * Pembungkus sesi AR. Semua akses SceneView/ARCore ada di paket `ar/`;
@@ -58,6 +61,7 @@ fun ArController(
 
     var trackedImage by remember { mutableStateOf<AugmentedImage?>(null) }
     var hasEverTracked by remember { mutableStateOf(false) }
+    var lostSince by remember { mutableStateOf<Long?>(null) }
 
     val modelState = key(instrument.id, retryToken) {
         rememberModelLoadState(modelLoader, instrument.modelAsset)
@@ -66,6 +70,19 @@ fun ArController(
     val hasMarker = trackedImage != null
     LaunchedEffect(hasMarker) {
         if (hasMarker) hasEverTracked = true
+    }
+
+    // Beri waktu singkat sebelum menyembunyikan model. ARCore bisa sesaat
+    // melaporkan LAST_KNOWN_POSE saat marker masih terlihat; tanpa grace period
+    // model akan berkedip.
+    LaunchedEffect(lostSince) {
+        val started = lostSince ?: return@LaunchedEffect
+        delay(MARKER_LOST_GRACE_MS)
+        if (lostSince == started) {
+            Log.d("GemaArMarker", "visible=false (grace expired)")
+            trackedImage = null
+            lostSince = null
+        }
     }
 
     val state: ArUiState = when {
@@ -154,15 +171,18 @@ fun ArController(
                 isMarkerVisible(image.trackingState, image.trackingMethod)
 
             // Hanya tulis state saat status berubah, bukan tiap frame.
-            if (visible && trackedImage == null) {
-                Log.d("GemaArMarker", "visible=true")
-                trackedImage = image
-            } else if (!visible && trackedImage != null) {
+            if (visible) {
+                lostSince = null
+                if (trackedImage == null) {
+                    Log.d("GemaArMarker", "visible=true")
+                    trackedImage = image
+                }
+            } else if (trackedImage != null && lostSince == null) {
                 Log.d(
                     "GemaArMarker",
-                    "visible=false state=${image?.trackingState} method=${image?.trackingMethod}",
+                    "lost grace state=${image?.trackingState} method=${image?.trackingMethod}",
                 )
-                trackedImage = null
+                lostSince = SystemClock.elapsedRealtime()
             }
         },
         onCameraPermissionStateChanged = { permissionState ->

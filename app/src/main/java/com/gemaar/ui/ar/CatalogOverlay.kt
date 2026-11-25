@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -62,65 +63,76 @@ fun CatalogOverlay (
         .pointerInput(Unit ) { detectTapGestures { } },
         contentAlignment = Alignment.Center,
     ){
-        Box(
-            modifier = Modifier
-                .fillMaxWidth(0.94f)
-                .fillMaxHeight(0.82f)
-                .widthIn(max = 760.dp),
+        BoxWithConstraints(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center,
         ) {
-            val panelShape = RoundedCornerShape(20.dp)
-            Column(
+            val compact = maxHeight < 600.dp
+            Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .shadow(16.dp, panelShape)
-                    .background(GemaARColors.Surface, panelShape)
-                    .border(2.dp, GemaARColors.Border, panelShape)
-                    .padding(horizontal = 24.dp, vertical = 20.dp)
-                    .padding(top = 28.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-            ){
-                instruments.chunked(3).forEach { rowItems ->
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        rowItems.forEach { instrument ->
-                            InstrumentCard(
-                                instrument = instrument,
-                                isSelected = instrument.id == selectedId,
-                                onClick = { onSelect(instrument) },
-                            )
+                    .fillMaxWidth(0.94f)
+                    .fillMaxHeight(if (compact) 0.92f else 0.82f)
+                    .widthIn(max = 760.dp),
+            ) {
+                val panelShape = RoundedCornerShape(20.dp)
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .shadow(16.dp, panelShape)
+                        .background(GemaARColors.Surface, panelShape)
+                        .border(2.dp, GemaARColors.Border, panelShape)
+                        .padding(
+                            horizontal = if (compact) 12.dp else 24.dp,
+                            vertical = if (compact) 10.dp else 20.dp,
+                        )
+                        .padding(top = if (compact) 18.dp else 28.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                ) {
+                    instruments.chunked(3).forEach { rowItems ->
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(
+                                if (compact) 10.dp else 16.dp,
+                            ),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            rowItems.forEach { instrument ->
+                                InstrumentCard(
+                                    instrument = instrument,
+                                    isSelected = instrument.id == selectedId,
+                                    compact = compact,
+                                    onClick = { onSelect(instrument) },
+                                )
+                            }
                         }
                     }
                 }
-
-            }
-            PlaqueTitle(
-                text = "Katalog",
-                fontSize = 30.sp,
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .offset(y = (-22).dp),
-            )
-
-            Box(
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(12.dp)
-                    .size(44.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(GemaARColors.Wood)
-                    .border(2.dp, GemaARColors.Border, RoundedCornerShape(8.dp))
-                    .clickable(onClick = onClose),
-                contentAlignment = Alignment.Center,
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.Close,
-                    contentDescription = "Tutup katalog",
-                    tint = GemaARColors.Fg,
-                    modifier = Modifier.size(24.dp),
+                PlaqueTitle(
+                    text = "Katalog",
+                    fontSize = if (compact) 24.sp else 30.sp,
+                    modifier = Modifier
+                        .align(Alignment.TopCenter)
+                        .offset(y = if (compact) (-18).dp else (-22).dp),
                 )
+
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(if (compact) 8.dp else 12.dp)
+                        .size(if (compact) 40.dp else 44.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(GemaARColors.Wood)
+                        .border(2.dp, GemaARColors.Border, RoundedCornerShape(8.dp))
+                        .clickable(onClick = onClose),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Close,
+                        contentDescription = "Tutup katalog",
+                        tint = GemaARColors.Fg,
+                        modifier = Modifier.size(22.dp),
+                    )
+                }
             }
         }
     }
@@ -130,6 +142,7 @@ fun CatalogOverlay (
 private fun InstrumentCard(
     instrument: Instrument,
     isSelected: Boolean,
+    compact: Boolean,
     onClick: () -> Unit,
 ) {
     val cardShape = RoundedCornerShape(12.dp)
@@ -137,30 +150,30 @@ private fun InstrumentCard(
 
     Column(
         modifier = Modifier
-            .width(160.dp)
+            .width(if (compact) 140.dp else 160.dp)
             .clip(cardShape)
             .background(GemaARColors.Wood)
             .border(if (isSelected) 3.dp else 2.dp, borderColor, cardShape)
             .clickable(onClick = onClick)
-            .padding(12.dp),
+            .padding(if (compact) 8.dp else 12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
             painter = painterResource(instrument.iconRes),
             contentDescription = instrument.name,
-            modifier = Modifier.size(72.dp),
+            modifier = Modifier.size(if (compact) 48.dp else 72.dp),
         )
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(if (compact) 4.dp else 8.dp))
         Text(
             text = instrument.name,
             color = GemaARColors.Fg,
             fontWeight = FontWeight.Bold,
-            fontSize = 14.sp,
+            fontSize = if (compact) 12.sp else 14.sp,
         )
         Text(
             text = instrument.origin,
             color = GemaARColors.Muted,
-            fontSize = 12.sp,
+            fontSize = if (compact) 10.sp else 12.sp,
         )
     }
 }

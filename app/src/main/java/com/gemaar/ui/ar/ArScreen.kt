@@ -124,9 +124,8 @@ fun ArScreen(onBack: () -> Unit) {
         mutableStateOf(Catalog.byId(instrumentStore.selectedInstrumentId))
     }
 
-
     fun playNote(note: Note) {
-        if (!selectedInstrument.audioAvailable) return // <-- Tambahkan baris ini
+        if (!selectedInstrument.audioAvailable) return
         if (notePlayerState != NotePlayerState.Ready) return
         notePlayer.play(note)
         activeNoteId = note.id
@@ -205,8 +204,10 @@ fun ArScreen(onBack: () -> Unit) {
         petunjukStore.markPetunjukSeen()
         petunjukVisible = false
         arStarted = true
-        // First run: katalog terbuka otomatis sekali, tepat setelah Petunjuk.
-        if (!instrumentStore.catalogAutoOpened) {
+    }
+
+    LaunchedEffect(arStarted) {
+        if (arStarted && !instrumentStore.catalogAutoOpened) {
             instrumentStore.catalogAutoOpened = true
             catalogVisible = true
         }
