@@ -41,6 +41,13 @@
 
 ## Log
 
+## 2026-11-25 12:10 — F-05 — spec kartu budaya
+- Done: `docs/specs/F-05-culture-card/spec.md` — problem, 3 user story, FR, edge case, content brief 6 alat, success criteria
+- Sumber daring: UNESCO Gamelan 01607, Wikipedia Saron/Bonang/Slenthem/Gendèr/Gong ageng/Kempul/Kendang
+- Design: mengikuti `S5-kartu-budaya.png`, `SCREENS.md`, `DESIGN.md`, `COMPONENTS.md`; chip Pelog/Slendro dikecualikan
+- Next: review spec, lalu `plan.md` + `tasks.md`
+- Blocked: butuh approval owner sebelum implementasi
+
 ## 2026-11-25 11:50 — F-04 — converge
 - Done: user-confirmed tap Slenthem, Gong 9 nada, Gender 1h–7h, Bonang 1h–6h di atas
 - Verify: 41 unit test, lint 0, assembleDebug OK, verify-docs OK; screenshot F04-*
