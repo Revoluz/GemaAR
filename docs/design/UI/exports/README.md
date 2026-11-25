@@ -72,6 +72,9 @@ Hasil export dari `docs/design/UI/ui.pen` (frame 1912×862, scale 1x).
 | `verification/F05-Bonang.png` | Kartu Budaya Bonang (panel kanan) |
 | `verification/F05-Gong.png` | Kartu Budaya Gong & Kempul |
 | `verification/F05-Kendang.png` | Kartu Budaya Kendang; panel tetap terbuka saat marker hilang |
+| `verification/F06-belum.png` | S6 Alat Musik — semua belum dimainkan |
+| `verification/F06-sebagian.png` | S6 — Saron sudah dimainkan |
+| `verification/F06-semua.png` | S6 — keenam alat sudah dimainkan |
 
 ## Catatan implementasi
 

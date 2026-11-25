@@ -145,6 +145,7 @@ fun ArScreen(onBack: () -> Unit) {
         if (selectedAudio == null) return
         if (notePlayerState != NotePlayerState.Ready) return
         notePlayer.play(note)
+        instrumentStore.markPlayed(selectedInstrument.id)
         activeNoteId = note.id
         noteLabel = note.feedbackLabel
         noteFeedbackToken += 1

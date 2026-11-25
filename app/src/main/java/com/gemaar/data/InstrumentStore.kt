@@ -15,8 +15,21 @@ class InstrumentStore(context: Context) {
         get() = preferences.getBoolean(KEY_CATALOG_AUTO_OPENED, false)
         set(value) = preferences.edit { putBoolean(KEY_CATALOG_AUTO_OPENED, value) }
 
+    /** Id alat yang pernah dimainkan; salinan agar StringSet tidak dimutasi. */
+    val playedInstrumentIds: Set<String>
+        get() = preferences
+            .getStringSet(KEY_PLAYED_INSTRUMENTS, emptySet())
+            ?.toSet()
+            .orEmpty()
+
+    fun markPlayed(instrumentId: String) {
+        val progress = CollectionProgress(playedInstrumentIds).markPlayed(instrumentId)
+        preferences.edit { putStringSet(KEY_PLAYED_INSTRUMENTS, progress.playedIds) }
+    }
+
     private companion object {
         const val KEY_SELECTED_INSTRUMENT = "selected_instrument"
         const val KEY_CATALOG_AUTO_OPENED = "catalog_auto_opened"
+        const val KEY_PLAYED_INSTRUMENTS = "played_instruments"
     }
 }

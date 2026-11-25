@@ -71,9 +71,9 @@
       "title": "Progres koleksi alat yang sudah dimainkan",
       "priority": 6,
       "spec": "docs/specs/F-06-collection/spec.md",
-      "passes": false,
-      "evidence": null,
-      "updated": null
+      "passes": true,
+      "evidence": "Tab S9: Beranda → Alat Musik menampilkan S6 (latar, panel, plakat, grid 3×2, nama script, badge); tombol tutup X di dalam panel kanan atas kembali ke Beranda; Back sistem juga kembali; status kosong/sebagian/semua tampil benar dan bertahan setelah restart. Jalur tulis terkonfirmasi: main nada Slenthem → prefs berisi played_instruments=slenthem → kartu hijau. 50 unit test, lint 0, assembleDebug OK, init.sh --check OK, verify-docs OK. Bukti: docs/design/UI/exports/verification/F06-*; converge.md.",
+      "updated": "2026-11-25"
     },
     {
       "id": "F-07",

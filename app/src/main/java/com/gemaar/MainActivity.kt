@@ -12,9 +12,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.gemaar.data.Catalog
+import com.gemaar.data.InstrumentStore
+import com.gemaar.ui.CollectionScreen
 import com.gemaar.ui.HomeScreen
 import com.gemaar.ui.ar.ArScreen
 import com.gemaar.ui.theme.GemaARTheme
@@ -22,6 +26,7 @@ import com.gemaar.ui.theme.GemaARTheme
 private enum class Screen {
     Home,
     Ar,
+    Collection,
 }
 
 class MainActivity : ComponentActivity() {
@@ -56,10 +61,20 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun GemaARApp() {
+    val context = LocalContext.current
+    val instrumentStore = remember(context) { InstrumentStore(context) }
     var screen by remember { mutableStateOf(Screen.Home) }
 
     when (screen) {
-        Screen.Home -> HomeScreen(onStart = { screen = Screen.Ar })
+        Screen.Home -> HomeScreen(
+            onStart = { screen = Screen.Ar },
+            onOpenCollection = { screen = Screen.Collection },
+        )
         Screen.Ar -> ArScreen(onBack = { screen = Screen.Home })
+        Screen.Collection -> CollectionScreen(
+            instruments = Catalog.instruments,
+            playedIds = instrumentStore.playedInstrumentIds,
+            onBack = { screen = Screen.Home },
+        )
     }
 }

@@ -43,7 +43,10 @@ import com.gemaar.ui.theme.GemaARDisplay
  * Background: docs/design/UI/exports/assets/ilustrasi-latar.png.
  */
 @Composable
-fun HomeScreen(onStart: () -> Unit) {
+fun HomeScreen(
+    onStart: () -> Unit,
+    onOpenCollection: () -> Unit,
+) {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             painter = painterResource(R.drawable.ilustrasi_latar),
@@ -74,8 +77,8 @@ fun HomeScreen(onStart: () -> Unit) {
                     label = "Alat Musik",
                     icon = Icons.AutoMirrored.Filled.List,
                     primary = false,
-                    enabled = false,
-                    onClick = {},
+                    enabled = true,
+                    onClick = onOpenCollection,
                 )
                 HomeAction(
                     label = "Pengaturan",

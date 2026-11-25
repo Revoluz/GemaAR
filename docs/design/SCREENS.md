@@ -19,7 +19,7 @@
 | S3 | **Petunjuk** | overlay di S4 | Menjelaskan cara memakai satu marker | langkah marker, aksi unduh/cetak, status izin kamera | F-01 | built |
 | S4 | **AR** | layar penuh | Menampilkan & memainkan alat di atas marker | instrument aktif, model, kontrol nada per alat, status marker | F-01, F-02, F-04 | built |
 | S5 | **Kartu Budaya** | panel kanan di S4 | Info asal & cara main tanpa keluar AR | teks budaya instrument | F-05 | built |
-| S6 | **Alat Musik** | layar penuh | Melihat daftar 6 alat + status sudah/belum dimainkan | daftar instrument + status dimainkan | F-06 | draft |
+| S6 | **Alat Musik** | layar penuh | Melihat daftar 6 alat + status sudah/belum dimainkan | daftar instrument + status dimainkan | F-06 | built |
 | S7 | **Pengaturan** | overlay / modal | Mengatur volume musik | nilai volume (0–100) tersimpan lokal | F-07 | draft |
 
 **Satu layar boleh dimiliki beberapa fitur.** Itu normal.

@@ -41,6 +41,16 @@
 
 ## Log
 
+## 2026-11-25 13:10 — F-06 — converge
+- Done: `CollectionProgress` + `InstrumentStore.playedInstrumentIds/markPlayed`, `CollectionScreen` S6, navigasi Home↔S6, tandai di `playNote`
+- Design: latar Beranda, panel 720dp, plakat, grid 3×2, badge hijau/terang, tanpa aksi kartu
+- Verify: 50 unit test, lint 0, assembleDebug OK, init.sh --check OK, verify-docs OK; Tab S9 kosong/sebagian/semua + persistence read
+- Device: jalur tulis terkonfirmasi (main Slenthem → prefs played_instruments=slenthem → badge hijau)
+- UI: tombol tutup X dipindah ke dalam panel, pojok kanan atas
+- Docs: `converge.md`, `tasks.md` T001–T006, `feature_list.json` F-06 `passes: true`
+- Next: F-07 (pengaturan volume)
+- Blocked: none
+
 ## 2026-11-25 12:45 — F-05 — converge
 - Done: `CultureCard`/`CultureCardMap` 6 alat, `InfoPanel` S5, tombol Info aktif, BackHandler
 - Design: plakat Info, judul Caveat (font ditambahkan), body rata kanan + scroll, badge, tanpa chip laras
