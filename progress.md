@@ -41,6 +41,15 @@
 
 ## Log
 
+## 2026-11-27 20:43 — F-07 — T006 uji device + screenshot
+- Done: uji di SM-A356E, bukan Tab S9 (deviasi device): 100/40/0 mengubah bunyi, persist 40 setelah app ditutup total, A/B alat lain beda jelas, geser cepat ±20× final 31% tersimpan tanpa crash, 150 → tampil 100%
+- Evidence: `docs/design/UI/exports/verification/F07-{100,40,0,AR}.png`
+- Catatan: latar panel hitam hanya di screenshot (di HP frame beku normal); prefs menyimpan 150 sampai slider dilepas walau UI 100%
+- Contract: no
+- Docs: docs/specs/F-07-volume/tasks.md (T006 dicentang + catatan)
+- Next: T007 converge (`converge.md`, `SCREENS.md`, `exports/README.md`, `feature_list.json`)
+- Blocked: none
+
 ## 2026-11-27 19:56 — F-07 — T005 pause AR saat panel dari AR
 - Done: `ArController(paused)` memegang `LifecycleRegistry` sendiri dan meneruskannya ke `ARSceneView(lifecycle = ...)`; ditahan di STARTED selama panel terbuka; `ArScreen(paused)`; `MainActivity` mengirim `paused = settingsVisible`
 - Contract: no — `ar/` tetap tidak membaca state UI, nilai masuk lewat parameter; kontrak di `plan.md` "Pause AR" sudah sesuai

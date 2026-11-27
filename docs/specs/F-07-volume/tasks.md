@@ -69,11 +69,22 @@
 
 ## Phase 4: Bukti & converge
 
-- [ ] **T006** Uji device + screenshot
+- [x] **T006** Uji device + screenshot
       blocked by: T005
       verify: Tab S9 — 100%/40%/0%; bunyi berubah; persist setelah restart;
               ganti alat; geser cepat; nilai rusak 150 → 100%; screenshot
               `F07-100.png`, `F07-40.png`, `F07-0.png`, `F07-AR.png`
+      catatan: dicentang 2026-11-27 di SM-A356E (A35) landscape, bukan Tab S9
+              — deviasi device, tugas menyebut Tab S9. Dengar: 100=keras,
+              40=agak keras, 2=pelan banget, 0=senyap. Persist 40 setelah app
+              ditutup total; A/B di Bonang 100 vs 40 beda jelas; geser cepat
+              ±20× final 31% tersimpan tanpa crash; 150 di preferensi → tampil
+              100% dan app jalan. Screenshot tersimpan di
+              `docs/design/UI/exports/verification/`. Dua catatan: latar di
+              belakang panel tampak hitam di screenshot (di HP frame kamera
+              beku normal — `screencap` tidak menangkap buffer terakhir), dan
+              preferensi tetap menyimpan 150 sampai slider dilepas walau UI
+              selalu menampilkan 100%
 
 - [ ] **T007** Update docs + converge
       blocked by: T006
