@@ -12,7 +12,7 @@
 
 ## Phase 1: Nilai & penyimpanan
 
-- [ ] **T001** `MusicVolume` + `AudioSettingsStore`
+- [x] **T001** `MusicVolume` + `AudioSettingsStore`
       blocked by: none
       files: `data/MusicVolume.kt`, `data/AudioSettingsStore.kt`,
              `app/src/test/java/com/gemaar/data/MusicVolumeTest.kt`

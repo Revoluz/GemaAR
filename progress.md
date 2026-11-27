@@ -41,6 +41,13 @@
 
 ## Log
 
+## 2026-11-27 17:35 — F-07 — T001 nilai & penyimpanan volume
+- Done: `MusicVolume` (clamp 0–100, default 100, `fraction`, `isMuted`) + `AudioSettingsStore` (key `music_volume`, data rusak → 100, `saveVolume()` → Boolean untuk FR-012) + `MusicVolumeTest` 6 test
+- Contract: no (belum dipakai `audio/` atau `ui/`)
+- Docs: docs/specs/F-07-volume/tasks.md (T001)
+- Next: T002 volume di `NotePlayer`/`SoundPoolNotePlayer`, T003 `SettingsPanel`
+- Blocked: none
+
 ## 2026-11-25 13:40 — F-07 — plan + tasks
 - Done: `plan.md` (MusicVolume, AudioSettingsStore, NotePlayer volume, SettingsPanel, global overlay, pause AR) dan `tasks.md` T001–T007
 - Spec: status `approved`; design S7; satu slider Musik; auto-save; X dalam panel
