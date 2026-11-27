@@ -108,6 +108,7 @@ fun ArScreen(
     onBack: () -> Unit,
     onOpenSettings: () -> Unit,
     volumePercent: Int,
+    paused: Boolean = false,
 ) {
     val context = LocalContext.current
     val petunjukStore = remember(context) { PetunjukStore(context) }
@@ -268,6 +269,7 @@ fun ArScreen(
                     modifier = Modifier.fillMaxSize(),
                     modelScale = selectedInstrument.modelScale,
                     retryToken = retryToken,
+                    paused = paused,
                     onUiState = { uiState = it },
                     onModelTap = { x, z ->
                         selectedAudio?.let { audio ->

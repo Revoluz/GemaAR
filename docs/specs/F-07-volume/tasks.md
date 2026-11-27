@@ -52,11 +52,20 @@
               tanpa scan ulang. Bug slider (mirroring + thumb diam) ditemukan
               di uji ini dan sudah diperbaiki sebelum commit
 
-- [ ] **T005** Pause AR saat panel dari AR
+- [x] **T005** Pause AR saat panel dari AR
       blocked by: T004
       files: `ar/ArController.kt`, `ui/ar/ArScreen.kt`
       verify: panel dari AR → sesi AR berhenti sementara; tutup → AR lanjut
               tanpa scan ulang; buka/tutup 5× tanpa kamera hitam/crash
+      catatan: dicentang 2026-11-27 (SM-A356E). `ARSceneView(lifecycle = ...)`
+              memakai `LifecycleRegistry` milik `ArController`, ditahan di
+              STARTED selama panel terbuka; tanpa `session.pause()` mentah.
+              `MainActivity` juga disentuh untuk `paused = settingsVisible`
+              (plan.md "Pause AR"; di luar daftar file di sini). Bukti: 6×
+              pause + 6× resume sesi dan tidak ada sesi baru dibuat; layar
+              100% identik setelah 3 detik saat panel terbuka vs 647–780 rb
+              piksel berubah saat panel ditutup; status tetap "Marker
+              terdeteksi"; tutup 5× tanpa crash (pid sama)
 
 ## Phase 4: Bukti & converge
 

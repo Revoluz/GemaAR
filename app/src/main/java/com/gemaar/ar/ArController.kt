@@ -6,6 +6,7 @@ import android.view.MotionEvent
 import android.view.ViewConfiguration
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
@@ -16,6 +17,11 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.gemaar.data.Instrument
 import com.google.ar.core.AugmentedImage
 import com.google.ar.core.AugmentedImageDatabase
@@ -42,6 +48,8 @@ private const val MARKER_LOST_GRACE_MS = 500L
  * `ui/` hanya menerima [ArUiState] dan slot overlay.
  *
  * @param retryToken ubah nilainya untuk memuat ulang model setelah gagal.
+ * @param paused `true` saat overlay menutupi AR (panel Pengaturan): sesi AR
+ *   dijeda lewat lifecycle, bukan `session.pause()` (F-07 T005).
  */
 @Composable
 fun ArController(
@@ -49,6 +57,7 @@ fun ArController(
     modifier: Modifier = Modifier,
     modelScale: Float = ModelScale.DEFAULT_TARGET_METERS,
     retryToken: Int = 0,
+    paused: Boolean = false,
     onUiState: (ArUiState) -> Unit,
     onModelTap: (markerLocalX: Float, markerLocalZ: Float) -> Unit = { _, _ -> },
     onCameraPermissionChanged: (Boolean) -> Unit = {},
@@ -63,6 +72,42 @@ fun ArController(
     val engine = rememberEngine()
     val modelLoader = rememberModelLoader(engine)
     val markerBitmap = remember(context) { MarkerRepository.loadBitmap(context) }
+
+    // F-07 T005 — pause AR saat panel Pengaturan terbuka.
+    // SceneView memasang observer pada lifecycle yang kita berikan
+    // (`ARSceneView(lifecycle = ...)`): ON_RESUME → `ARCore.resume()`,
+    // ON_PAUSE → `ARCore.pause()`. Karena itu kita beri lifecycle sendiri yang
+    // ditahan di STARTED selama overlay terbuka, lalu dikembalikan ke RESUMED.
+    // Jangan memanggil `session.pause()` mentah (tasks.md Rules): frame loop,
+    // pelepasan kamera, dan pengaman resume tetap milik SceneView.
+    val hostLifecycle = LocalLifecycleOwner.current.lifecycle
+    val arOwner = remember {
+        object : LifecycleOwner {
+            val registry = LifecycleRegistry(this)
+            override val lifecycle: Lifecycle get() = registry
+        }
+    }
+    val pausedNow by rememberUpdatedState(paused)
+    // Sesi AR hanya RESUMED kalau host juga RESUMED dan overlay tertutup;
+    // selain itu AR dijeda (INITIALIZED → STARTED, tanpa DESTROYED, supaya
+    // sesi ARCore tidak dibuang dan marker tidak perlu dipindai ulang).
+    val syncArLifecycle = {
+        arOwner.registry.currentState =
+            if (pausedNow || !hostLifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
+                Lifecycle.State.STARTED
+            } else {
+                Lifecycle.State.RESUMED
+            }
+    }
+
+    // Ikuti siklus host (app ke background tetap menjeda AR).
+    DisposableEffect(hostLifecycle, arOwner) {
+        val observer = LifecycleEventObserver { _, _ -> syncArLifecycle() }
+        hostLifecycle.addObserver(observer)
+        onDispose { hostLifecycle.removeObserver(observer) }
+    }
+
+    LaunchedEffect(paused) { syncArLifecycle() }
 
     var trackedImage by remember { mutableStateOf<AugmentedImage?>(null) }
     var hasEverTracked by remember { mutableStateOf(false) }
@@ -120,6 +165,9 @@ fun ArController(
         modelLoader = modelLoader,
         planeFindingMode = Config.PlaneFindingMode.DISABLED,
         sessionCameraConfig = ::balancedCameraConfig,
+        // F-07 T005: lifecycle yang bisa dijeda; SceneView yang mengurus
+        // ARCore pause/resume, jadi sesi tetap sama setelah panel ditutup.
+        lifecycle = arOwner.lifecycle,
         onSessionCreated = { session ->
             val camera = session.cameraConfig
             Log.d(

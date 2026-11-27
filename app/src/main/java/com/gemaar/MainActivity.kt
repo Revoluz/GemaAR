@@ -101,6 +101,8 @@ private fun GemaARApp() {
                     settingsVisible = true
                 },
                 volumePercent = volumePercent,
+                // F-07 T005: panel dari AR menjeda sesi AR di belakangnya.
+                paused = settingsVisible,
             )
             Screen.Collection -> CollectionScreen(
                 instruments = Catalog.instruments,

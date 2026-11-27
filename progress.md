@@ -41,6 +41,13 @@
 
 ## Log
 
+## 2026-11-27 19:56 — F-07 — T005 pause AR saat panel dari AR
+- Done: `ArController(paused)` memegang `LifecycleRegistry` sendiri dan meneruskannya ke `ARSceneView(lifecycle = ...)`; ditahan di STARTED selama panel terbuka; `ArScreen(paused)`; `MainActivity` mengirim `paused = settingsVisible`
+- Contract: no — `ar/` tetap tidak membaca state UI, nilai masuk lewat parameter; kontrak di `plan.md` "Pause AR" sudah sesuai
+- Docs: docs/specs/F-07-volume/tasks.md (T005 dicentang + catatan bukti)
+- Next: T006 uji device + screenshot `F07-*.png` (butuh marker fisik di depan kamera)
+- Blocked: none
+
 ## 2026-11-27 19:35 — F-07 — T004 wiring Beranda + gear AR + state global
 - Done: `MainActivity` memegang `settingsVisible`/`volumePercent` + overlay `AnimatedVisibility` (motion 180ms) + `BackHandler` + simpan saat commit (gagal → nilai kembali + pesan); `HomeScreen(onOpenSettings)`; `ArScreen(onOpenSettings, volumePercent)` + `notePlayer.setVolume(percent/100f)`
 - Bug saat uji: slider melawan jari (mirror `percent` di tengah drag) dan thumb kuning tidak bergeser (nilai tidak ditulis balik ke `SliderState`) — keduanya diperbaiki di `SettingsPanel.kt`
