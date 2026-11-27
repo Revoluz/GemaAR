@@ -35,6 +35,9 @@
       verify: modal tengah maks 720dp; plakat Pengaturan; satu baris Musik;
               slider emas 0–100; persentase; pill “tersimpan otomatis”;
               X dalam panel ≥48dp; tanpa SFX/bahasa; motion 180ms
+      catatan: kode selesai 2026-11-27; file tambahan `ui/theme/Tokens.kt` dan
+              `res/values/strings.xml` (COMPONENTS #6/#7); centang menunggu
+              motion terpasang di T004 dan bukti device di T006 (opsi 1)
 
 ## Phase 3: Navigasi & AR
 

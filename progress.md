@@ -41,6 +41,14 @@
 
 ## Log
 
+## 2026-11-27 18:47 — F-07 — T003 panel Pengaturan (S7)
+- Done: `ui/components/SettingsPanel.kt` (panel 720dp/92%, plakat, satu baris Musik, slider emas 0–100, persen tabular, pill autosave, X 48dp di dalam panel, `SliderRow` publik + varian `enabled`, transisi masuk/keluar 180ms); `ui/theme/Tokens.kt` (token ukuran dari design-tokens.json); 5 string ke `strings.xml`
+- Contract: no
+- Docs: progress.md; `tasks.md` ditambah `catatan` di T003 (belum dicentang — opsi 1: centang setelah T004 + bukti T006)
+- Verify: `assembleDebug`, `testDebugUnitTest` (56 test), `lintDebug` (2 info lama) hijau; `init.sh --check` OK
+- Next: T004 wiring Beranda + gear AR + state global + pemasangan motion
+- Blocked: motion 180ms baru tersedia, belum terpasang; bukti visual di T006
+
 ## 2026-11-27 18:25 — F-07 — T002 volume di pemutar audio
 - Done: `NotePlayer.setVolume(0f..1f)` + `SoundPoolNotePlayer` menyimpan volume dengan clamp dan memakainya di `play()` untuk kanal kiri & kanan; konstanta `VOLUME` dihapus
 - Contract: ya — `NotePlayer` bertambah `setVolume`; sudah tercantum di `plan.md` (dokumen tidak diubah)
