@@ -75,6 +75,10 @@ Hasil export dari `docs/design/UI/ui.pen` (frame 1912×862, scale 1x).
 | `verification/F06-belum.png` | S6 Alat Musik — semua belum dimainkan |
 | `verification/F06-sebagian.png` | S6 — Saron sudah dimainkan |
 | `verification/F06-semua.png` | S6 — keenam alat sudah dimainkan |
+| `verification/F07-100.png` | S7 Pengaturan — volume 100% (dari AR) |
+| `verification/F07-40.png` | S7 — volume 40% |
+| `verification/F07-0.png` | S7 — volume 0% (thumb di ujung kiri) |
+| `verification/F07-AR.png` | S7 dibuka dari AR, panel di atas sesi AR yang dijeda |
 
 ## Catatan implementasi
 

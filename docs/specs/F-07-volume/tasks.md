@@ -86,12 +86,21 @@
               preferensi tetap menyimpan 150 sampai slider dilepas walau UI
               selalu menampilkan 100%
 
-- [ ] **T007** Update docs + converge
+- [x] **T007** Update docs + converge
       blocked by: T006
       files: `converge.md`, `tasks.md`, `feature_list.json`, `progress.md`,
              `docs/design/SCREENS.md`, `docs/design/UI/exports/README.md`
       verify: unit test lulus; lint 0; `init.sh --check`; `verify-docs`;
               F-07 `passes: true`
+      catatan: dicentang 2026-11-27. `converge.md` dibuat (Spec + Standards
+              PASS). Verifikasi: 56 unit test 0 gagal (`--rerun-tasks`), lint
+              OK (2 informational soal versi plugin/dependency), `init.sh
+              --check` OK, `verify-docs` OK. `feature_list.json` F-07
+              `passes: true` + path spec diperbaiki (`F-07-audio-settings` →
+              `F-07-volume`). `SCREENS.md` S7 `draft` → `built` (status
+              `verified` tidak dipakai layar lain mana pun). Keputusan terbuka:
+              matriks state S7 menulis "toast", implementasi memakai pesan teks
+              di panel — dokumen tidak diubah
 
 ## Rules
 

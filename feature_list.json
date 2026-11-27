@@ -79,10 +79,10 @@
       "id": "F-07",
       "title": "Pengaturan volume musik",
       "priority": 7,
-      "spec": "docs/specs/F-07-audio-settings/spec.md",
-      "passes": false,
-      "evidence": null,
-      "updated": null
+      "spec": "docs/specs/F-07-volume/spec.md",
+      "passes": true,
+      "evidence": "SM-A356E (A35, landscape; bukan Tab S9): panel S7 terbuka dari Beranda dan gear AR; 100/40/2/0 persen mengubah bunyi (keras/agak keras/pelan banget/senyap); nilai bertahan setelah app ditutup total; A/B di alat lain beda jelas; geser cepat +/-20x berakhir 31% tanpa crash; music_volume=150 di prefs tampil 100% dan app tetap jalan. Panel dari AR menjeda sesi lewat lifecycle (session=pause/resume, tanpa sesi baru) dan AR lanjut tanpa scan ulang. 56 unit test, lint bersih, assembleDebug OK, init.sh --check OK, verify-docs OK. Bukti: docs/design/UI/exports/verification/F07-*; docs/specs/F-07-volume/converge.md.",
+      "updated": "2026-11-27"
     }
   ]
 }
