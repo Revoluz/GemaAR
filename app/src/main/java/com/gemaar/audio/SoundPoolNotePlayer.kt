@@ -34,6 +34,9 @@ class SoundPoolNotePlayer(
     private var failed = false
     private var released = false
 
+    /** Volume 0f..1f yang dipakai nada berikutnya. Default penuh. */
+    private var volume = 1f
+
     private val _state = MutableStateFlow<NotePlayerState>(NotePlayerState.Loading)
     override val state: StateFlow<NotePlayerState> = _state.asStateFlow()
 
@@ -69,18 +72,22 @@ class SoundPoolNotePlayer(
         }
     }
 
+    override fun setVolume(volume: Float) {
+        this.volume = volume.coerceIn(0f, 1f)
+    }
+
     override fun play(note: Note) {
         if (released || _state.value != NotePlayerState.Ready) return
         val soundId = soundIdsByNoteId[note.id] ?: return
         val streamId = soundPool.play(
             soundId,
-            VOLUME,
-            VOLUME,
+            volume,
+            volume,
             PRIORITY,
             NO_LOOP,
             NORMAL_RATE,
         )
-        Log.d("GemaArAudio", "play note=${note.id} stream=$streamId")
+        Log.d("GemaArAudio", "play note=${note.id} stream=$streamId volume=$volume")
     }
 
     override fun stopAll() {
@@ -96,7 +103,6 @@ class SoundPoolNotePlayer(
 
     private companion object {
         const val MAX_STREAMS = 8
-        const val VOLUME = 1f
         const val PRIORITY = 1
         const val NO_LOOP = 0
         const val NORMAL_RATE = 1f

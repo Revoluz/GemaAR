@@ -41,6 +41,13 @@
 
 ## Log
 
+## 2026-11-27 18:25 — F-07 — T002 volume di pemutar audio
+- Done: `NotePlayer.setVolume(0f..1f)` + `SoundPoolNotePlayer` menyimpan volume dengan clamp dan memakainya di `play()` untuk kanal kiri & kanan; konstanta `VOLUME` dihapus
+- Contract: ya — `NotePlayer` bertambah `setVolume`; sudah tercantum di `plan.md` (dokumen tidak diubah)
+- Docs: progress.md; `tasks.md` ditambah `catatan` di T002 (belum dicentang: bukti 0% senyap / 100% penuh butuh pemanggil T004 dan uji device T006)
+- Verify: `assembleDebug`, `testDebugUnitTest` (56 test), `lintDebug` (2 info lama) hijau
+- Next: T003 panel (motion baru terbukti di T004), lalu T004 wiring
+
 ## 2026-11-27 17:35 — F-07 — T001 nilai & penyimpanan volume
 - Done: `MusicVolume` (clamp 0–100, default 100, `fraction`, `isMuted`) + `AudioSettingsStore` (key `music_volume`, data rusak → 100, `saveVolume()` → Boolean untuk FR-012) + `MusicVolumeTest` 6 test
 - Contract: no (belum dipakai `audio/` atau `ui/`)

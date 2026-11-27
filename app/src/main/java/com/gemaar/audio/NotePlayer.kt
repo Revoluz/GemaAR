@@ -15,6 +15,12 @@ sealed interface NotePlayerState {
 interface NotePlayer {
     val state: StateFlow<NotePlayerState>
 
+    /**
+     * Volume untuk nada berikutnya, 0f..1f. Nilai di luar rentang dijepit.
+     * Nada yang sedang berbunyi tidak diubah.
+     */
+    fun setVolume(volume: Float)
+
     fun play(note: Note)
 
     fun stopAll()

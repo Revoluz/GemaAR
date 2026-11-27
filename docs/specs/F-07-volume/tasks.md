@@ -26,6 +26,8 @@
       files: `audio/NotePlayer.kt`, `audio/SoundPoolNotePlayer.kt`
       verify: `setVolume(0f..1f)`; `play` memakai volume; 0% senyap;
               100% penuh; nada berikutnya mengikuti volume baru < 1 detik
+      catatan: kode selesai 2026-11-27; centang menunggu bukti bunyi 0%/100%
+              di T004 (pemanggil) dan T006 (uji device)
 
 - [ ] **T003** `SettingsPanel` mengikuti S7
       blocked by: T001
