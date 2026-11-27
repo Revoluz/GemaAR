@@ -41,6 +41,15 @@
 
 ## Log
 
+## 2026-11-27 21:05 — F-07 — selaraskan matriks state S7
+- Done: `SCREENS.md` baris S7 "gagal menyimpan → toast" jadi "pesan singkat di dalam panel + nilai kembali"; `converge.md` + `tasks.md` catatan T007 ikut disesuaikan
+- Alasan: `spec.md` FR-012 hanya mewajibkan "pesan singkat"; `SCREENS.md` menyatakan dirinya bukan sumber acceptance criteria, jadi baris itu deskripsi basi
+- Unchanged: `spec.md`, `plan.md` (tidak ada acceptance criteria yang diubah)
+- Contract: no
+- Docs: docs/design/SCREENS.md, docs/specs/F-07-volume/{converge.md,tasks.md}
+- Next: commit + push F-07
+- Blocked: none
+
 ## 2026-11-27 20:55 — F-07 — T007 converge
 - Done: `converge.md` (Spec + Standards PASS); `feature_list.json` F-07 `passes: true` + evidence; path spec diperbaiki ke `F-07-volume`; `SCREENS.md` S7 `draft` → `built`; `exports/README.md` tambah 4 baris F07
 - Verified: 56 unit test 0 gagal, lint OK, `init.sh --check` OK, `verify-docs` OK

@@ -98,9 +98,9 @@
               --check` OK, `verify-docs` OK. `feature_list.json` F-07
               `passes: true` + path spec diperbaiki (`F-07-audio-settings` →
               `F-07-volume`). `SCREENS.md` S7 `draft` → `built` (status
-              `verified` tidak dipakai layar lain mana pun). Keputusan terbuka:
-              matriks state S7 menulis "toast", implementasi memakai pesan teks
-              di panel — dokumen tidak diubah
+              `verified` tidak dipakai layar lain mana pun). Matriks state S7 di
+              `SCREENS.md` disesuaikan: "toast" → "pesan singkat di dalam
+              panel"; `spec.md` FR-012 tidak diubah
 
 ## Rules
 

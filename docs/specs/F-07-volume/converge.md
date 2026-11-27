@@ -109,10 +109,11 @@ Bukti device: `docs/design/UI/exports/verification/F07-100.png`,
 2. **T005 file list:** `tasks.md` T005 hanya menyebut `ar/ArController.kt` dan
    `ui/ar/ArScreen.kt`; `plan.md` ("Pause AR") menyebut `MainActivity` juga,
    dan plan menang menurut precedence. `MainActivity` ikut diubah.
-3. **Pesan gagal simpan** tampil sebagai teks di dalam panel, sedangkan matriks
-   state S7 di `SCREENS.md` menulis "toast + nilai kembali". Spec FR-012 hanya
-   mewajibkan "pesan singkat", jadi kode mengikuti spec; `SCREENS.md` **tidak**
-   diubah. Keputusan terbuka: tambah toast, atau setujui perubahan baris itu.
+3. **Pesan gagal simpan** tampil sebagai teks di dalam panel. Matriks state S7
+   di `SCREENS.md` semula menulis "toast"; baris itu diperbaiki menjadi "pesan
+   singkat di dalam panel + nilai kembali" karena `spec.md` (FR-012) hanya
+   mewajibkan "pesan singkat" dan `SCREENS.md` sendiri menyatakan bukan sumber
+   acceptance criteria. Aturan penerimaan tidak berubah.
 4. **`feature_list.json`** entri F-07 menunjuk `docs/specs/F-07-audio-settings/`
    yang tidak ada; diperbaiki ke `docs/specs/F-07-volume/` saat converge.
 5. **Slider visual** memakai stop indicator bawaan Material 3 (titik di ujung
@@ -125,5 +126,6 @@ dan jeda sesi AR tanpa melewati aturan repo (boundary modul, teks di
 `strings.xml`, token ukuran/warna, tanpa dependency baru). `passes: true`
 didukung 56 unit test, lint bersih, dan empat bukti screenshot di device.
 
-**Keputusan terbuka (bukan blocker):** baris "toast" di matriks state S7
-(`SCREENS.md`) vs pesan teks di panel.
+**Keputusan yang diambil:** baris "toast" di matriks state S7 (`SCREENS.md`)
+disesuaikan menjadi "pesan singkat di dalam panel + nilai kembali", mengikuti
+`spec.md` FR-012. Tidak ada acceptance criteria yang berubah.

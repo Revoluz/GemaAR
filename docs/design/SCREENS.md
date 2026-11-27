@@ -49,7 +49,7 @@ Setiap layar wajib punya empat state. Isi bagaimana tampilannya:
 | S4 AR | progress memuat model di plakat | marker belum terdeteksi → hint arahkan kamera | izin kamera / ARCore tidak tersedia | model tampil di atas marker + HUD + kontrol nada/pad |
 | S5 Kartu Budaya | teks memuat | n/a | teks gagal dimuat → Coba lagi | panel Info terbuka; AR tetap jalan |
 | S6 Alat Musik | skeleton grid | "Belum ada alat" | "Daftar alat gagal dimuat" + Coba lagi | grid 6 kartu + status sudah/belum dimainkan |
-| S7 Pengaturan | nilai volume tersimpan dimuat | n/a | gagal menyimpan → toast + nilai kembali | slider volume musik aktif |
+| S7 Pengaturan | nilai volume tersimpan dimuat | n/a | gagal menyimpan → pesan singkat di dalam panel + nilai kembali | slider volume musik aktif |
 
 Catatan S5: panel sisi kanan, body discroll bila teks panjang; teks rata kanan
 sesuai DESIGN; tombol close (X) mengembalikan fokus ke AR tanpa memutus sesi.
