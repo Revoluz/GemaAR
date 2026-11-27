@@ -41,6 +41,16 @@
 
 ## Log
 
+## 2026-11-27 19:35 — F-07 — T004 wiring Beranda + gear AR + state global
+- Done: `MainActivity` memegang `settingsVisible`/`volumePercent` + overlay `AnimatedVisibility` (motion 180ms) + `BackHandler` + simpan saat commit (gagal → nilai kembali + pesan); `HomeScreen(onOpenSettings)`; `ArScreen(onOpenSettings, volumePercent)` + `notePlayer.setVolume(percent/100f)`
+- Bug saat uji: slider melawan jari (mirror `percent` di tengah drag) dan thumb kuning tidak bergeser (nilai tidak ditulis balik ke `SliderState`) — keduanya diperbaiki di `SettingsPanel.kt`
+- Uji A35: panel dari Beranda & gear AR; log audio volume 0.0 / 0.55 / 0.99 mengikuti slider; X & Back menutup; restart mempertahankan nilai; dari AR "Marker terdeteksi" tetap (tanpa scan ulang)
+- Contract: no
+- Docs: `tasks.md` T002/T003/T004 dicentang + catatan (opsi 1); file tambahan `ui/theme/Tokens.kt`, `strings.xml`
+- Verify: `assembleDebug`, `testDebugUnitTest` (56), `lintDebug` (2 info lama), `init.sh --check` OK
+- Next: T005 pause AR saat panel dibuka dari AR
+- Blocked: bukti screenshot 100%/40%/0%/AR menunggu T006
+
 ## 2026-11-27 18:47 — F-07 — T003 panel Pengaturan (S7)
 - Done: `ui/components/SettingsPanel.kt` (panel 720dp/92%, plakat, satu baris Musik, slider emas 0–100, persen tabular, pill autosave, X 48dp di dalam panel, `SliderRow` publik + varian `enabled`, transisi masuk/keluar 180ms); `ui/theme/Tokens.kt` (token ukuran dari design-tokens.json); 5 string ke `strings.xml`
 - Contract: no

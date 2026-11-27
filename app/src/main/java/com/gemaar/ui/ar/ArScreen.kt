@@ -63,6 +63,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -72,6 +73,7 @@ import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import com.gemaar.R
 import com.gemaar.ar.ArController
 import com.gemaar.ar.ArUiState
 import com.gemaar.audio.NotePlayerState
@@ -102,7 +104,11 @@ import kotlinx.coroutines.delay
  * Note bar dan pemilih tangga nada belum ditampilkan (F-02/F-04).
  */
 @Composable
-fun ArScreen(onBack: () -> Unit) {
+fun ArScreen(
+    onBack: () -> Unit,
+    onOpenSettings: () -> Unit,
+    volumePercent: Int,
+) {
     val context = LocalContext.current
     val petunjukStore = remember(context) { PetunjukStore(context) }
     var activeNoteId by remember { mutableStateOf<String?>(null) }
@@ -140,6 +146,11 @@ fun ArScreen(onBack: () -> Unit) {
         SoundPoolNotePlayer(context, selectedAudio?.allNotes.orEmpty())
     }
     val notePlayerState by notePlayer.state.collectAsState()
+
+    // F-07: terapkan volume tersimpan ke pemutar, termasuk setelah ganti alat.
+    LaunchedEffect(notePlayer, volumePercent) {
+        notePlayer.setVolume(volumePercent / 100f)
+    }
 
     fun playNote(note: Note) {
         if (selectedAudio == null) return
@@ -312,6 +323,7 @@ fun ArScreen(onBack: () -> Unit) {
                     catalogVisible = true
                 },
                 onInfo = { infoVisible = true },
+                onSettings = onOpenSettings,
             )
         }
 
@@ -378,6 +390,7 @@ private fun BoxScope.ArHud(
     onCatalog: () -> Unit,
     onRetryModel: () -> Unit,
     onInfo: () -> Unit,
+    onSettings: () -> Unit,
 ) {
     val title = when (uiState) {
         is ArUiState.ModelLoading -> "Memuat model"
@@ -429,9 +442,9 @@ private fun BoxScope.ArHud(
 
     HudButton(
         icon = Icons.Filled.Settings,
-        contentDescription = "Pengaturan (belum aktif)",
-        enabled = false,
-        onClick = {},
+        contentDescription = stringResource(R.string.settings_open),
+        enabled = true,
+        onClick = onSettings,
         modifier = Modifier
             .align(Alignment.CenterEnd)
             .padding(end = 20.dp),

@@ -21,31 +21,36 @@
 
 ## Phase 2: Audio & panel
 
-- [ ] **T002** Volume di `NotePlayer` + `SoundPoolNotePlayer`
+- [x] **T002** Volume di `NotePlayer` + `SoundPoolNotePlayer`
       blocked by: T001
       files: `audio/NotePlayer.kt`, `audio/SoundPoolNotePlayer.kt`
       verify: `setVolume(0f..1f)`; `play` memakai volume; 0% senyap;
               100% penuh; nada berikutnya mengikuti volume baru < 1 detik
-      catatan: kode selesai 2026-11-27; centang menunggu bukti bunyi 0%/100%
-              di T004 (pemanggil) dan T006 (uji device)
+      catatan: dicentang 2026-11-27 setelah T004; log A35 menunjukkan volume
+              0.0 / 0.55 / 0.99 mengikuti slider; bukti dengar penuh di T006
 
-- [ ] **T003** `SettingsPanel` mengikuti S7
+- [x] **T003** `SettingsPanel` mengikuti S7
       blocked by: T001
       files: `ui/components/SettingsPanel.kt`
       verify: modal tengah maks 720dp; plakat Pengaturan; satu baris Musik;
               slider emas 0–100; persentase; pill “tersimpan otomatis”;
               X dalam panel ≥48dp; tanpa SFX/bahasa; motion 180ms
-      catatan: kode selesai 2026-11-27; file tambahan `ui/theme/Tokens.kt` dan
-              `res/values/strings.xml` (COMPONENTS #6/#7); centang menunggu
-              motion terpasang di T004 dan bukti device di T006 (opsi 1)
+      catatan: dicentang 2026-11-27; file tambahan `ui/theme/Tokens.kt` dan
+              `res/values/strings.xml` (COMPONENTS #6/#7); motion 180ms
+              terpasang di T004; screenshot S7 menyusul di T006
 
 ## Phase 3: Navigasi & AR
 
-- [ ] **T004** Aktifkan Pengaturan dari Beranda + gear AR + state global
+- [x] **T004** Aktifkan Pengaturan dari Beranda + gear AR + state global
       blocked by: T002, T003
       files: `MainActivity.kt`, `ui/HomeScreen.kt`, `ui/ar/ArScreen.kt`
       verify: Beranda → Pengaturan; AR gear → Pengaturan; volume live;
               X/Back menutup panel; nilai tersimpan; layer kembali ke asal
+      catatan: dicentang 2026-11-27 (A35). Beranda & gear AR membuka panel;
+              log audio 0.0 / 0.55 / 0.99 mengikuti slider; X dan Back menutup;
+              restart app mempertahankan nilai; dari AR marker tetap terdeteksi
+              tanpa scan ulang. Bug slider (mirroring + thumb diam) ditemukan
+              di uji ini dan sudah diperbaiki sebelum commit
 
 - [ ] **T005** Pause AR saat panel dari AR
       blocked by: T004

@@ -29,6 +29,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -46,6 +47,7 @@ import com.gemaar.ui.theme.GemaARDisplay
 fun HomeScreen(
     onStart: () -> Unit,
     onOpenCollection: () -> Unit,
+    onOpenSettings: () -> Unit,
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
@@ -81,11 +83,11 @@ fun HomeScreen(
                     onClick = onOpenCollection,
                 )
                 HomeAction(
-                    label = "Pengaturan",
+                    label = stringResource(R.string.settings_title),
                     icon = Icons.Filled.Settings,
                     primary = false,
-                    enabled = false,
-                    onClick = {},
+                    enabled = true,
+                    onClick = onOpenSettings,
                 )
             }
         }

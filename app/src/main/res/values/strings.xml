@@ -5,4 +5,6 @@
     <string name="settings_music_label">Musik</string>
     <string name="settings_autosave">Volume musik tersimpan otomatis</string>
     <string name="settings_percent">%1$d%%</string>
+    <string name="settings_open">Buka pengaturan</string>
+    <string name="settings_save_failed">Gagal menyimpan volume. Nilai dikembalikan.</string>
 </resources>

@@ -103,7 +103,10 @@ fun SettingsPanel(
     message: String? = null,
 ) {
     val sliderState = remember { SliderState(percent.toFloat(), 0, 0f..100f) }
-    LaunchedEffect(percent) { sliderState.value = percent.toFloat() }
+    // Sinkron sekali saat panel dibuka. Jangan memantulkan `percent` setiap
+    // perubahan: saat jari masih menyeret, itu melawan gerak slider (nilai
+    // melompat, mis. geser ke kiri malah naik).
+    LaunchedEffect(Unit) { sliderState.value = percent.toFloat() }
 
     val panelShape = RoundedCornerShape(GemaARRadius.lg)
 
@@ -220,7 +223,12 @@ fun SliderRow(
         Spacer(Modifier.width(GemaARSpace.x4))
         Slider(
             state = sliderState,
-            onValueChange = onSliderChange,
+            onValueChange = { value ->
+                // SliderState tidak memperbarui dirinya sendiri: tanpa baris ini
+                // persentase berubah tapi thumb tidak bergeser.
+                sliderState.value = value
+                onSliderChange(value)
+            },
             onValueChangeFinished = onSliderChangeFinished,
             enabled = enabled,
             colors = SliderDefaults.colors(
